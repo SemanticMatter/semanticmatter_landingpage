@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #050508;
+  --foreground: #f8fafc;
+}
+
+* {
+  border-color: rgb(255 255 255 / 0.08);
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-body), sans-serif;
+  background:
+    radial-gradient(circle at top left, rgb(17 184 184 / 0.12), transparent 30%),
+    radial-gradient(circle at top right, rgb(138 43 226 / 0.16), transparent 40%),
+    var(--background);
+  color: var(--foreground);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), sans-serif;
+}
+
+.glass {
+  background: rgb(255 255 255 / 0.05);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgb(255 255 255 / 0.12);
+}
