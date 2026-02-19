@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { ComponentType } from "react";
 import {
   ArrowRight,
@@ -66,6 +67,41 @@ const assistantFlow = [
     title: "Serve",
     description:
       "Deliver FAIR-aligned data to downstream tools and decision makers."
+  }
+];
+
+const presentationHighlights = [
+  {
+    title: "Blobfish Component Architecture",
+    caption:
+      "OpenAI-compatible interface, model handlers, and specialized generator stack.",
+    src: "/blobfish-presentation/image10.png",
+    width: 2884,
+    height: 3124
+  },
+  {
+    title: "Image to Markdown Handler",
+    caption:
+      "Example conversion of handwritten and tabular source material into structured markdown.",
+    src: "/blobfish-presentation/image12.png",
+    width: 1517,
+    height: 1308
+  },
+  {
+    title: "Entity Generator Output",
+    caption:
+      "Schema-oriented metadata generation from extracted text and structured fields.",
+    src: "/blobfish-presentation/image13.png",
+    width: 1129,
+    height: 890
+  },
+  {
+    title: "Knowledge Graph Visualization",
+    caption:
+      "Generated graph view used for exploration, relationships, and domain context validation.",
+    src: "/blobfish-presentation/image16.png",
+    width: 1656,
+    height: 1280
   }
 ];
 
@@ -359,25 +395,18 @@ export default function BlobfishPage() {
             Blobfish converts scans, tables, logs, and reports into a coherent
             semantic structure that can be queried, audited, and reused.
           </p>
-          <div className="mt-5 rounded-2xl border border-white/10 bg-black/30 p-4">
-            <div className="flex items-center justify-between text-xs text-slate-400">
-              <span>Raw Sources</span>
-              <span>Knowledge Graph</span>
-            </div>
-            <div className="mt-3 flex items-center justify-between gap-3">
-              <span className="rounded-md bg-white/10 px-2 py-1 text-xs text-slate-200">
-                PDF / Image
-              </span>
-              <ArrowRight className="h-4 w-4 text-teal-200" />
-              <span className="rounded-md bg-white/10 px-2 py-1 text-xs text-slate-200">
-                Entity Graph
-              </span>
-            </div>
-            <p className="mt-4 text-[11px] text-slate-500">
-              Image source reference:
-              https://heesters.gitlab.io/howtoelabjournal/
-            </p>
-          </div>
+          <figure className="mt-5 overflow-hidden rounded-2xl border border-white/10 bg-black/30">
+            <Image
+              src="/blobfish-presentation/image9.jpeg"
+              alt="Blobfish image from presentation cover slide"
+              width={1200}
+              height={675}
+              className="h-auto w-full"
+            />
+            <figcaption className="border-t border-white/10 px-3 py-2 text-[11px] text-slate-400">
+              Presentation visual from Blobfish deck (slide 1).
+            </figcaption>
+          </figure>
         </article>
       </section>
 
@@ -445,6 +474,38 @@ export default function BlobfishPage() {
               </article>
             );
           })}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-14">
+        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+          From the Presentation
+        </h2>
+        <p className="mt-4 max-w-3xl text-slate-300">
+          Selected artifacts from `Blobfish-presentation.pptx` showing the
+          architecture and model-handler workflow in action.
+        </p>
+        <div className="mt-8 grid gap-5 md:grid-cols-2">
+          {presentationHighlights.map((item) => (
+            <article
+              key={item.title}
+              className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+            >
+              <Image
+                src={item.src}
+                alt={item.title}
+                width={item.width}
+                height={item.height}
+                className="h-auto w-full"
+              />
+              <div className="border-t border-white/10 p-4">
+                <h3 className="font-[var(--font-heading)] text-lg font-semibold text-slate-100">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-sm text-slate-300">{item.caption}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
