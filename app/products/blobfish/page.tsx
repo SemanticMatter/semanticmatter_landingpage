@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { ComponentType } from "react";
 import {
   ArrowRight,
@@ -75,7 +74,7 @@ const presentationHighlights = [
     title: "Blobfish Component Architecture",
     caption:
       "OpenAI-compatible interface, model handlers, and specialized generator stack.",
-    src: "/blobfish-presentation/image10.png",
+    src: "../../blobfish-presentation/image10.png",
     width: 2884,
     height: 3124
   },
@@ -83,7 +82,7 @@ const presentationHighlights = [
     title: "Image to Markdown Handler",
     caption:
       "Example conversion of handwritten and tabular source material into structured markdown.",
-    src: "/blobfish-presentation/image12.png",
+    src: "../../blobfish-presentation/image12.png",
     width: 1517,
     height: 1308
   },
@@ -91,7 +90,7 @@ const presentationHighlights = [
     title: "Entity Generator Output",
     caption:
       "Schema-oriented metadata generation from extracted text and structured fields.",
-    src: "/blobfish-presentation/image13.png",
+    src: "../../blobfish-presentation/image13.png",
     width: 1129,
     height: 890
   },
@@ -99,7 +98,7 @@ const presentationHighlights = [
     title: "Knowledge Graph Visualization",
     caption:
       "Generated graph view used for exploration, relationships, and domain context validation.",
-    src: "/blobfish-presentation/image16.png",
+    src: "../../blobfish-presentation/image16.png",
     width: 1656,
     height: 1280
   }
@@ -396,12 +395,13 @@ export default function BlobfishPage() {
             semantic structure that can be queried, audited, and reused.
           </p>
           <figure className="mt-5 overflow-hidden rounded-2xl border border-white/10 bg-black/30">
-            <Image
-              src="/blobfish-presentation/image9.jpeg"
+            <img
+              src="../../blobfish-presentation/image9.jpeg"
               alt="Blobfish image from presentation cover slide"
               width={1200}
               height={675}
               className="h-auto w-full"
+              loading="lazy"
             />
             <figcaption className="border-t border-white/10 px-3 py-2 text-[11px] text-slate-400">
               Presentation visual from Blobfish deck (slide 1).
@@ -491,12 +491,13 @@ export default function BlobfishPage() {
               key={item.title}
               className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
             >
-              <Image
+              <img
                 src={item.src}
                 alt={item.title}
                 width={item.width}
                 height={item.height}
                 className="h-auto w-full"
+                loading="lazy"
               />
               <div className="border-t border-white/10 p-4">
                 <h3 className="font-[var(--font-heading)] text-lg font-semibold text-slate-100">

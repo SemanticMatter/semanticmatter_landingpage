@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { ComponentType } from "react";
 import {
@@ -218,7 +217,7 @@ const screenshots = [
     title: "Data Tab and Initial Graph View",
     caption:
       "Import, export, and graph stats controls with live graph and minimap context.",
-    src: "/graph_explorer_presentation/graphview1.png",
+    src: "../../graph_explorer_presentation/graphview1.png",
     width: 1713,
     height: 904
   },
@@ -226,7 +225,7 @@ const screenshots = [
     title: "View Tab Controls",
     caption:
       "Layout, coloring, labels, and predicate filter controls integrated with visual exploration.",
-    src: "/graph_explorer_presentation/graphview2.png",
+    src: "../../graph_explorer_presentation/graphview2.png",
     width: 1709,
     height: 908
   },
@@ -234,7 +233,7 @@ const screenshots = [
     title: "Analyze Tab with API Workflows",
     caption:
       "Reasoning and SHACL workflows with auto polling, inferred merge, and report operations.",
-    src: "/graph_explorer_presentation/graphview3.png",
+    src: "../../graph_explorer_presentation/graphview3.png",
     width: 1715,
     height: 907
   }
@@ -406,12 +405,13 @@ export default function GraphExplorerPage() {
               key={shot.title}
               className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
             >
-              <Image
+              <img
                 src={shot.src}
                 alt={shot.title}
                 width={shot.width}
                 height={shot.height}
                 className="h-auto w-full"
+                loading="lazy"
               />
               <div className="border-t border-white/10 p-4">
                 <h3 className="font-[var(--font-heading)] text-lg font-semibold text-slate-100">
