@@ -403,7 +403,7 @@ export default function BlobfishPage() {
               loading="lazy"
             />
             <figcaption className="border-t border-white/10 px-3 py-2 text-[11px] text-slate-400">
-              Presentation visual from Blobfish deck (slide 1).
+              The blobfish thrives in its natural habitat, adapted to extreme high-pressure conditions.
               {" "}
               Photograph By National Science Foundation-Ocean Observatory
               Initiative/University of Washington/CSSF
