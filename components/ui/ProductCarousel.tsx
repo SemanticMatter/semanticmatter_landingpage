@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -110,13 +109,13 @@ export default function ProductCarousel({
               transition={{ duration: 0.4, ease: [0.22, 0.61, 0.36, 1] }}
               className="absolute inset-0"
             >
-              <Image
+              <img
                 src={activeSlide.src}
                 alt={activeSlide.title}
-                fill
-                className="object-contain"
-                sizes="(max-width: 768px) 100vw, 1200px"
-                priority={activeIndex === 0}
+                width={activeSlide.width}
+                height={activeSlide.height}
+                className="h-full w-full object-contain"
+                loading={activeIndex === 0 ? "eager" : "lazy"}
               />
             </motion.div>
           </AnimatePresence>
@@ -161,14 +160,15 @@ export default function ProductCarousel({
             }`}
           >
             <div className="relative aspect-[16/9] w-full">
-              <Image
+              <img
                 src={slide.src}
                 alt={slide.title}
-                fill
-                className={`object-cover transition duration-300 ${
+                width={slide.width}
+                height={slide.height}
+                className={`h-full w-full object-cover transition duration-300 ${
                   idx === activeIndex ? "opacity-100" : "opacity-70 group-hover:opacity-90"
                 }`}
-                sizes="(max-width: 768px) 33vw, 260px"
+                loading="lazy"
               />
             </div>
             <div className="px-2 py-1.5 text-left text-[11px] text-slate-300">{slide.title}</div>
