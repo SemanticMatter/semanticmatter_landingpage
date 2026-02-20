@@ -43,6 +43,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <link rel="shortcut icon" type="image/x-icon" href={faviconPath} />
+      </head>
       <body
         className={`${bodyFont.variable} ${headingFont.variable} bg-ink text-slate-100 antialiased`}
       >
