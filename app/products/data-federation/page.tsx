@@ -9,6 +9,7 @@ import {
   TableProperties,
   Waypoints
 } from "lucide-react";
+import ProductCarousel from "@/components/ui/ProductCarousel";
 
 const painPoints = [
   "Access is spread across many source systems",
@@ -133,6 +134,33 @@ const roadmap = [
   "Add tenant-scoped registries, credentials, and policy namespaces.",
   "Publish machine-readable API contracts (OpenAPI and SensorThings profiles).",
   "Harden security with OIDC and encrypted connector secrets."
+];
+
+const presentationSlides = [
+  {
+    title: "Dataset discovery",
+    caption:
+      "Browse distributed datasets through a federated catalog view.",
+    src: "../../federated-presentation/dataset_discovery.png",
+    width: 1600,
+    height: 900
+  },
+  {
+    title: "Connected knowledge across datasets",
+    caption:
+      "Link records across sources so teams can follow relationships, not just files.",
+    src: "../../federated-presentation/dataset_connected_knowledge.png",
+    width: 1600,
+    height: 900
+  },
+  {
+    title: "FAIR alignment view",
+    caption:
+      "Track metadata readiness and FAIR alignment as part of federation workflows.",
+    src: "../../federated-presentation/FAIR_alignment.png",
+    width: 1600,
+    height: 900
+  }
 ];
 
 const apiExamples = {
@@ -333,6 +361,19 @@ export default function DataFederationPage() {
               </article>
             );
           })}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-14">
+        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+          Live federation views
+        </h2>
+        <p className="mt-4 max-w-3xl text-slate-300">
+          Screens from `public/federated-presentation` showing discovery,
+          connected knowledge, and FAIR alignment workflows.
+        </p>
+        <div className="mt-8">
+          <ProductCarousel slides={presentationSlides} autoAdvanceMs={6000} />
         </div>
       </section>
 
