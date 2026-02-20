@@ -44,9 +44,10 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const isProductsActive = pathname.startsWith("/products");
+  const closeMobileMenu = () => setMobileOpen(false);
   const handleRequestDemo = () => {
     openRequestDemoEmail();
-    setMobileOpen(false);
+    closeMobileMenu();
   };
 
   return (
@@ -107,10 +108,14 @@ export default function Navbar() {
       {mobileOpen ? (
         <div className="border-t border-white/10 bg-[#050508]/95 px-6 py-5 md:hidden">
           <div className="flex flex-col gap-3">
-            <Link href="/" className="py-1.5 text-sm text-slate-200">
+            <Link href="/" className="py-1.5 text-sm text-slate-200" onClick={closeMobileMenu}>
               Overview
             </Link>
-            <Link href="/products" className="py-1.5 text-sm text-slate-200">
+            <Link
+              href="/products"
+              className="py-1.5 text-sm text-slate-200"
+              onClick={closeMobileMenu}
+            >
               Products
             </Link>
             {productItems.map((item) => (
@@ -118,17 +123,30 @@ export default function Navbar() {
                 key={item.path}
                 href={item.path}
                 className="pl-3 text-xs uppercase tracking-wide text-slate-400"
+                onClick={closeMobileMenu}
               >
                 {item.name}
               </Link>
             ))}
-            <Link href="/use-cases" className="py-1.5 text-sm text-slate-200">
+            <Link
+              href="/use-cases"
+              className="py-1.5 text-sm text-slate-200"
+              onClick={closeMobileMenu}
+            >
               Use Cases
             </Link>
-            <Link href="/developers" className="py-1.5 text-sm text-slate-200">
+            <Link
+              href="/developers"
+              className="py-1.5 text-sm text-slate-200"
+              onClick={closeMobileMenu}
+            >
               Developers
             </Link>
-            <Link href="/learn" className="py-1.5 text-sm text-slate-200">
+            <Link
+              href="/learn"
+              className="py-1.5 text-sm text-slate-200"
+              onClick={closeMobileMenu}
+            >
               Learn
             </Link>
             <Button variant="primary" className="mt-2 w-full" onClick={handleRequestDemo}>
