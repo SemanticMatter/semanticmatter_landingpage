@@ -483,7 +483,7 @@ export default function BlobfishPage() {
             From the presentation
           </h2>
         <p className="mt-4 max-w-3xl text-slate-300">
-          Selected artifacts from `Blobfish-presentation.pptx` showing the
+          Selected screenshots from the <b>Blobfish presentation</b> showing the
           architecture and model-handler workflow in action.
         </p>
         <div className="mt-8">

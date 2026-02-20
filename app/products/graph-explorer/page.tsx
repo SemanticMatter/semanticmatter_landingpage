@@ -310,12 +310,20 @@ export default function GraphExplorerPage() {
                 validation.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  href="/developers"
+                <a
+                  href="https://semanticmatter.github.io/graph-explorer/"
+                  target="_blank"
+                  rel="noreferrer"
                   className="inline-flex items-center gap-2 rounded-full border border-cyan-300 bg-cyan-300 px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-200"
                 >
-                  Request walkthrough
+                  Open live application
                   <ArrowRight className="h-4 w-4" />
+                </a>
+                <Link
+                  href="/developers"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-slate-100 transition-colors hover:bg-white/20"
+                >
+                  Request walkthrough
                 </Link>
                 <Link
                   href="/learn"
@@ -397,8 +405,19 @@ export default function GraphExplorerPage() {
           Live application views
         </h2>
         <p className="mt-4 max-w-3xl text-slate-300">
-          Screenshots from `public/graph_explorer_presentation` showing Data,
-          View, and Analyze workflows.
+          Screenshots from the Graph Explorer application showing Data, View,
+          and Analyze workflows.
+        </p>
+        <p className="mt-3 text-sm text-slate-300">
+          Try it live:{" "}
+          <a
+            href="https://semanticmatter.github.io/graph-explorer/"
+            target="_blank"
+            rel="noreferrer"
+            className="text-cyan-200 underline decoration-cyan-300/60 underline-offset-4 hover:text-cyan-100"
+          >
+            semanticmatter.github.io/graph-explorer
+          </a>
         </p>
         <div className="mt-8">
           <ProductCarousel slides={screenshots} autoAdvanceMs={6000} />
