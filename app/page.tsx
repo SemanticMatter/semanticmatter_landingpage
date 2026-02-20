@@ -78,7 +78,7 @@ export default function OverviewPage() {
           <FeatureCard
             icon={<Workflow className="h-6 w-6 text-violet-300" />}
             title="Developer Extensibility"
-            description="Built on open standards and FAIR principles. Extend functionality through plugins and graph APIs."
+            description="Engineered around open standards. Deploy in your own environment for full control, and extend through modular integrations"
           />
           <FeatureCard
             icon={<ShieldCheck className="h-6 w-6 text-cyan-300" />}

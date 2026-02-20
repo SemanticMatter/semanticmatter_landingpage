@@ -68,15 +68,6 @@ const coreCapabilities = [
   }
 ];
 
-const architectureLayers = [
-  "User Interface Layer",
-  "AI-Assisted Documentation Engine",
-  "Semantic Modeling Layer (Ontologies + SHACL Shapes)",
-  "Knowledge Graph and Metadata Store",
-  "Federated Catalog and Access Governance",
-  "Integration and Interoperability APIs"
-];
-
 const analogPipeline = [
   "OCR extraction",
   "LLM semantic parsing",
@@ -251,36 +242,6 @@ export default function ThinkPage() {
               </article>
             );
           })}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-6 py-14">
-        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr]">
-          <div>
-            <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-              THiNK Reference Architecture
-            </h2>
-            <p className="mt-4 text-slate-300">
-              THiNK operationalizes ontology-aligned semantic interoperability
-              through a layered architecture that connects documentation,
-              modeling, governance, and integration.
-            </p>
-          </div>
-          <div className="space-y-4">
-            {architectureLayers.map((layer, idx) => (
-              <article
-                key={layer}
-                className="rounded-2xl border border-white/10 bg-white/5 p-5"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-teal-300/20 text-xs font-semibold text-teal-200">
-                    0{idx + 1}
-                  </span>
-                  <h3 className="font-semibold text-slate-100">{layer}</h3>
-                </div>
-              </article>
-            ))}
-          </div>
         </div>
       </section>
 

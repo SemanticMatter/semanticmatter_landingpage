@@ -494,14 +494,22 @@ export default function BlobfishPage() {
               key={item.title}
               className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
             >
-              <img
-                src={item.src}
-                alt={item.title}
-                width={item.width}
-                height={item.height}
-                className="h-auto w-full"
-                loading="lazy"
-              />
+              <div
+                className={
+                  item.title === "Blobfish Component Architecture"
+                    ? "bg-slate-100/80"
+                    : "bg-transparent"
+                }
+              >
+                <img
+                  src={item.src}
+                  alt={item.title}
+                  width={item.width}
+                  height={item.height}
+                  className="h-auto w-full"
+                  loading="lazy"
+                />
+              </div>
               <div className="border-t border-white/10 p-4">
                 <h3 className="font-[var(--font-heading)] text-lg font-semibold text-slate-100">
                   {item.title}
