@@ -20,7 +20,12 @@ const headingFont = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Semantic Matter | Intelligent Data Ecosystems",
   description:
-    "Semantic infrastructure and knowledge graphs for complex data interoperability."
+    "Semantic infrastructure and knowledge graphs for complex data interoperability.",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico"
+  }
 };
 
 export default function RootLayout({
