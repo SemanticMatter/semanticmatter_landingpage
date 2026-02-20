@@ -369,8 +369,8 @@ export default function DataFederationPage() {
           Live federation views
         </h2>
         <p className="mt-4 max-w-3xl text-slate-300">
-          Screens from `public/federated-presentation` showing discovery,
-          connected knowledge, and FAIR alignment workflows.
+          Demonstrational screenshots of a UI application implemented on the federated data interfaces
+          for showcasing connected knowledge, and FAIR alignment workflows.
         </p>
         <div className="mt-8">
           <ProductCarousel slides={presentationSlides} autoAdvanceMs={6000} />
