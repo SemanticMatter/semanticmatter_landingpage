@@ -82,7 +82,7 @@ const architecturePlanes = [
     icon: Waypoints
   },
   {
-    title: "Control Plane",
+    title: "Federation Management",
     bullets: [
       "Node registry and connector config",
       "Metadata catalog and semantic mapping",
@@ -91,7 +91,7 @@ const architecturePlanes = [
     icon: Layers
   },
   {
-    title: "Data Plane",
+    title: "Query & Delivery Layer",
     bullets: [
       "Unified API facade for federated queries",
       "Query planning across registered nodes",
@@ -102,7 +102,7 @@ const architecturePlanes = [
 ];
 
 const requestSequence = [
-  "Client sends logical request with filter, select, and paging.",
+  "Client sends a query with filters, selected fields, and paging",
   "Gateway validates auth and policy scope.",
   "Planner resolves eligible nodes from registry.",
   "Subqueries execute in parallel with pushdown strategy.",
@@ -111,17 +111,17 @@ const requestSequence = [
 ];
 
 const connectorPatterns = [
-  "CatalogAdapter and WorkflowsAdapter abstraction for swap-ready integration boundaries.",
+  "CatalogAdapter and WorkflowsAdapter abstraction for clean integration boundaries.",
   "API adapter contracts define endpoint mapping and payload translation.",
   "Mock and real backend modes support progressive adoption.",
-  "Connector evolution can happen without redesigning the full UX surface."
+  "Add or upgrade connectors without changing the UI."
 ];
 
 const governanceAndOps = [
   "FAIR-guided metadata capture and readiness scoring.",
   "Node health indicators with degraded-state semantics.",
   "Workflow run lifecycle patterns: queued, running, failed, completed.",
-  "Recommended SLOs: 99.9% gateway uptime, P95 query latency under 2s, freshness lag under 5 minutes."
+  "Operational targets: 99.9% gateway uptime, P95 query latency under 2s, freshness lag under 5 minutes."
 ];
 
 const roadmap = [
@@ -175,7 +175,7 @@ export default function DataFederationPage() {
                 </span>
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
-                Query and govern distributed data systems as one logical plane
+                Query and govern distributed data systems through one shared interface, 
                 without centralizing all raw data. FDL combines federation-first
                 access, metadata and semantic workflows, and policy-aware
                 mediation for cross-domain interoperability.
@@ -205,8 +205,8 @@ export default function DataFederationPage() {
                   Federation-First Operating Model
                 </p>
                 <p className="mt-2 text-sm text-slate-300">
-                  Node registration, unified API mediation, and parallel-source
-                  query intent over copy-first architectures.
+                  Register nodes, expose a unified API, and run queries across sources in parallel 
+                  without relying on copy-first pipelines.
                 </p>
               </article>
               <article className="rounded-2xl border border-white/10 bg-white/5 p-5">
@@ -214,7 +214,7 @@ export default function DataFederationPage() {
                   Standards
                 </p>
                 <p className="mt-2 text-lg font-semibold text-white">
-                  SensorThings + OData-Style + FAIR
+                  SensorThings, OData query semantics, and FAIR-aligned metadata
                 </p>
                 <p className="mt-2 text-sm text-slate-300">
                   Standards-led interoperability with metadata readiness and
@@ -284,8 +284,7 @@ export default function DataFederationPage() {
             Capability Maturity Snapshot
           </h2>
           <p className="max-w-2xl text-sm text-slate-300 md:text-base">
-            Evidence-based breakdown of what is already implemented in the
-            product surface versus what is still illustrated or partial.
+            A clear view of what’s implemented today and what is still conceptual or in progress.
           </p>
         </div>
         <div className="mt-8 space-y-4">
