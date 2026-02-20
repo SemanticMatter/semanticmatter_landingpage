@@ -97,10 +97,10 @@ const presentationHighlights = [
     height: 890
   },
   {
-    title: "Knowledge Graph Visualization",
+    title: "Concept Extraction for Ontology Development",
     caption:
-      "Generated graph view used for exploration, relationships, and domain context validation.",
-    src: "../../blobfish-presentation/image16.png",
+      "Ontology concept extraction from publication.",
+    src: "../../blobfish-presentation/image18.png",
     width: 1656,
     height: 1280
   }
