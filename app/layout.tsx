@@ -11,7 +11,7 @@ const basePath =
   process.env.GITHUB_ACTIONS === "true" && !isUserOrOrgPagesSite && repoName
     ? `/${repoName}`
     : "";
-const faviconPath = `${basePath}/favicon.ico`;
+const faviconPath = `${basePath}/favicon.ico?`;
 
 const bodyFont = IBM_Plex_Sans({
   subsets: ["latin"],
