@@ -72,6 +72,20 @@ export default function OverviewPage() {
           />
         </div>
       </section>
+
+      <section id="contact-information" className="relative z-10 mx-auto max-w-7xl px-6 pb-24">
+        <div className="glass rounded-2xl p-8">
+          <h2 className="font-[var(--font-heading)] text-3xl font-semibold">Contact Information</h2>
+          <address className="mt-4 not-italic text-slate-300">
+            <p>SINTEF Ocean AS</p>
+            <p>SemanticMatter</p>
+            <p>Att: Sarah Schmidt</p>
+            <p>PoBox 4762 Torgard</p>
+            <p>N-7465 Trondheim</p>
+            <p>Norway</p>
+          </address>
+        </div>
+      </section>
     </div>
   );
 }

@@ -4,7 +4,8 @@ const links = [
   { label: "Products", href: "/products" },
   { label: "Use Cases", href: "/use-cases" },
   { label: "Developers", href: "/developers" },
-  { label: "Learn", href: "/learn" }
+  { label: "Learn", href: "/learn" },
+  { label: "Contact", href: "/#contact-information" }
 ];
 
 export default function Footer() {

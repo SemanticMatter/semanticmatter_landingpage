@@ -7,6 +7,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import DropdownMenu from "@/components/layout/DropdownMenu";
 import Button from "@/components/ui/Button";
+import { openRequestDemoEmail } from "@/lib/requestDemoEmail";
 import { cn } from "@/lib/utils";
 
 const productItems = [
@@ -43,6 +44,10 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const isProductsActive = pathname.startsWith("/products");
+  const handleRequestDemo = () => {
+    openRequestDemoEmail();
+    setMobileOpen(false);
+  };
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-[#04050a]/72 backdrop-blur-xl">
@@ -85,7 +90,7 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:block">
-          <Button variant="ghost" className="px-5 py-2.5">
+          <Button variant="ghost" className="px-5 py-2.5" onClick={handleRequestDemo}>
             Request Demo
           </Button>
         </div>
@@ -126,7 +131,7 @@ export default function Navbar() {
             <Link href="/learn" className="py-1.5 text-sm text-slate-200">
               Learn
             </Link>
-            <Button variant="primary" className="mt-2 w-full">
+            <Button variant="primary" className="mt-2 w-full" onClick={handleRequestDemo}>
               Request Demo
             </Button>
           </div>

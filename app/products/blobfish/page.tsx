@@ -222,19 +222,19 @@ const expansionPhases = [
     phase: "Phase 1",
     title: "Offshore Asset Integrity and Marine Operations",
     description:
-      "Blobfish provides a FAIR data backbone for inspection reports, sensor feeds, and maintenance histories to support digital twins, risk models, and operational decision support."
+      "SemanticMatter expands Blobfish into marine operations, providing a FAIR data backbone for offshore asset integrity. By turning inspection reports, sensor feeds, and maintenance histories into a unified knowledge graph, operators get traceable, machine-readable inputs for digital twins, risk models, and operational decision support."
   },
   {
     phase: "Phase 2",
     title: "Chemicals and Materials Science",
     description:
-      "Blobfish creates a FAIR knowledge graph over experiments, formulations, and characterization data for optimization models, scale-up decisions, and regulatory submissions."
+      "SemanticMatter brings Blobfish into the heart of chemicals and materials R&D, creating a FAIR knowledge graph over experiments, formulations, and characterization data. By turning human-written lab notes and instrument outputs into machine-readable, ontology-aligned metadata, organizations gain a traceable memory of what was tried, what worked, and why, ready to power optimization models, scale-up decisions, and regulatory submissions."
   },
   {
     phase: "Phase 3",
     title: "Energy, Manufacturing and Food Tech",
     description:
-      "Blobfish becomes a FAIR data spine connecting lab, plant, and quality systems to optimize yield, quality, and compliance reporting."
+      "SemanticMatter extends Blobfish into Energy, Manufacturing, and Food Tech as a FAIR data spine connecting lab, plant, and quality systems. By converting recipes, process logs, and QA data into a machine-readable, ontology-aligned knowledge graph, organizations gain a unified view of how process decisions impact yield, quality, and compliance, fueling optimization models, digital twins, and trustworthy reporting."
   }
 ];
 
@@ -585,7 +585,7 @@ export default function BlobfishPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-14">
         <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-          Strategic Expansion
+          Industrial Use Cases: Strategic Expansion
         </h2>
         <div className="mt-8 space-y-4">
           {expansionPhases.map((phase) => (
