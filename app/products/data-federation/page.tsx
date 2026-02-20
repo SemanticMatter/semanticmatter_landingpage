@@ -11,128 +11,128 @@ import {
 } from "lucide-react";
 
 const painPoints = [
-  "Fragmented access across many source systems",
-  "Governance inconsistency across domains",
-  "Slow onboarding caused by bespoke integrations",
-  "Limited trust without lineage and quality metadata"
+  "Access is spread across many source systems",
+  "Governance differs from team to team",
+  "New integrations take too long to build and maintain",
+  "Trust is low without lineage and quality signals"
 ];
 
 const federationVsReplication = [
   {
     title: "Federation",
-    subtitle: "Shared logical plane, distributed source ownership",
+    subtitle: "One access layer, sources stay owned by their teams",
     bullets: [
-      "Query across nodes without mandatory raw-data centralization",
-      "Preserve domain ownership of operational source systems",
-      "Reduce copy-heavy ETL burden for cross-domain access"
+      "Query across nodes without moving all raw data into a central store",
+      "Keep ownership and operations with the teams running each source",
+      "Reduce copy-heavy ETL when you need cross-domain access"
     ]
   },
   {
     title: "Replication",
-    subtitle: "Copy-first operating model",
+    subtitle: "Copy-first approach",
     bullets: [
-      "Heavy data movement and freshness lag",
-      "Duplicated governance and lineage management",
-      "Higher integration friction per dataset"
+      "Large data movement and lag between source and copy",
+      "Lineage and governance get duplicated across copies",
+      "Each new dataset adds integration work and maintenance"
     ]
   }
 ];
 
 const capabilityStatus = [
   {
-    capability: "Federated node registry UX",
+    capability: "Node registry UI",
     status: "Implemented",
-    notes: "Node cards, health states, protocol fields, inspector behavior."
+    notes: "Node cards, health states, protocol fields, and inspection views."
   },
   {
-    capability: "Unified API contract documentation",
+    capability: "API contract docs",
     status: "Implemented",
-    notes: "REST, query options, and API examples are rendered in docs UX."
+    notes: "REST endpoints, query options, and examples rendered in the docs UI."
   },
   {
-    capability: "Metadata and FAIR wizard workflow",
+    capability: "Metadata + FAIR wizard",
     status: "Implemented",
-    notes: "Multi-step form logic, readiness checks, and scoring are present."
+    notes: "Multi-step flow, readiness checks, and scoring are in place."
   },
   {
-    capability: "Cross-node parallel orchestration",
+    capability: "Parallel query orchestration",
     status: "Illustrated",
-    notes: "Described in architecture flow; backend planner is not in this repo."
+    notes: "Shown in the architecture flow; the planner service is not in this repo."
   },
   {
-    capability: "Policy enforcement in gateway",
+    capability: "Policy checks at the gateway",
     status: "Illustrated",
-    notes: "Concept shown in product flow text; no backend runtime evaluator here."
+    notes: "Described in the product flow; no runtime evaluator is included here."
   },
   {
-    capability: "Real connector execution",
+    capability: "Production connectors",
     status: "Partial",
-    notes: "Adapter contracts exist; several concrete adapters remain stubbed."
+    notes: "Adapter contracts exist; several concrete connectors are still stubbed."
   }
 ];
 
 const architecturePlanes = [
   {
-    title: "Experience Layer",
+    title: "User experience",
     bullets: [
-      "Node operations and source health",
+      "Node operations and health status",
       "Federated explorer and API guidance",
-      "Metadata, semantics, and workflow UX"
+      "Metadata, semantics, and workflow UI"
     ],
     icon: Waypoints
   },
   {
-    title: "Federation Management",
+    title: "Federation management",
     bullets: [
-      "Node registry and connector config",
-      "Metadata catalog and semantic mapping",
-      "Policy metadata and workflow orchestration"
+      "Node registry and connector setup",
+      "Metadata catalog and semantic mappings",
+      "Policies and workflow orchestration"
     ],
     icon: Layers
   },
   {
-    title: "Query & Delivery Layer",
+    title: "Query runtime",
     bullets: [
-      "Unified API facade for federated queries",
-      "Query planning across registered nodes",
-      "Normalization and merge before response"
+      "Single API for federated queries",
+      "Plans queries across registered nodes",
+      "Normalizes and merges results before returning"
     ],
     icon: Network
   }
 ];
 
 const requestSequence = [
-  "Client sends a query with filters, selected fields, and paging",
-  "Gateway validates auth and policy scope.",
-  "Planner resolves eligible nodes from registry.",
-  "Subqueries execute in parallel with pushdown strategy.",
+  "Client sends a query with filters, selected fields, and paging.",
+  "Gateway verifies authentication and checks policy scope.",
+  "Planner selects eligible nodes from the registry.",
+  "Subqueries run in parallel with pushdown where possible.",
   "Results are normalized, deduplicated, and merged.",
-  "Response returns unified data plus lineage context."
+  "Response returns unified results plus lineage context."
 ];
 
 const connectorPatterns = [
-  "CatalogAdapter and WorkflowsAdapter abstraction for clean integration boundaries.",
-  "API adapter contracts define endpoint mapping and payload translation.",
-  "Mock and real backend modes support progressive adoption.",
+  "`CatalogAdapter` and `WorkflowsAdapter` define clean integration boundaries.",
+  "Adapter contracts map endpoints and translate payloads.",
+  "Mock and production modes support a staged rollout.",
   "Add or upgrade connectors without changing the UI."
 ];
 
 const governanceAndOps = [
-  "FAIR-guided metadata capture and readiness scoring.",
-  "Node health indicators with degraded-state semantics.",
-  "Workflow run lifecycle patterns: queued, running, failed, completed.",
+  "Capture metadata with FAIR guidance and readiness scoring.",
+  "Track node health with clear degraded states.",
+  "Workflow runs follow a simple lifecycle: queued, running, failed, completed.",
   "Operational targets: 99.9% gateway uptime, P95 query latency under 2s, freshness lag under 5 minutes."
 ];
 
 const roadmap = [
-  "Implement production federation planner and executor service with pushdown optimization.",
-  "Replace adapter stubs with contract-tested real connectors.",
-  "Add policy engine runtime for RBAC and ABAC with decision logging.",
-  "Operationalize tracing, metrics, and SLO-based alerting.",
-  "Persist metadata wizard outputs in a versioned catalog service.",
-  "Introduce tenant-scoped registries, credentials, and policy namespaces.",
+  "Build the production planner/executor with pushdown optimization.",
+  "Replace adapter stubs with contract-tested connectors.",
+  "Add a policy runtime for RBAC/ABAC with decision logging.",
+  "Add tracing, metrics, and SLO-based alerting.",
+  "Store wizard outputs in a versioned catalog service.",
+  "Add tenant-scoped registries, credentials, and policy namespaces.",
   "Publish machine-readable API contracts (OpenAPI and SensorThings profiles).",
-  "Harden security with OIDC flows and encrypted connector secret storage."
+  "Harden security with OIDC and encrypted connector secrets."
 ];
 
 const apiExamples = {
@@ -171,66 +171,67 @@ export default function DataFederationPage() {
               <h1 className="mt-5 font-[var(--font-heading)] text-4xl font-semibold tracking-tight md:text-6xl">
                 Data Federation
                 <span className="mt-2 block bg-gradient-to-r from-cyan-200 via-teal-300 to-violet-300 bg-clip-text text-transparent">
-                  One Logical Layer Across Distributed Sources
+                  One way to query across distributed sources
                 </span>
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
-                Query and govern distributed data systems through one shared interface, 
-                without centralizing all raw data. FDL combines federation-first
-                access, metadata and semantic workflows, and policy-aware
-                mediation for cross-domain interoperability.
+                Query and govern distributed systems through a single interface,
+                without centralizing all raw data. FDL provides federation-first
+                access, metadata and semantic workflows, and policy checks at the
+                gateway for cross-domain use.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href="/developers"
                   className="inline-flex items-center gap-2 rounded-full border border-teal-300 bg-teal-300 px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-teal-200"
                 >
-                  Request Technical Walkthrough
+                  Request technical walkthrough
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="/learn"
                   className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-slate-100 transition-colors hover:bg-white/10"
                 >
-                  Download FDL Whitepaper
+                  Download FDL whitepaper
                 </Link>
               </div>
             </div>
+
             <div className="grid gap-4">
               <article className="rounded-2xl border border-white/10 bg-white/5 p-5">
                 <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
                   Differentiator
                 </p>
                 <p className="mt-2 text-lg font-semibold text-white">
-                  Federation-First Operating Model
+                  Federation-first approach
                 </p>
                 <p className="mt-2 text-sm text-slate-300">
-                  Register nodes, expose a unified API, and run queries across sources in parallel 
-                  without relying on copy-first pipelines.
+                  Register nodes, expose a unified API, and run queries across sources in
+                  parallel—without relying on copy-first pipelines.
                 </p>
               </article>
+
               <article className="rounded-2xl border border-white/10 bg-white/5 p-5">
                 <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
                   Standards
                 </p>
                 <p className="mt-2 text-lg font-semibold text-white">
-                  SensorThings, OData query semantics, and FAIR-aligned metadata
+                  SensorThings, OData query semantics, and FAIR metadata
                 </p>
                 <p className="mt-2 text-sm text-slate-300">
-                  Standards-led interoperability with metadata readiness and
-                  semantic enrichment workflows.
+                  Use standard query patterns and metadata practices so integrations stay portable.
                 </p>
               </article>
+
               <article className="rounded-2xl border border-white/10 bg-white/5 p-5">
                 <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
                   Design principle
                 </p>
                 <p className="mt-2 text-lg font-semibold text-white">
-                  Source Ownership Preserved
+                  Keep ownership with the source teams
                 </p>
                 <p className="mt-2 text-sm text-slate-300">
-                  Separate source ownership from shared logical access and
-                  governance controls.
+                  Share access and governance without taking over how each source is operated.
                 </p>
               </article>
             </div>
@@ -240,7 +241,7 @@ export default function DataFederationPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-14">
         <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-          Problem Context
+          Why teams move to federation
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           {painPoints.map((point) => (
@@ -256,7 +257,7 @@ export default function DataFederationPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-14">
         <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-          Federation vs Replication
+          Federation vs replication
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           {federationVsReplication.map((item) => (
@@ -281,10 +282,10 @@ export default function DataFederationPage() {
       <section className="mx-auto max-w-7xl px-6 py-14">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-            Capability Maturity Snapshot
+            What’s built vs what’s next
           </h2>
           <p className="max-w-2xl text-sm text-slate-300 md:text-base">
-            A clear view of what’s implemented today and what is still conceptual or in progress.
+            A snapshot of what’s implemented in the UI today, and what’s still in progress.
           </p>
         </div>
         <div className="mt-8 space-y-4">
@@ -311,7 +312,7 @@ export default function DataFederationPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-14">
         <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-          Architecture Deep Dive
+          Architecture overview
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           {architecturePlanes.map((plane) => {
@@ -339,7 +340,7 @@ export default function DataFederationPage() {
         <div className="grid gap-8 lg:grid-cols-[1fr_1fr]">
           <article className="rounded-2xl border border-white/10 bg-white/5 p-6">
             <h2 className="font-[var(--font-heading)] text-2xl font-semibold md:text-3xl">
-              Request and Query Sequence
+              How a query runs
             </h2>
             <ol className="mt-5 space-y-3 text-sm text-slate-300">
               {requestSequence.map((step, idx) => (
@@ -352,9 +353,10 @@ export default function DataFederationPage() {
               ))}
             </ol>
           </article>
+
           <article className="rounded-2xl border border-white/10 bg-white/5 p-6">
             <h2 className="font-[var(--font-heading)] text-2xl font-semibold md:text-3xl">
-              Connectors and Adapters
+              Connectors and adapters
             </h2>
             <ul className="mt-5 space-y-3 text-sm text-slate-300">
               {connectorPatterns.map((item) => (
@@ -370,11 +372,10 @@ export default function DataFederationPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-14">
         <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-          API Contract Examples
+          API examples
         </h2>
         <p className="mt-4 max-w-3xl text-slate-300">
-          Illustrative examples aligned to the FDL contract model and OData-style
-          filtering and pagination semantics.
+          Examples that follow the FDL contract model and standard OData-style query parameters.
         </p>
         <div className="mt-8 grid gap-5 lg:grid-cols-2">
           <article className="rounded-2xl border border-white/10 bg-[#05060e]/90 p-5">
@@ -398,7 +399,7 @@ export default function DataFederationPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-14">
         <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-          Governance, Security, and Operations
+          Governance, security, and operations
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           {governanceAndOps.map((item) => (
@@ -418,7 +419,7 @@ export default function DataFederationPage() {
       <section className="mx-auto max-w-7xl px-6 py-14">
         <div className="glass rounded-3xl p-8 md:p-10">
           <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-            Product Roadmap Priorities
+            Roadmap priorities
           </h2>
           <div className="mt-6 grid gap-3">
             {roadmap.map((item, idx) => (
@@ -431,22 +432,22 @@ export default function DataFederationPage() {
               </article>
             ))}
           </div>
+
           <div className="mt-8 rounded-2xl border border-violet-300/30 bg-violet-300/[0.1] p-6">
             <h3 className="font-[var(--font-heading)] text-2xl font-semibold text-slate-100">
-              Build a Production-Grade Federation Backbone
+              Move from prototype to production federation
             </h3>
             <p className="mt-3 max-w-3xl text-sm text-slate-200">
-              FDL already demonstrates strong UX and operating-model clarity for
-              federation, documentation, and standards-led governance. The next
-              milestone is backend hardening: planner, policy runtime,
-              persistent metadata services, and connector execution.
+              The UI already covers node management, documentation, and standards-based governance.
+              The next step is the production runtime: planner, policy checks, durable metadata services,
+              and connector execution.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Link
                 href="/developers"
                 className="inline-flex items-center gap-2 rounded-full border border-violet-300 bg-violet-300 px-5 py-2.5 text-sm font-semibold text-slate-950 transition-colors hover:bg-violet-200"
               >
-                Start Integration Planning
+                Start integration planning
               </Link>
               <Link
                 href="/products/blobfish"
