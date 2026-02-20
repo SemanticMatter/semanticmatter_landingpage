@@ -15,6 +15,7 @@ import {
   ShieldCheck,
   Sparkles
 } from "lucide-react";
+import ProductCarousel from "@/components/ui/ProductCarousel";
 
 type IconType = ComponentType<{ className?: string }>;
 
@@ -76,7 +77,8 @@ const presentationHighlights = [
       "OpenAI-compatible interface, model handlers, and specialized generator stack.",
     src: "../../blobfish-presentation/image10.png",
     width: 2884,
-    height: 3124
+    height: 3124,
+    imageBackgroundClassName: "bg-slate-100/80"
   },
   {
     title: "Image to Markdown Handler",
@@ -488,36 +490,8 @@ export default function BlobfishPage() {
           Selected artifacts from `Blobfish-presentation.pptx` showing the
           architecture and model-handler workflow in action.
         </p>
-        <div className="mt-8 grid gap-5 md:grid-cols-2">
-          {presentationHighlights.map((item) => (
-            <article
-              key={item.title}
-              className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
-            >
-              <div
-                className={
-                  item.title === "Blobfish Component Architecture"
-                    ? "bg-slate-100/80"
-                    : "bg-transparent"
-                }
-              >
-                <img
-                  src={item.src}
-                  alt={item.title}
-                  width={item.width}
-                  height={item.height}
-                  className="h-auto w-full"
-                  loading="lazy"
-                />
-              </div>
-              <div className="border-t border-white/10 p-4">
-                <h3 className="font-[var(--font-heading)] text-lg font-semibold text-slate-100">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm text-slate-300">{item.caption}</p>
-              </div>
-            </article>
-          ))}
+        <div className="mt-8">
+          <ProductCarousel slides={presentationHighlights} autoAdvanceMs={6000} />
         </div>
       </section>
 

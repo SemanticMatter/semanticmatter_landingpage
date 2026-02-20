@@ -10,6 +10,7 @@ type CarouselSlide = {
   src: string;
   width: number;
   height: number;
+  imageBackgroundClassName?: string;
 };
 
 type ProductCarouselProps = {
@@ -107,7 +108,7 @@ export default function ProductCarousel({
               animate="center"
               exit="exit"
               transition={{ duration: 0.4, ease: [0.22, 0.61, 0.36, 1] }}
-              className="absolute inset-0"
+              className={`absolute inset-0 ${activeSlide.imageBackgroundClassName ?? ""}`}
             >
               <img
                 src={activeSlide.src}
@@ -160,16 +161,18 @@ export default function ProductCarousel({
             }`}
           >
             <div className="relative aspect-[16/9] w-full">
-              <img
-                src={slide.src}
-                alt={slide.title}
-                width={slide.width}
-                height={slide.height}
-                className={`h-full w-full object-cover transition duration-300 ${
-                  idx === activeIndex ? "opacity-100" : "opacity-70 group-hover:opacity-90"
-                }`}
-                loading="lazy"
-              />
+              <div className={`h-full w-full ${slide.imageBackgroundClassName ?? ""}`}>
+                <img
+                  src={slide.src}
+                  alt={slide.title}
+                  width={slide.width}
+                  height={slide.height}
+                  className={`h-full w-full object-cover transition duration-300 ${
+                    idx === activeIndex ? "opacity-100" : "opacity-70 group-hover:opacity-90"
+                  }`}
+                  loading="lazy"
+                />
+              </div>
             </div>
             <div className="px-2 py-1.5 text-left text-[11px] text-slate-300">{slide.title}</div>
           </button>
