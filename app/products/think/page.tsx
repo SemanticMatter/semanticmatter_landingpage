@@ -94,7 +94,7 @@ const useCases = [
   }
 ];
 
-const standards = ["RDF/OWL", "SHACL", "PROV-O", "DCAT", "SKOS", "FAIR principles"];
+const standards = ["RDF/OWL", "SHACL", "PROV-O", "DCAT", "SKOS", "FNO", "DC"];
 
 const roadmap = [
   "Lock the initial feature set",
@@ -105,11 +105,11 @@ const roadmap = [
 ];
 
 const transformationalImpact = [
-  "Files -> Shared, queryable knowledge",
-  "Manual metadata -> Assisted capture with review",
-  "Static datasets -> Workflows that react to change",
-  "Paper context -> Digital metadata you can search",
-  "Local reuse -> Cross-team interoperability"
+  "Files → Shared, queryable knowledge",
+  "Manual metadata → Assisted capture with review",
+  "Static datasets → Workflows that react to change",
+  "Paper context → Digital metadata you can search",
+  "Local reuse → Cross-team interoperability"
 ];
 
 export default function ThinkPage() {
@@ -160,7 +160,7 @@ export default function ThinkPage() {
                   Catalog model
                 </p>
                 <p className="mt-2 text-2xl font-semibold text-white">
-                  Groups {"->"} Packages {"->"} Resources
+                  Groups {"→"} Packages {"→"} Resources
                 </p>
                 <p className="mt-2 text-sm text-slate-300">
                   Organize datasets by team and project, with clear ownership,
@@ -184,7 +184,7 @@ export default function ThinkPage() {
                   Technical stack
                 </p>
                 <p className="mt-2 text-lg font-semibold text-white">
-                  RDF/OWL, SHACL, PROV-O, DCAT, SKOS
+                  RDF/OWL, DC, SKOS, SHACL, PROV-O, DCAT, SKOS, FNO
                 </p>
                 <p className="mt-2 text-sm text-slate-300">
                   Open standards you can keep using over time—inside your own
