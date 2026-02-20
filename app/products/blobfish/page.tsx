@@ -405,6 +405,9 @@ export default function BlobfishPage() {
             />
             <figcaption className="border-t border-white/10 px-3 py-2 text-[11px] text-slate-400">
               Presentation visual from Blobfish deck (slide 1).
+              {" "}
+              Photograph By National Science Foundation-Ocean Observatory
+              Initiative/University of Washington/CSSF
             </figcaption>
           </figure>
         </article>
