@@ -5,6 +5,14 @@ import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import "./globals.css";
 
+const repoName = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "";
+const isUserOrOrgPagesSite = repoName.endsWith(".github.io");
+const basePath =
+  process.env.GITHUB_ACTIONS === "true" && !isUserOrOrgPagesSite && repoName
+    ? `/${repoName}`
+    : "";
+const faviconPath = `${basePath}/favicon.ico`;
+
 const bodyFont = IBM_Plex_Sans({
   subsets: ["latin"],
   variable: "--font-body",
@@ -22,9 +30,9 @@ export const metadata: Metadata = {
   description:
     "Semantic infrastructure and knowledge graphs for complex data interoperability.",
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico"
+    icon: faviconPath,
+    shortcut: faviconPath,
+    apple: faviconPath
   }
 };
 
