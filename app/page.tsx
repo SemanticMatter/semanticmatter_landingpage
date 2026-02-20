@@ -23,7 +23,7 @@ export default function OverviewPage() {
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 1.0, ease: "easeOut" }}
           className="font-[var(--font-heading)] text-5xl font-bold tracking-tight md:text-7xl"
         >
           Semantic Infrastructure for
@@ -47,7 +47,7 @@ export default function OverviewPage() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="mt-12 flex flex-wrap items-center justify-center gap-4"
         >
           <Link

@@ -81,7 +81,7 @@ export default function Navbar() {
                   <motion.div
                     layoutId="desktop-nav-indicator"
                     className="absolute -bottom-6 left-0 right-0 h-0.5 bg-teal-400"
-                    transition={{ type: "spring", bounce: 0.25, duration: 0.5 }}
+                    transition={{ type: "spring", bounce: 0.55, duration: 1.8 }}
                   />
                 ) : null}
               </div>
