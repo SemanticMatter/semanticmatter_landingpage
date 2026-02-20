@@ -29,7 +29,7 @@ const valueProps = [
   {
     title: "Automated Pipelines",
     description:
-      "Seamless integration into automated modelling and analytics workflows.",
+      "Connect captured metadata to modeling and analytics workflows.",
     icon: GitBranch
   },
   {
@@ -143,18 +143,18 @@ const capabilities: Array<{
     icon: CircleDashed,
     bullets: [
       "Cross-department Q&A and discovery.",
-      "Power graph queries for complex insights.",
-      "Rich semantic context for all data."
+      "Run graph queries for cross-team analysis.",
+      "Keep semantic context attached to the data."
     ]
   },
   {
     title: "OpenAI v1-Compatible API",
     icon: Handshake,
     bullets: [
-      "Plug-and-play with existing LLM infrastructure.",
-      "Compatible with standard orchestrators (LangChain, etc.).",
-      "Drop-in replacement for generic endpoints.",
-      "Enterprise-grade security and scalability."
+      "Connect to existing LLM infrastructure.",
+      "Use standard orchestrators such as LangChain.",
+      "Route supported tasks to Blobfish handlers.",
+      "Run in controlled enterprise environments."
     ]
   }
 ];
@@ -205,7 +205,7 @@ const investorNarrative = [
   {
     title: "Scalable Infrastructure",
     description:
-      "OpenAI v1-compatible API ensures zero-friction adoption into existing enterprise MLOps stacks."
+      "OpenAI v1-compatible APIs reduce integration work in existing MLOps stacks."
   },
   {
     title: "Massive Market Need",
@@ -318,24 +318,23 @@ export default function BlobfishPage() {
                 </span>
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
-                Turn messy, heterogeneous lab data into fully FAIR-aligned
-                assets. Blobfish accelerates the journey from experiment to
-                business decision support with automated pipelines and
-                specialized model handlers.
+                Turn mixed lab records into FAIR-aligned data assets. Blobfish
+                helps teams move from experiment records to analysis-ready data
+                using repeatable extraction and mapping workflows.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href="/developers"
                   className="inline-flex items-center gap-2 rounded-full border border-teal-300 bg-teal-300 px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-teal-200"
                 >
-                  Request a Pilot
+                  Request walkthrough
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="/learn"
                   className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-slate-100 transition-colors hover:bg-white/10"
                 >
-                  Download Technical Overview
+                  Read whitepaper
                 </Link>
               </div>
             </div>
@@ -365,13 +364,11 @@ export default function BlobfishPage() {
       <section className="mx-auto grid max-w-7xl gap-8 px-6 py-14 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
           <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-            The Reality of Industrial R&D Data
+            Industrial R&D data in practice
           </h2>
           <p className="mt-4 text-slate-300">
-            Despite massive investment in digital transformation, the last mile
-            of lab data remains broken. Knowledge is trapped in logbooks,
-            mixed-language notes, unstructured PDF reports, and scattered
-            equipment files.
+            Even with major digital programs, lab context is often still spread
+            across logbooks, mixed-language notes, PDF reports, and equipment files.
           </p>
           <div className="mt-6 space-y-3">
             {painPoints.map((point) => (
@@ -393,8 +390,8 @@ export default function BlobfishPage() {
             Unstructured Information to Graph
           </h3>
           <p className="mt-4 text-sm text-slate-300">
-            Blobfish converts scans, tables, logs, and reports into a coherent
-            semantic structure that can be queried, audited, and reused.
+            Blobfish converts scans, tables, logs, and reports into structured
+            metadata that teams can query, review, and reuse.
           </p>
           <figure className="mt-5 overflow-hidden rounded-2xl border border-white/10 bg-black/30">
             <img
@@ -418,13 +415,12 @@ export default function BlobfishPage() {
       <section className="mx-auto max-w-7xl px-6 py-14">
         <div className="grid gap-8 lg:grid-cols-[1fr_1fr]">
           <div>
-            <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-              Enter SemanticMatter Lab Assistant
-            </h2>
+          <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+            SemanticMatter lab assistant
+          </h2>
             <p className="mt-4 text-slate-300">
-              A specialized API orchestrating LLM workflows to ingest,
-              understand, and structure R&D data into a queryable
-              machine-readable knowledge graph.
+              Use a focused API workflow to ingest, interpret, and structure
+              R&D records into a queryable knowledge graph.
             </p>
           </div>
           <div className="space-y-3">
@@ -447,12 +443,12 @@ export default function BlobfishPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-          Core Capabilities
-        </h2>
+          <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+            Core capabilities
+          </h2>
         <p className="mt-4 max-w-3xl text-slate-300">
-          Built for the complexity of modern science and powered by specialized
-          model handlers.
+          Built for scientific data workflows that need repeatable extraction,
+          mapping, and review.
         </p>
         <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {capabilities.map((capability) => {
@@ -483,9 +479,9 @@ export default function BlobfishPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-          From the Presentation
-        </h2>
+          <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+            From the presentation
+          </h2>
         <p className="mt-4 max-w-3xl text-slate-300">
           Selected artifacts from `Blobfish-presentation.pptx` showing the
           architecture and model-handler workflow in action.
@@ -496,11 +492,11 @@ export default function BlobfishPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-          From Lab to Business Decision Support
+          <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+          From lab records to decisions
         </h2>
         <p className="mt-4 text-slate-300">
-          Accelerate time-to-insight with a trusted, reproducible data pipeline.
+          Move faster with a reproducible data pipeline.
         </p>
         <div className="mt-8 grid gap-4 md:grid-cols-4">
           {decisionFlow.map((step, idx) => (
@@ -522,7 +518,7 @@ export default function BlobfishPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-14">
         <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-          Proven Impact
+          Proven impact
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           {impacts.map((impact) => (
@@ -550,9 +546,8 @@ export default function BlobfishPage() {
             Why Blobfish Matters
           </h2>
           <p className="mt-4 max-w-4xl text-slate-300">
-            Blobfish addresses the data quality bottleneck in a $100B+ industrial
-            R&D market where the value of structured FAIR-aligned proprietary
-            data is accelerating with AI adoption.
+            Blobfish addresses data quality bottlenecks in industrial R&D where
+            teams need structured FAIR-aligned data for analytics and AI.
           </p>
           <div className="mt-7 grid gap-4 md:grid-cols-2">
             {investorNarrative.map((item) => (
@@ -592,7 +587,7 @@ export default function BlobfishPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-14">
         <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-          How It Works
+          How it works
         </h2>
         <div className="mt-8 grid gap-4 md:grid-cols-5">
           {howItWorks.map((step, idx) => (
@@ -612,7 +607,7 @@ export default function BlobfishPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-14">
         <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-          Frequently Asked Questions
+          Frequently asked questions
         </h2>
         <div className="mt-8 space-y-4">
           {faqs.map((faq) => (
@@ -632,14 +627,14 @@ export default function BlobfishPage() {
           <div className="grid gap-8 md:grid-cols-[1.2fr_0.8fr] md:items-end">
             <div>
               <p className="text-xs uppercase tracking-[0.2em] text-teal-100">
-                Turn Lab Chaos Into Intelligence
+                Bring order to lab data
               </p>
               <h2 className="mt-3 font-[var(--font-heading)] text-3xl font-semibold md:text-5xl">
-                Machine-Readable FAIR Data for Modern R&D
+                Machine-readable FAIR data for modern R&D
               </h2>
               <p className="mt-4 max-w-2xl text-slate-100">
-                Join forward-thinking R&D organizations building reusable,
-                trusted knowledge assets for analytics, digital twins, and AI.
+                Work with teams building reusable knowledge assets for
+                analytics, digital twins, and AI.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 md:justify-end">
@@ -647,14 +642,14 @@ export default function BlobfishPage() {
                 href="/developers"
                 className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white px-5 py-2.5 text-sm font-semibold text-slate-950 transition-colors hover:bg-slate-100"
               >
-                Schedule a Technical Demo
+                Request walkthrough
                 <ScanLine className="h-4 w-4" />
               </Link>
               <Link
                 href="/learn"
                 className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
               >
-                Get Technical Brief
+                Read whitepaper
                 <FlaskConical className="h-4 w-4" />
               </Link>
             </div>

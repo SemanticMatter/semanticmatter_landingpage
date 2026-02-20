@@ -34,7 +34,7 @@ export default function ProductsPage() {
         Products
       </h1>
       <p className="mt-4 max-w-2xl text-slate-300">
-        Products for building and operating semantic data infrastructure across complex organizations.
+        Products for teams that need to model, connect, and query data across systems.
       </p>
       <div className="mt-12 grid gap-6 md:grid-cols-2">
         {products.map((product) => (

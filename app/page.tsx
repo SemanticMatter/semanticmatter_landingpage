@@ -39,9 +39,9 @@ export default function OverviewPage() {
           transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           className="mx-auto mt-8 max-w-3xl text-lg text-slate-300 md:text-xl"
         >
-          We build enterprise-grade knowledge graphs and metadata-driven systems.
-          Unify your data, enforce interoperability, and unlock intelligent
-          federation across your entire technical stack.
+          We build knowledge graph and metadata systems for teams working across
+          many tools and data sources. Bring your data together, apply shared
+          semantics, and make it easier to query and reuse.
         </motion.p>
 
         <motion.div
@@ -63,7 +63,7 @@ export default function OverviewPage() {
             href="/learn"
             className="rounded-full border border-white/20 bg-white/5 px-8 py-3.5 text-sm font-semibold text-slate-100 transition-colors hover:border-white/35 hover:bg-white/10"
           >
-            Read the Whitepaper
+            Read whitepaper
           </Link>
         </motion.div>
       </section>
@@ -83,7 +83,7 @@ export default function OverviewPage() {
           <FeatureCard
             icon={<ShieldCheck className="h-6 w-6 text-cyan-300" />}
             title="Enterprise Architecture"
-            description="Highly scalable, secure infrastructure designed for mission-critical compliance and decision intelligence."
+            description="Secure infrastructure for compliance-heavy workflows and decision support."
           />
         </div>
       </section>

@@ -185,14 +185,14 @@ export default function DataFederationPage() {
                   href="/developers"
                   className="inline-flex items-center gap-2 rounded-full border border-teal-300 bg-teal-300 px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-teal-200"
                 >
-                  Request technical walkthrough
+                  Request walkthrough
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="/learn"
                   className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-slate-100 transition-colors hover:bg-white/10"
                 >
-                  Download FDL whitepaper
+                  Read whitepaper
                 </Link>
               </div>
             </div>
@@ -447,7 +447,7 @@ export default function DataFederationPage() {
                 href="/developers"
                 className="inline-flex items-center gap-2 rounded-full border border-violet-300 bg-violet-300 px-5 py-2.5 text-sm font-semibold text-slate-950 transition-colors hover:bg-violet-200"
               >
-                Start integration planning
+                Start integration
               </Link>
               <Link
                 href="/products/blobfish"
