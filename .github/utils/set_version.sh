@@ -10,7 +10,6 @@ VER=""
 REMOTE_BRANCH="${REMOTE_BRANCH:-origin/main}"
 EPOCH_VERSION="1"
 DEBUG=false
-TOP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
@@ -63,7 +62,7 @@ fi
 # Determine version
 if [ -n "$VER" ]; then
     # Validate version format
-    if ! echo "$VER" | grep -qE '^v?[1-9][0-9]*\.20[0-9]{2}[0-1][0-9][0-3][0-9]\.[0-9]+$'; then
+    if ! echo "$VER" | grep -qE '^v?[1-9][0-9]*\.20[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])\.[0-9]+$'; then
         echo "Error: Please specify version as '<Epoch version>.<CalVer (YYYY0M0D)>.<Build number>' or 'v<Epoch version>.<CalVer (YYYY0M0D)>.<Build number>'."
         exit 1
     fi
@@ -87,22 +86,42 @@ else
         exit 1
     fi
 
-    # Check if this is a git repository
+    # Check if this is a git repository and fetch remotes
     if ! git rev-parse --git-dir > /dev/null 2>&1; then
         echo "Error: Could not set version. No version is provided using the '--ver' option. This is not a git repository."
         exit 1
     fi
 
-    # Compile version from git
-    CALVER=$(date -u +"%Y%m%d")
+    # Handle custom remote URL if provided
+    if [ -n "$REMOTE_URL" ]; then
+        REMOTE_NAME="${REMOTE_BRANCH%/*}"
+        git remote set-url "$REMOTE_NAME" "$REMOTE_URL"
+        if [ "$DEBUG" = true ]; then
+            echo "Debug: Set remote URL to REMOTE_URL value."
+        fi
+    fi
 
-    # Get commit count for build number
-    if git rev-parse "$REMOTE_BRANCH" > /dev/null 2>&1; then
-        BUILD_NUMBER=$(git rev-list --count "$REMOTE_BRANCH")
-    else
-        echo "Error: Could not set version. No version is provided using the '--ver' option. Nor can the '$REMOTE_BRANCH' remote branch be properly accessed in the repository folder. Is this a git repository?"
+    # Fetch from all remotes
+    git fetch --all
+    if [ "$DEBUG" = true ]; then
+        echo "Debug: Fetched from all remotes."
+    fi
+
+    # Get ref to sha mapping using git for-each-ref
+    CHOSEN_REF="refs/remotes/${REMOTE_BRANCH}"
+
+    if ! git for-each-ref --format='%(refname)' refs/remotes/ | grep -q "^${CHOSEN_REF}$"; then
+        echo "Error: Could not find a valid ref in the git repo."
+        echo "Error: Expected a valid ref in the git repo !"
+        echo "Did this run via the set_version.sh script?"
         exit 1
     fi
+
+    # Get the calendar version (YYYYMMDD)
+    CALVER=$(git for-each-ref --format='%(creatordate:short)' "$CHOSEN_REF" | tr -d '-')
+
+    # Get the build number (commit count)
+    BUILD_NUMBER=$(git rev-list --count "$CHOSEN_REF")
 
     VER="${EPOCH_VERSION}.${CALVER}.${BUILD_NUMBER}"
 

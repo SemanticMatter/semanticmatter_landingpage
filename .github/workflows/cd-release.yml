@@ -76,7 +76,7 @@ jobs:
       if: steps.update-version-step.outputs.continue-workflow == 'true'
       uses: docker://githubchangeloggenerator/github-changelog-generator:1.16.2
       with:
-        args: --user "${{ github.repository_owner }}" --project "semanticmatter_landingpackge" --token "${{ secrets.BOT_PAT }}" --release-branch "${{ env.DEFAULT_REPO_BRANCH }}" --exclude-labels "skip-changelog,duplicate,question,invalid,wontfix" --unreleased-label "v${{ steps.update-version-step.outputs.version }}:"
+        args: --user "${{ github.repository_owner }}" --project "semanticmatter_landingpage" --token "${{ secrets.BOT_PAT }}" --release-branch "${{ env.DEFAULT_REPO_BRANCH }}" --exclude-labels "skip-changelog,duplicate,question,invalid,wontfix" --unreleased-label "v${{ steps.update-version-step.outputs.version }}:"
 
     - name: Commit changes
       if: steps.update-version-step.outputs.continue-workflow == 'true'
@@ -114,3 +114,5 @@ jobs:
     secrets:
       GITLAB_REGISTRY_USER: ${{ secrets.SINTEF_GITLAB_REGISTRY_USER }}
       GITLAB_REGISTRY_PASSWORD: ${{ secrets.SINTEF_GITLAB_REGISTRY_PAT }}
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}

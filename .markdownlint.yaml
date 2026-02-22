@@ -10,6 +10,3 @@ MD013:
   heading_line_length: 88
   # Number of characters for code blocks (match that of black's default)
   code_block_line_length: 88
-
-# Ignore MD056 until the issue is fixed in DataSpaces-Entities
-MD056: false

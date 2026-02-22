@@ -28,6 +28,12 @@ on:
       GITLAB_REGISTRY_PASSWORD:
         description: 'The password (or Personal Access Token) for the Container Registry.'
         required: true
+      DOCKER_USERNAME:
+        description: 'The username for Docker Hub Container Registry.'
+        required: true
+      DOCKER_PASSWORD:
+        description: 'The password (or Personal Access Token) for Docker Hub Container Registry.'
+        required: true
 
 env:
   IMAGE_ROOT_GITHUB: ghcr.io/semanticmatter
@@ -139,7 +145,7 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker_metadata.outputs.tags }}
           labels: ${{ steps.docker_metadata.outputs.labels }}
-          cache-from: type=local,src=${{ runner.temp}}/.buildx-cache
+          cache-from: type=local,src=${{ runner.temp }}/.buildx-cache
           cache-to: type=local,dest=${{ runner.temp }}/.buildx-cache-new,mode=max
           provenance: false
 
