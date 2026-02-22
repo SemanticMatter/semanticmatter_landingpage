@@ -28,15 +28,6 @@ on:
       GITLAB_REGISTRY_PASSWORD:
         description: 'The password (or Personal Access Token) for the Container Registry.'
         required: true
-      CACHE_ENDPOINT:
-        description: 'The endpoint for the cache.'
-        required: true
-      CACHE_ACCESS_KEY:
-        description: 'The access key for the cache.'
-        required: true
-      CACHE_SECRET_KEY:
-        description: 'The secret key for the cache.'
-        required: true
 
 env:
   IMAGE_ROOT_GITHUB: ghcr.io/semanticmatter
@@ -132,17 +123,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup local cache
-        uses: tespkg/actions-cache@v1.9.0
+      - name: Setup cache
+        uses: actions/cache@v3
         with:
-          endpoint: ${{ secrets.CACHE_ENDPOINT }}
-          port: 9000
-          bucket: actions-cache
-          insecure: true
-          accessKey: ${{ secrets.CACHE_ACCESS_KEY }}
-          secretKey: ${{ secrets.CACHE_SECRET_KEY }}
-          region: 'us-east-1'
-          use-fallback: true
           path: ${{ runner.temp }}/.buildx-cache
           key: ${{ github.repository }}-${{ runner.os }}-sm-landingpage-${{ github.sha }}
           restore-keys: |

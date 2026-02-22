@@ -114,6 +114,3 @@ jobs:
     secrets:
       GITLAB_REGISTRY_USER: ${{ secrets.SINTEF_GITLAB_REGISTRY_USER }}
       GITLAB_REGISTRY_PASSWORD: ${{ secrets.SINTEF_GITLAB_REGISTRY_PAT }}
-      CACHE_ENDPOINT: ${{ secrets.CACHE_ENDPOINT }}
-      CACHE_ACCESS_KEY: ${{ secrets.CACHE_ACCESS_KEY }}
-      CACHE_SECRET_KEY: ${{ secrets.CACHE_SECRET_KEY }}
