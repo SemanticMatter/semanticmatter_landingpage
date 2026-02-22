@@ -16,7 +16,7 @@ env:
 jobs:
   update-version:
     name: Update the version
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     if: github.repository_owner == 'SemanticMatter'
     outputs:
       continue-workflow: ${{ steps.update-version-step.outputs.continue-workflow }}
