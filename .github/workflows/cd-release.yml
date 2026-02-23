@@ -55,6 +55,7 @@ jobs:
       env:
         REMOTE_URL: https://__token__:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
       run: |
+        chmod +x ./.github/utils/set_version.sh
         ./.github/utils/set_version.sh
 
         if [ -n "$(git status --porcelain package.json package-lock.json)" ]; then
