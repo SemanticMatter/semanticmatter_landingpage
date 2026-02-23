@@ -1,11 +1,11 @@
-#### Build
-FROM node:20-alpine AS builder
+### Build
+FROM node:24-alpine AS builder
 
 WORKDIR /app
 
 COPY package.json package-lock.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY . .
 
