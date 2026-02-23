@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository_owner == 'SemanticMatter'
     outputs:
-      continue-workflow: ${{ steps.update-version-step.outputs.continue-workflow }}
+      continue-workflow: ${{ steps.update-version-step.outputs.continue_workflow }}
       version: ${{ steps.update-version-step.outputs.version }}
       tag: ${{ steps.tag.outputs.tag }}
 
@@ -60,33 +60,33 @@ jobs:
 
         if [ -n "$(git status --porcelain package.json package-lock.json)" ]; then
           echo "Version updated !"
-          continue-workflow=true
+          continue_workflow=true
         else
           # The version has not changed - i.e. the workflow shouldn't continue.
-          continue-workflow=false
+          continue_workflow=false
           echo "Version not updated !"
         fi
 
-        echo "continue-workflow=${continue-workflow}" >> $GITHUB_OUTPUT
+        echo "continue_workflow=${continue_workflow}" >> $GITHUB_OUTPUT
         version="$(jq -r '.version' package.json)"
         echo "version=${version}" >> $GITHUB_OUTPUT
 
         echo "Retrieved version after update: ${version}"
 
     - name: Update changelog
-      if: steps.update-version-step.outputs.continue-workflow == 'true'
+      if: steps.update-version-step.outputs.continue_workflow == 'true'
       uses: docker://githubchangeloggenerator/github-changelog-generator:1.16.2
       with:
         args: --user "${{ github.repository_owner }}" --project "semanticmatter_landingpage" --token "${{ secrets.BOT_PAT }}" --release-branch "${{ env.DEFAULT_REPO_BRANCH }}" --exclude-labels "skip-changelog,duplicate,question,invalid,wontfix" --unreleased-label "v${{ steps.update-version-step.outputs.version }}:"
 
     - name: Commit changes
-      if: steps.update-version-step.outputs.continue-workflow == 'true'
+      if: steps.update-version-step.outputs.continue_workflow == 'true'
       run: |
         git add package.json package-lock.json CHANGELOG.md
         git commit --amend -C HEAD
 
     - name: Add new git tag
-      if: steps.update-version-step.outputs.continue-workflow == 'true'
+      if: steps.update-version-step.outputs.continue_workflow == 'true'
       id: tag
       run: |
         TAG="v${{ steps.update-version-step.outputs.version }}"
@@ -94,7 +94,7 @@ jobs:
         echo "tag=${TAG}" >> $GITHUB_OUTPUT
 
     - name: Update '${{ env.DEFAULT_REPO_BRANCH }}'
-      if: steps.update-version-step.outputs.continue-workflow == 'true'
+      if: steps.update-version-step.outputs.continue_workflow == 'true'
       run: git push origin HEAD:refs/heads/${{ env.DEFAULT_REPO_BRANCH }} --force --tags
 
   docker:
