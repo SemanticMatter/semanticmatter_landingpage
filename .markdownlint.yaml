@@ -6,7 +6,7 @@ MD013:
   # Number of characters
   # Set very long to support 1-sentence-per-line style.
   line_length: 999
-  # Number of characters for headings (match that of black's default)
+  # Maximum line length for headings
   heading_line_length: 88
-  # Number of characters for code blocks (match that of black's default)
+  # Maximum line length for code blocks
   code_block_line_length: 88
