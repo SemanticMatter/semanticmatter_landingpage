@@ -117,8 +117,8 @@ else
         exit 1
     fi
 
-    # Get the calendar version (YYYYMMDD)
-    CALVER=$(git for-each-ref --format='%(creatordate:short)' "$CHOSEN_REF" | tr -d '-')
+    # Get the calendar version (YYYYMMDD) based on the latest commit date
+    CALVER=$(git log -1 --format=%cd --date=short "$CHOSEN_REF" | tr -d '-')
 
     # Get the build number (commit count)
     BUILD_NUMBER=$(git rev-list --count "$CHOSEN_REF")
