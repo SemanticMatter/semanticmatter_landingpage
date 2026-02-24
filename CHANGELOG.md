@@ -1,12 +1,8 @@
 # Changelog
 
-## [v1.20260223.29:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
+## [v1.20260223.29](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260223.29) (2026-02-23)
 
-[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260223.28...HEAD)
-
-**Merged pull requests:**
-
-- Tfh/upgrade to node24 [\#3](https://github.com/SemanticMatter/semanticmatter_landingpage/pull/3) ([quaat](https://github.com/quaat))
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260223.28...v1.20260223.29)
 
 ## [v1.20260223.28](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260223.28) (2026-02-23)
 
