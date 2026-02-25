@@ -205,12 +205,9 @@ const performanceSignals = [
 ];
 
 const roadmap = [
-  "Add optional local worker-based reasoning and SHACL execution for offline workflows.",
+  "Handle large graphs by leveraging a triplestore backend.",
   "Add SPARQL query panel with result-to-subgraph highlighting.",
-  "Move parse and heavy analytics to Web Workers for large graph responsiveness.",
-  "Add persistence options via IndexedDB and optional backend sync.",
-  "Improve deterministic graph element identifiers for cache and diff stability.",
-  "Add structured telemetry for API job durations and validation coverage."
+  "Offload parsing and compute-heavy analytics to Web Workers to keep large-graph interactions responsive."
 ];
 
 const screenshots = [
@@ -426,51 +423,6 @@ export default function GraphExplorerPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-14">
         <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-          Problem statement
-        </h2>
-        <div className="mt-8 grid gap-5 md:grid-cols-2">
-          {painPoints.map((point) => (
-            <article
-              key={point}
-              className="rounded-2xl border border-red-300/20 bg-red-300/[0.06] p-5"
-            >
-              <p className="text-sm text-slate-200">{point}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-          Architecture deep dive
-        </h2>
-        <div className="mt-8 grid gap-5 md:grid-cols-2">
-          {architectureLayers.map((layer) => {
-            const Icon = layer.icon;
-            return (
-              <article key={layer.title} className="glass rounded-2xl p-6">
-                <div className="inline-flex rounded-lg bg-white/10 p-2 text-teal-200">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <h3 className="mt-4 font-[var(--font-heading)] text-xl font-semibold">
-                  {layer.title}
-                </h3>
-                <ul className="mt-3 space-y-2 text-sm text-slate-300">
-                  {layer.bullets.map((bullet) => (
-                    <li key={bullet} className="flex items-start gap-2">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 text-teal-300" />
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
           Reasoning and SHACL status
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
@@ -542,105 +494,9 @@ export default function GraphExplorerPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <div className="grid gap-8 lg:grid-cols-[1fr_1fr]">
-          <article className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <h2 className="font-[var(--font-heading)] text-2xl font-semibold md:text-3xl">
-              Performance and scalability signals
-            </h2>
-            <ul className="mt-5 space-y-3 text-sm text-slate-300">
-              {performanceSignals.map((item) => (
-                <li key={item} className="flex items-start gap-2">
-                  <Gauge className="mt-0.5 h-4 w-4 text-teal-200" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </article>
-          <article className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <h2 className="font-[var(--font-heading)] text-2xl font-semibold md:text-3xl">
-              Confirmed limitations
-            </h2>
-            <ul className="mt-5 space-y-3 text-sm text-slate-300">
-              {limits.map((item) => (
-                <li key={item} className="flex items-start gap-2">
-                  <AlertTriangle className="mt-0.5 h-4 w-4 text-amber-200" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-6 py-14">
-        <div className="grid gap-8 lg:grid-cols-[1fr_1fr]">
-          <article className="glass rounded-2xl p-6">
-            <h2 className="font-[var(--font-heading)] text-2xl font-semibold md:text-3xl">
-              Security and observability posture
-            </h2>
-            <ul className="mt-5 space-y-3 text-sm text-slate-300">
-              <li className="flex items-start gap-2">
-                <ShieldCheck className="mt-0.5 h-4 w-4 text-teal-200" />
-                Local parsing and graph operations are client-side; reasoning and
-                SHACL are remote API actions.
-              </li>
-              <li className="flex items-start gap-2">
-                <ShieldCheck className="mt-0.5 h-4 w-4 text-teal-200" />
-                No first-party auth UI in this app codebase; API auth and access
-                control are expected to be handled by deployed API infrastructure.
-              </li>
-              <li className="flex items-start gap-2">
-                <ShieldCheck className="mt-0.5 h-4 w-4 text-teal-200" />
-                Error handling includes network, timeout, 4xx/5xx normalization,
-                plus UI-level status for reasoning and SHACL jobs.
-              </li>
-            </ul>
-          </article>
-          <article className="glass rounded-2xl p-6">
-            <h2 className="font-[var(--font-heading)] text-2xl font-semibold md:text-3xl">
-              Deployment model
-            </h2>
-            <ul className="mt-5 space-y-3 text-sm text-slate-300">
-              <li className="flex items-start gap-2">
-                <Boxes className="mt-0.5 h-4 w-4 text-violet-200" />
-                Vite build output is static and deployable to standard static
-                hosting platforms.
-              </li>
-              <li className="flex items-start gap-2">
-                <Boxes className="mt-0.5 h-4 w-4 text-violet-200" />
-                Local development uses Vite dev server; production integration
-                requires an available KG Analysis API base URL.
-              </li>
-              <li className="flex items-start gap-2">
-                <Boxes className="mt-0.5 h-4 w-4 text-violet-200" />
-                CI/CD model runs tests and build before static deployment.
-              </li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-          Module inventory (key files)
-        </h2>
-        <div className="mt-8 grid gap-4">
-          {moduleInventory.map((item) => (
-            <article
-              key={item.module}
-              className="rounded-xl border border-white/10 bg-white/[0.04] p-4"
-            >
-              <p className="font-mono text-xs text-cyan-200">{item.module}</p>
-              <p className="mt-1 text-sm text-slate-300">{item.responsibility}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-6 py-14">
         <div className="glass rounded-3xl p-8 md:p-10">
           <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
-            Roadmap recommendations
+            Feature Roadmap
           </h2>
           <div className="mt-6 grid gap-3">
             {roadmap.map((item, idx) => (
