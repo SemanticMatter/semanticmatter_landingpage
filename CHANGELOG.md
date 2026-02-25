@@ -1,8 +1,12 @@
 # Changelog
 
-## [v1.20260223.28:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
+## [v1.20260223.29](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260223.29) (2026-02-23)
 
-[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/43936e616f5a0a811f91038a9213b7181fc137d9...HEAD)
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260223.28...v1.20260223.29)
+
+## [v1.20260223.28](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260223.28) (2026-02-23)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/43936e616f5a0a811f91038a9213b7181fc137d9...v1.20260223.28)
 
 **Merged pull requests:**
 
