@@ -1,5 +1,17 @@
 # Changelog
 
+## [v1.20260225.31:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260224.30...HEAD)
+
+**Merged pull requests:**
+
+- Tfh/graph explorer cleanup [\#9](https://github.com/SemanticMatter/semanticmatter_landingpage/pull/9) ([quaat](https://github.com/quaat))
+
+## [v1.20260224.30](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260224.30) (2026-02-24)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260223.29...v1.20260224.30)
+
 ## [v1.20260223.29](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260223.29) (2026-02-23)
 
 [Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260223.28...v1.20260223.29)
