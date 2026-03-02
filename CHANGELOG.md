@@ -1,5 +1,17 @@
 # Changelog
 
+## [v1.20260302.33:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260302.32...HEAD)
+
+**Merged pull requests:**
+
+- Bump minimatch from 3.1.3 to 3.1.5 in the npm\_and\_yarn group across 1 directory [\#12](https://github.com/SemanticMatter/semanticmatter_landingpage/pull/12) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.20260302.32](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260302.32) (2026-03-02)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260225.31...v1.20260302.32)
+
 ## [v1.20260225.31](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260225.31) (2026-02-25)
 
 [Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260224.30...v1.20260225.31)
