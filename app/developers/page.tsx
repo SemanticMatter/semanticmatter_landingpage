@@ -17,7 +17,7 @@ const Endpoint = ({ path, method }: { path: string; method?: string }) => {
   );
 
   return (
-    <div className="flex items-center gap-3 rounded-lg border border-slate-800 bg-slate-950/50 px-3 py-2 font-mono text-sm shadow-sm transition-colors hover:border-slate-700 overflow-x-auto">
+    <div className="flex min-w-0 items-center gap-3 rounded-lg border border-slate-800 bg-slate-950/50 px-3 py-2 font-mono text-sm shadow-sm transition-colors hover:border-slate-700">
       {method && (
         <span className={`text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 ${
           method === 'GET' ? 'bg-blue-500/20 text-blue-400' : 
@@ -35,7 +35,7 @@ const Endpoint = ({ path, method }: { path: string; method?: string }) => {
 };
 
 const Card = ({ title, icon: Icon, children }: { title: string; icon: any; children: React.ReactNode }) => (
-  <div className="flex flex-col gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 shadow-lg backdrop-blur-sm">
+  <div className="flex min-w-0 flex-col gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 shadow-lg backdrop-blur-sm">
     <div className="flex items-center gap-3">
       <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
         <Icon size={20} />
@@ -99,7 +99,7 @@ export default function DevelopersPage() {
           </h2>
           <p className="mt-2 text-slate-400">Core endpoints available for integration today.</p>
 
-          <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-2">
+          <div className="mt-8 grid grid-cols-1 gap-6">
             <Card title="Catalog & Documentation" icon={Database}>
               <p className="text-sm">Manage source (Groups, Packages, Resources) and target (Projects, Targets) models.</p>
               <div className="mt-4 space-y-2">
@@ -171,34 +171,7 @@ export default function DevelopersPage() {
           </div>
         </div>
 
-        {/* AUTH & SECURITY */}
-        <div className="mt-24 rounded-3xl border border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950 p-8 md:p-12">
-          <div className="flex flex-col md:flex-row gap-8 items-start">
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-slate-800/50 text-white shadow-inner border border-slate-700">
-              <ShieldCheck size={32} />
-            </div>
-            <div className="space-y-4">
-              <h2 className="font-[var(--font-heading)] text-2xl font-semibold text-white">
-                Auth and Security Model
-              </h2>
-              <p className="max-w-3xl leading-relaxed text-slate-400">
-                Both middle-layer and backend specs define the OAuth2 security scheme <code className="text-indigo-300">DataSpaces</code> using the authorization code flow. 
-                Obtain an access token, then call protected routes with Bearer auth where <code className="text-indigo-300">DataSpaces</code> is declared.
-              </p>
-              <div className="flex flex-wrap gap-2 pt-2">
-                {['openid', 'profile', 'email', 'roles', 'service_account', 'offline_access'].map(scope => (
-                  <span key={scope} className="inline-flex items-center gap-1.5 rounded-md bg-slate-800/60 px-2.5 py-1 text-xs font-mono text-slate-300 border border-slate-700/50">
-                    <Key size={12} className="text-slate-500"/>
-                    {scope}
-                  </span>
-                ))}
-              </div>
-              <p className="text-sm text-slate-500 pt-2">
-                * Role and scope handling is strictly token-driven. Endpoint authorization depends on API enforcement for the provided token.
-              </p>
-            </div>
-          </div>
-        </div>
+        
 
         {/* INTEGRATION PATTERNS */}
         <div className="mt-24">
