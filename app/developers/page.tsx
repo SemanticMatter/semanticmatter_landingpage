@@ -72,22 +72,13 @@ export default function DevelopersPage() {
           
           <div className="flex flex-wrap gap-4 pt-4">
             <a 
-              href="https://api-dev.semanticmatter.com/openapi.json" 
+              href="https://api-dev.semanticmatter.com/docs" 
               target="_blank" 
               rel="noreferrer"
               className="flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-medium text-slate-900 transition-colors hover:bg-slate-200"
             >
               <BookOpen size={18} />
               Middle Layer API Spec
-            </a>
-            <a 
-              href="https://api-dev.semanticmatter.com/_api/openapi.json" 
-              target="_blank" 
-              rel="noreferrer"
-              className="flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-slate-800"
-            >
-              <Server size={18} />
-              Backend API Spec
             </a>
           </div>
         </div>
