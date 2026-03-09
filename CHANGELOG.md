@@ -1,5 +1,17 @@
 # Changelog
 
+## [v1.20260309.36:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260306.35...HEAD)
+
+**Merged pull requests:**
+
+- Tfh/developers page initial [\#10](https://github.com/SemanticMatter/semanticmatter_landingpage/pull/10) ([quaat](https://github.com/quaat))
+
+## [v1.20260306.35](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260306.35) (2026-03-06)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260306.34...v1.20260306.35)
+
 ## [v1.20260306.34](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260306.34) (2026-03-06)
 
 [Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260302.33...v1.20260306.34)
