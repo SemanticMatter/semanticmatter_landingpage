@@ -266,7 +266,7 @@ export default function DevelopersPage() {
             {/* Flow 3 */}
             <div className="relative border-l border-slate-800 pl-8 md:pl-12">
               <div className="absolute -left-4 flex h-8 w-8 items-center justify-center rounded-full bg-purple-500/20 border border-purple-500/30 text-purple-400 font-bold text-sm">3</div>
-              <h3 className="text-xl font-semibold text-white">Read Target Outputs & Wire Triggers</h3>
+              <h3 className="text-xl font-semibold text-white">Read Target Outputs & Workflow Triggers</h3>
               <ol className="mt-6 space-y-4 text-sm text-slate-400 list-none">
                 <li className="flex gap-3"><ArrowRight size={16} className="mt-0.5 shrink-0 text-slate-600"/> Fetch target results via <code className="text-slate-300">/composer/{"{"}target_name{"}"}</code>.</li>
                 <li className="flex gap-3"><ArrowRight size={16} className="mt-0.5 shrink-0 text-slate-600"/> Read a single field lightly via <code className="text-slate-300">/composer/{"{"}target_name{"}"}/properties/{"{"}target_property{"}"}</code>.</li>
