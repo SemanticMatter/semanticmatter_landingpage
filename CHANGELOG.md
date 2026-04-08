@@ -1,5 +1,17 @@
 # Changelog
 
+## [v1.20260408.44:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260408.43...HEAD)
+
+**Merged pull requests:**
+
+- Bump lodash-es from 4.17.23 to 4.18.1 in the npm\_and\_yarn group across 1 directory [\#23](https://github.com/SemanticMatter/semanticmatter_landingpage/pull/23) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.20260408.43](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260408.43) (2026-04-08)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260327.42...v1.20260408.43)
+
 ## [v1.20260327.42](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260327.42) (2026-03-27)
 
 [Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260326.41...v1.20260327.42)
