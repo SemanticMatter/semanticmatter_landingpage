@@ -1,6 +1,6 @@
 import React from "react";
-import { 
-  Terminal, Database, Network, FileCode2, ShieldCheck, 
+import {
+  Terminal, Database, Network, FileCode2, ShieldCheck,
   Cpu, BookOpen, Layers, Workflow, ArrowRight, Server, Key
 } from "lucide-react";
 
@@ -20,10 +20,10 @@ const Endpoint = ({ path, method }: { path: string; method?: string }) => {
     <div className="flex min-w-0 items-center gap-3 rounded-lg border border-slate-800 bg-slate-950/50 px-3 py-2 font-mono text-sm shadow-sm transition-colors hover:border-slate-700">
       {method && (
         <span className={`text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 ${
-          method === 'GET' ? 'bg-blue-500/20 text-blue-400' : 
-          method === 'POST' ? 'bg-green-500/20 text-green-400' : 
-          method === 'PUT' ? 'bg-yellow-500/20 text-yellow-400' : 
-          method === 'DELETE' ? 'bg-red-500/20 text-red-400' : 
+          method === 'GET' ? 'bg-blue-500/20 text-blue-400' :
+          method === 'POST' ? 'bg-green-500/20 text-green-400' :
+          method === 'PUT' ? 'bg-yellow-500/20 text-yellow-400' :
+          method === 'DELETE' ? 'bg-red-500/20 text-red-400' :
           'bg-slate-500/20 text-slate-400'
         }`}>
           {method}
@@ -54,7 +54,7 @@ export default function DevelopersPage() {
   return (
     <main className="min-h-screen bg-slate-950 text-slate-300 selection:bg-blue-500/30">
       <section className="mx-auto max-w-6xl px-6 py-20 lg:py-28">
-        
+
         {/* HERO SECTION */}
         <div className="max-w-3xl space-y-6">
           <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-sm text-blue-400">
@@ -65,15 +65,15 @@ export default function DevelopersPage() {
             Build with <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">THiNK</span>
           </h1>
           <p className="text-lg leading-relaxed text-slate-400">
-            Integrate semantic documentation and catalog operations directly into your stack. 
-            Manage the complete lifecycle of source catalogs and target graphs, tracing how your 
+            Integrate semantic documentation and catalog operations directly into your stack.
+            Manage the complete lifecycle of source catalogs and target graphs, tracing how your
             data maps to computed results.
           </p>
-          
+
           <div className="flex flex-wrap gap-4 pt-4">
-            <a 
-              href="https://api-dev.semanticmatter.com/docs" 
-              target="_blank" 
+            <a
+              href="https://api-dev.semanticmatter.com/docs"
+              target="_blank"
               rel="noreferrer"
               className="flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-medium text-slate-900 transition-colors hover:bg-slate-200"
             >
@@ -162,7 +162,7 @@ export default function DevelopersPage() {
           </div>
         </div>
 
-        
+
 
         {/* INTEGRATION PATTERNS */}
         <div className="mt-24">
@@ -170,7 +170,7 @@ export default function DevelopersPage() {
             Ecosystem Integration
           </h2>
           <p className="mt-2 text-slate-400">THiNK acts as a semantic control layer next to your existing systems, not a replacement.</p>
-          
+
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[
               { title: "Catalogs & Data Lakes", desc: "Keep existing storage; register semantic metadata and lineage in THiNK." },
@@ -193,7 +193,7 @@ export default function DevelopersPage() {
           <h2 className="font-[var(--font-heading)] text-2xl font-semibold text-white md:text-3xl">
             Integration Walkthroughs
           </h2>
-          
+
           <div className="mt-10 space-y-16">
             {/* Flow 1 */}
             <div className="relative border-l border-slate-800 pl-8 md:pl-12">
@@ -208,7 +208,7 @@ export default function DevelopersPage() {
               </div>
               <div className="mt-4 flex flex-col gap-2 rounded-lg bg-blue-950/20 p-4 border border-blue-900/30">
                 <p className="text-sm text-slate-300">
-                  <strong className="text-blue-400">Pro tip:</strong> Use <code className="text-slate-200">?group={"{"}group{"}"}&only_names=true</code> for fast discovery, 
+                  <strong className="text-blue-400">Pro tip:</strong> Use <code className="text-slate-200">?group={"{"}group{"}"}&only_names=true</code> for fast discovery,
                   then retrieve full objects with <code className="text-slate-200">/documentation/packages/{"{"}package_name{"}"}</code> when full metadata is needed.
                 </p>
               </div>
