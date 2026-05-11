@@ -1,5 +1,17 @@
 # Changelog
 
+## [v1.20260511.51:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260504.50...HEAD)
+
+**Closed issues:**
+
+- Upgrade Node.js from v24 to v26 \(LTS\) [\#33](https://github.com/SemanticMatter/semanticmatter_landingpage/issues/33)
+
+## [v1.20260504.50](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260504.50) (2026-05-04)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260427.49...v1.20260504.50)
+
 ## [v1.20260427.49](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260427.49) (2026-04-27)
 
 [Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260424.48...v1.20260427.49)
