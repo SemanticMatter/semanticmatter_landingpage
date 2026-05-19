@@ -1,6 +1,6 @@
 {
   "name": "semantic-matter-spa",
-  "version": "1.20260511.51",
+  "version": "1.20260519.52",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,15 +11,15 @@
   "dependencies": {
     "clsx": "2.1.1",
     "framer-motion": "12.38.0",
-    "lucide-react": "1.14.0",
+    "lucide-react": "1.16.0",
     "next": "^16.2.6",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-force-graph-2d": "1.29.1",
-    "tailwind-merge": "3.5.0"
+    "tailwind-merge": "3.6.0"
   },
   "devDependencies": {
-    "@types/node": "24.12.3",
+    "@types/node": "24.12.4",
     "@types/react": "18.3.2",
     "@types/react-dom": "18.3.0",
     "autoprefixer": "10.5.0",
