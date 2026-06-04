@@ -1,0 +1,23 @@
+/* Swagger UI ships with a light theme. Rather than fight every selector, we
+   render it inside a clean white "document" card that reads well against the
+   site's dark background. */
+.swagger-spec {
+  border-radius: 1rem;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+.swagger-spec .swagger-ui {
+  padding: 1rem 1.25rem 2rem;
+}
+
+/* The standalone topbar/url bar is not needed for a single, fixed spec. */
+.swagger-spec .swagger-ui .topbar {
+  display: none;
+}
+
+/* Trim the large default top margin so the card hugs its content. */
+.swagger-spec .swagger-ui .info {
+  margin: 1.25rem 0;
+}
