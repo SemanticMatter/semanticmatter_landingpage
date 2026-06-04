@@ -29,8 +29,8 @@ jobs:
         with:
           python-version: '3.12'
 
-      - uses: extractions/netrc@v3
-        with:
+      - name: Configure .netrc credentials for gitlab.sintef.no
+        uses: extractions/netrc@v3
           machine: gitlab.sintef.no
           username: ${{ secrets.SINTEF_GITLAB_REGISTRY_USER }}
           password: ${{ secrets.SINTEF_GITLAB_REGISTRY_PAT }}
@@ -93,5 +93,5 @@ jobs:
           else
             # Do not skip CI, rather, we want the CD - Publish workflow to run if there are changes to the OpenAPI specification
             git commit -m "Update THiNK User API OpenAPI Specification"
-            git push origin HEAD:${{ github.ref }}
+            git push "https://__token__:${{ secrets.BOT_PAT }}@github.com/${{ github.repository }}.git" HEAD:${{ github.ref }}
           fi
