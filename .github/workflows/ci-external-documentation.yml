@@ -30,7 +30,7 @@ jobs:
           python-version: '3.12'
 
       - name: Configure .netrc credentials for gitlab.sintef.no
-        uses: extractions/netrc@v3
+        uses: extractions/netrc@v3.0.0
         with:
           machine: gitlab.sintef.no
           username: ${{ secrets.SINTEF_GITLAB_REGISTRY_USER }}
@@ -41,7 +41,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -U setuptools wheel
 
-          # Install the THiNK User API and its dependencies without installing the dependencies of the dependencies (to avoid potential conflicts with the dependencies of this repository)
+          # Install the THiNK User API
           pip install --no-deps -r .external/dataspaces-services/docker/requirements.middle.txt
           pip install --no-deps .external/dataspaces-services
 
@@ -73,6 +73,9 @@ jobs:
     steps:
       - name: Checkout ${{ github.repository }}
         uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.BOT_PAT }}
+          persist-credentials: true
 
       - name: Download OpenAPI Specification Artifact
         uses: actions/download-artifact@v8
@@ -94,5 +97,5 @@ jobs:
           else
             # Do not skip CI, rather, we want the CD - Publish workflow to run if there are changes to the OpenAPI specification
             git commit -m "Update THiNK User API OpenAPI Specification"
-            git push "https://__token__:${{ secrets.BOT_PAT }}@github.com/${{ github.repository }}.git" HEAD:${{ github.ref }}
+            git push origin HEAD:${{ github.ref }}
           fi
