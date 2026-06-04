@@ -31,6 +31,7 @@ jobs:
 
       - name: Configure .netrc credentials for gitlab.sintef.no
         uses: extractions/netrc@v3
+        with:
           machine: gitlab.sintef.no
           username: ${{ secrets.SINTEF_GITLAB_REGISTRY_USER }}
           password: ${{ secrets.SINTEF_GITLAB_REGISTRY_PAT }}
