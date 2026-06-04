@@ -29,6 +29,12 @@ jobs:
         with:
           python-version: '3.12'
 
+      - uses: extractions/netrc@v3
+        with:
+          machine: gitlab.sintef.no
+          username: ${{ secrets.SINTEF_GITLAB_REGISTRY_USER }}
+          password: ${{ secrets.SINTEF_GITLAB_REGISTRY_PAT }}
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
