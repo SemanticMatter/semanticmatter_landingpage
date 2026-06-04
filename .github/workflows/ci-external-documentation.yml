@@ -95,7 +95,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "OpenAPI specification unchanged; nothing to commit."
           else
-            # Do not skip CI, rather, we want the CD - Publish workflow to run if there are changes to the OpenAPI specification
+            # Do not skip CI, rather, we want the CD - Release workflow to run if there are changes to the OpenAPI specification
             git commit -m "Update THiNK User API OpenAPI Specification"
             git push origin HEAD:${{ github.ref }}
           fi
