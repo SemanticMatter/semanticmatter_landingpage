@@ -1,5 +1,21 @@
 # Changelog
 
+## [v1.20260604.55:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260601.54...HEAD)
+
+**Implemented enhancements:**
+
+- Add local version of OpenAPI schema\(s\) [\#39](https://github.com/SemanticMatter/semanticmatter_landingpage/issues/39)
+
+**Merged pull requests:**
+
+- Use a local Middle/THiNK User-facing API OpenAPI specification [\#40](https://github.com/SemanticMatter/semanticmatter_landingpage/pull/40) ([CasperWA](https://github.com/CasperWA))
+
+## [v1.20260601.54](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260601.54) (2026-06-01)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260525.53...v1.20260601.54)
+
 ## [v1.20260525.53](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260525.53) (2026-05-25)
 
 [Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260519.52...v1.20260525.53)
