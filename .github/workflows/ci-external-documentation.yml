@@ -77,5 +77,9 @@ jobs:
         run: |
           cp -f .external/think-user-api/think-user-api-openapi.json public/developers/think-user-api-openapi.json
           git add public/developers/think-user-api-openapi.json
-          git commit -m "Update THiNK User API OpenAPI Specification [skip ci]"
-          git push origin HEAD:${{ github.ref }}
+          if git diff --cached --quiet; then
+            echo "OpenAPI specification unchanged; nothing to commit."
+          else
+            git commit -m "Update THiNK User API OpenAPI Specification [skip ci]"
+            git push origin HEAD:${{ github.ref }}
+          fi

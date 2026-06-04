@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------
-   Dark theme for swagger-ui-react, matched to the Semantic Matter site.
+   Dark theme for swagger-ui-dist, matched to the Semantic Matter site.
 
    swagger-ui ships a light theme with two-class selectors (`.swagger-ui .x`).
    Every rule here is scoped under `.swagger-spec` so the extra class reliably

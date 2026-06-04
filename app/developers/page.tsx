@@ -77,7 +77,7 @@ export default function DevelopersPage() {
               className="flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-medium text-slate-900 transition-colors hover:bg-slate-200"
             >
               <BookOpen size={18} />
-              Middle Layer API Spec
+              THiNK User API Reference
             </Link>
           </div>
         </div>
