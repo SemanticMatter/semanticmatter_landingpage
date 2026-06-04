@@ -1,15 +1,80 @@
-/* Swagger UI ships with a light theme. Rather than fight every selector, we
-   render it inside a clean white "document" card that reads well against the
-   site's dark background. */
+/* ---------------------------------------------------------------------------
+   Dark theme for swagger-ui-react, matched to the Semantic Matter site.
+
+   swagger-ui ships a light theme with two-class selectors (`.swagger-ui .x`).
+   Every rule here is scoped under `.swagger-spec` so the extra class reliably
+   wins specificity without a forest of `!important`. Colours/fonts mirror the
+   Tailwind tokens used across the site (slate-900/40 cards, slate-800 borders,
+   teal-400 accent, Space Grotesk / IBM Plex Sans).
+--------------------------------------------------------------------------- */
+
 .swagger-spec {
+  /* Surfaces */
+  --sm-surface: rgba(15, 23, 42, 0.4); /* slate-900/40  */
+  --sm-surface-2: rgba(2, 6, 23, 0.6); /* slate-950/60  */
+  --sm-surface-3: rgba(15, 23, 42, 0.7);
+  --sm-border: #1e293b; /* slate-800     */
+  --sm-border-soft: rgba(255, 255, 255, 0.08);
+
+  /* Text */
+  --sm-text: #cbd5e1; /* slate-300 */
+  --sm-text-strong: #f1f5f9; /* slate-100 */
+  --sm-text-muted: #94a3b8; /* slate-400 */
+
+  /* Accents (HTTP methods mirror app/developers/page.tsx) */
+  --sm-accent: #11b8b8; /* teal-400  */
+  --sm-blue: #60a5fa; /* blue-400  */
+  --sm-green: #4ade80; /* green-400 */
+  --sm-yellow: #facc15; /* yellow-400 */
+  --sm-red: #f87171; /* red-400   */
+  --sm-purple: #c084fc; /* purple-400 */
+
   border-radius: 1rem;
-  background: #ffffff;
-  overflow: hidden;
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--sm-border);
+  background:
+    radial-gradient(circle at top left, rgb(17 184 184 / 0.06), transparent 35%),
+    var(--sm-surface);
+  box-shadow: 0 10px 40px -12px rgba(0, 0, 0, 0.6);
 }
 
+/* NOTE: deliberately no `backdrop-filter`/`transform`/`overflow: hidden` on the
+   card above. Swagger UI's auth dialog is `position: fixed`, and any of those
+   properties on an ancestor would turn this card into its containing block —
+   trapping the modal inside the card (rendered far down the page) instead of
+   centering it over the viewport. */
+
+/* Auth modal: pin the overlay to the viewport and centre the dialog, since the
+   dark card it lives inside must not establish a containing block. */
+.swagger-spec .swagger-ui .dialog-ux {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(2, 6, 23, 0.7);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.swagger-spec .swagger-ui .dialog-ux .modal-ux {
+  position: relative;
+  top: 12vh;
+  left: auto;
+  right: auto;
+  transform: none;
+  margin: 0;
+  max-width: 680px;
+  width: 92%;
+}
+
+/* ---- Base canvas ---------------------------------------------------------- */
 .swagger-spec .swagger-ui {
-  padding: 1rem 1.25rem 2rem;
+  padding: 0.5rem 1.5rem 2rem;
+  color: var(--sm-text);
+  font-family: var(--font-body), sans-serif;
+}
+
+.swagger-spec .swagger-ui .wrapper {
+  padding: 0;
+  max-width: none;
 }
 
 /* The standalone topbar/url bar is not needed for a single, fixed spec. */
@@ -17,7 +82,425 @@
   display: none;
 }
 
-/* Trim the large default top margin so the card hugs its content. */
+.swagger-spec .swagger-ui,
+.swagger-spec .swagger-ui .opblock-tag,
+.swagger-spec .swagger-ui label,
+.swagger-spec .swagger-ui p,
+.swagger-spec .swagger-ui li,
+.swagger-spec .swagger-ui table,
+.swagger-spec .swagger-ui .response-col_status,
+.swagger-spec .swagger-ui .parameter__name,
+.swagger-spec .swagger-ui .parameter__type,
+.swagger-spec .swagger-ui .prop-type {
+  color: var(--sm-text);
+}
+
+.swagger-spec .swagger-ui h1,
+.swagger-spec .swagger-ui h2,
+.swagger-spec .swagger-ui h3,
+.swagger-spec .swagger-ui h4,
+.swagger-spec .swagger-ui h5 {
+  color: var(--sm-text-strong);
+  font-family: var(--font-heading), sans-serif;
+}
+
+/* ---- Info / header -------------------------------------------------------- */
 .swagger-spec .swagger-ui .info {
-  margin: 1.25rem 0;
+  margin: 1.5rem 0;
+}
+
+.swagger-spec .swagger-ui .info .title {
+  color: var(--sm-text-strong);
+}
+
+/* Version / OAS badges beside the title. Keep them as coloured pills (rather
+   than flat dark text) but in the site palette: teal for the API version, blue
+   for the OAS stamp — echoing the translucent chip style used on /developers. */
+.swagger-spec .swagger-ui .info .title small {
+  background: rgba(17, 184, 184, 0.18);
+  border: 1px solid rgba(17, 184, 184, 0.3);
+  border-radius: 0.375rem;
+}
+.swagger-spec .swagger-ui .info .title small pre {
+  color: #5eead4; /* teal-300 */
+}
+.swagger-spec .swagger-ui .info .title small.version-stamp {
+  background: rgba(96, 165, 250, 0.18);
+  border-color: rgba(96, 165, 250, 0.3);
+}
+.swagger-spec .swagger-ui .info .title small.version-stamp pre {
+  color: var(--sm-blue);
+}
+
+.swagger-spec .swagger-ui .info li,
+.swagger-spec .swagger-ui .info p,
+.swagger-spec .swagger-ui .info table,
+.swagger-spec .swagger-ui .markdown p,
+.swagger-spec .swagger-ui .renderedMarkdown p {
+  color: var(--sm-text-muted);
+}
+
+.swagger-spec .swagger-ui .info a,
+.swagger-spec .swagger-ui a.nostyle,
+.swagger-spec .swagger-ui .info a:hover {
+  color: var(--sm-accent);
+}
+
+/* ---- Servers / auth scheme bar ------------------------------------------- */
+/* Keep this bar flush with the page (no card/box) so the Authorize button just
+   sits on a subtle divider instead of floating inside an empty bordered box. */
+.swagger-spec .swagger-ui .scheme-container {
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--sm-border-soft);
+  border-radius: 0;
+  box-shadow: none;
+  padding: 1rem 0;
+  margin: 0 0 1.5rem;
+}
+
+.swagger-spec .swagger-ui .scheme-container .schemes-title,
+.swagger-spec .swagger-ui .servers-title {
+  color: var(--sm-text-strong);
+}
+
+/* Scope checkboxes in the auth modal — tint to the site accent. */
+.swagger-spec .swagger-ui input[type="checkbox"] {
+  accent-color: var(--sm-accent);
+}
+
+/* ---- Operation tag sections ---------------------------------------------- */
+.swagger-spec .swagger-ui .opblock-tag {
+  border-bottom: 1px solid var(--sm-border-soft);
+  color: var(--sm-text-strong);
+}
+
+.swagger-spec .swagger-ui .opblock-tag:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.swagger-spec .swagger-ui .opblock-tag small {
+  color: var(--sm-text-muted);
+}
+
+/* ---- Operation blocks ----------------------------------------------------- */
+.swagger-spec .swagger-ui .opblock {
+  margin: 0 0 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--sm-border);
+  background: var(--sm-surface-2);
+  box-shadow: none;
+}
+
+.swagger-spec .swagger-ui .opblock .opblock-summary {
+  border-color: transparent;
+}
+
+.swagger-spec .swagger-ui .opblock .opblock-summary-path,
+.swagger-spec .swagger-ui .opblock .opblock-summary-path__deprecated,
+.swagger-spec .swagger-ui .opblock .opblock-summary-operation-id,
+.swagger-spec .swagger-ui .opblock .opblock-summary-description {
+  color: var(--sm-text-strong);
+  font-family: var(--font-body), monospace;
+}
+
+.swagger-spec .swagger-ui .opblock .opblock-summary-description {
+  color: var(--sm-text-muted);
+}
+
+/* Method badge — translucent fills like the Endpoint chips on /developers */
+.swagger-spec .swagger-ui .opblock .opblock-summary-method {
+  border-radius: 0.375rem;
+  font-family: var(--font-body), sans-serif;
+  text-shadow: none;
+  min-width: 80px;
+}
+
+.swagger-spec .swagger-ui .opblock.opblock-get {
+  border-color: rgba(96, 165, 250, 0.35);
+  background: rgba(96, 165, 250, 0.06);
+}
+.swagger-spec .swagger-ui .opblock.opblock-get .opblock-summary-method {
+  background: rgba(96, 165, 250, 0.2);
+  color: var(--sm-blue);
+}
+.swagger-spec .swagger-ui .opblock.opblock-get .opblock-summary {
+  border-color: rgba(96, 165, 250, 0.2);
+}
+
+.swagger-spec .swagger-ui .opblock.opblock-post {
+  border-color: rgba(74, 222, 128, 0.35);
+  background: rgba(74, 222, 128, 0.06);
+}
+.swagger-spec .swagger-ui .opblock.opblock-post .opblock-summary-method {
+  background: rgba(74, 222, 128, 0.2);
+  color: var(--sm-green);
+}
+.swagger-spec .swagger-ui .opblock.opblock-post .opblock-summary {
+  border-color: rgba(74, 222, 128, 0.2);
+}
+
+.swagger-spec .swagger-ui .opblock.opblock-put {
+  border-color: rgba(250, 204, 21, 0.35);
+  background: rgba(250, 204, 21, 0.06);
+}
+.swagger-spec .swagger-ui .opblock.opblock-put .opblock-summary-method {
+  background: rgba(250, 204, 21, 0.2);
+  color: var(--sm-yellow);
+}
+.swagger-spec .swagger-ui .opblock.opblock-put .opblock-summary {
+  border-color: rgba(250, 204, 21, 0.2);
+}
+
+.swagger-spec .swagger-ui .opblock.opblock-delete {
+  border-color: rgba(248, 113, 113, 0.35);
+  background: rgba(248, 113, 113, 0.06);
+}
+.swagger-spec .swagger-ui .opblock.opblock-delete .opblock-summary-method {
+  background: rgba(248, 113, 113, 0.2);
+  color: var(--sm-red);
+}
+.swagger-spec .swagger-ui .opblock.opblock-delete .opblock-summary {
+  border-color: rgba(248, 113, 113, 0.2);
+}
+
+.swagger-spec .swagger-ui .opblock.opblock-patch .opblock-summary-method {
+  background: rgba(45, 212, 191, 0.2);
+  color: var(--sm-accent);
+}
+
+.swagger-spec .swagger-ui .opblock.opblock-deprecated {
+  opacity: 0.7;
+}
+
+/* ---- Section headers, descriptions, tabs --------------------------------- */
+.swagger-spec .swagger-ui .opblock .opblock-section-header {
+  background: var(--sm-surface-3);
+  border-bottom: 1px solid var(--sm-border);
+  box-shadow: none;
+}
+
+.swagger-spec .swagger-ui .opblock .opblock-section-header h4,
+.swagger-spec .swagger-ui .opblock-description-wrapper p,
+.swagger-spec .swagger-ui .opblock-external-docs-wrapper p,
+.swagger-spec .swagger-ui .opblock-title_normal p {
+  color: var(--sm-text);
+}
+
+.swagger-spec .swagger-ui .tab li {
+  color: var(--sm-text-muted);
+}
+.swagger-spec .swagger-ui .tab li.active {
+  color: var(--sm-text-strong);
+}
+
+/* ---- Tables (parameters / responses) ------------------------------------- */
+.swagger-spec .swagger-ui table thead tr td,
+.swagger-spec .swagger-ui table thead tr th {
+  color: var(--sm-text-muted);
+  border-bottom: 1px solid var(--sm-border);
+}
+
+.swagger-spec .swagger-ui table tbody tr td {
+  border-bottom: 1px solid var(--sm-border-soft);
+  color: var(--sm-text);
+}
+
+.swagger-spec .swagger-ui .parameter__name {
+  color: var(--sm-text-strong);
+}
+.swagger-spec .swagger-ui .parameter__name.required::after {
+  color: var(--sm-red);
+}
+.swagger-spec .swagger-ui .parameter__type {
+  color: var(--sm-text-muted);
+}
+.swagger-spec .swagger-ui .parameter__in {
+  color: var(--sm-accent);
+}
+
+/* ---- Responses ------------------------------------------------------------ */
+.swagger-spec .swagger-ui .responses-inner h4,
+.swagger-spec .swagger-ui .responses-inner h5,
+.swagger-spec .swagger-ui .response-col_status {
+  color: var(--sm-text-strong);
+}
+.swagger-spec .swagger-ui .response-col_links {
+  color: var(--sm-text-muted);
+}
+
+/* ---- Models / schemas ----------------------------------------------------- */
+.swagger-spec .swagger-ui section.models {
+  border: 1px solid var(--sm-border);
+  background: var(--sm-surface-2);
+  border-radius: 0.75rem;
+}
+.swagger-spec .swagger-ui section.models.is-open h4 {
+  border-bottom: 1px solid var(--sm-border);
+}
+.swagger-spec .swagger-ui section.models h4,
+.swagger-spec .swagger-ui .model-title,
+.swagger-spec .swagger-ui .model .property-row .star {
+  color: var(--sm-text-strong);
+}
+.swagger-spec .swagger-ui .model,
+.swagger-spec .swagger-ui .model-toggle {
+  color: var(--sm-text);
+}
+.swagger-spec .swagger-ui .model .property,
+.swagger-spec .swagger-ui .prop-type {
+  color: var(--sm-accent);
+}
+.swagger-spec .swagger-ui .prop-format,
+.swagger-spec .swagger-ui .model .property.primitive {
+  color: var(--sm-text-muted);
+}
+.swagger-spec .swagger-ui .model-box {
+  background: rgba(2, 6, 23, 0.4);
+  border-radius: 0.5rem;
+}
+
+/* ---- Code / examples ------------------------------------------------------ */
+.swagger-spec .swagger-ui .highlight-code,
+.swagger-spec .swagger-ui .microlight,
+.swagger-spec .swagger-ui .body-param__example,
+.swagger-spec .swagger-ui textarea.curl {
+  background: #020617 !important; /* slate-950 */
+  border-radius: 0.5rem;
+  font-family: var(--font-body), monospace;
+}
+.swagger-spec .swagger-ui .highlight-code .microlight,
+.swagger-spec .swagger-ui .microlight code,
+.swagger-spec .swagger-ui .microlight {
+  color: #e2e8f0;
+}
+
+.swagger-spec .swagger-ui .markdown code,
+.swagger-spec .swagger-ui .renderedMarkdown code {
+  background: var(--sm-surface-3);
+  color: var(--sm-accent);
+  border-radius: 0.25rem;
+}
+
+/* ---- Form controls -------------------------------------------------------- */
+.swagger-spec .swagger-ui input[type="text"],
+.swagger-spec .swagger-ui input[type="password"],
+.swagger-spec .swagger-ui input[type="email"],
+.swagger-spec .swagger-ui input[type="number"],
+.swagger-spec .swagger-ui textarea,
+.swagger-spec .swagger-ui select {
+  background: var(--sm-surface-2);
+  color: var(--sm-text-strong);
+  border: 1px solid var(--sm-border);
+  border-radius: 0.5rem;
+  box-shadow: none;
+}
+.swagger-spec .swagger-ui input:focus,
+.swagger-spec .swagger-ui textarea:focus,
+.swagger-spec .swagger-ui select:focus {
+  border-color: var(--sm-accent);
+  outline: none;
+}
+.swagger-spec .swagger-ui input::placeholder,
+.swagger-spec .swagger-ui textarea::placeholder {
+  color: var(--sm-text-muted);
+}
+
+/* ---- Buttons -------------------------------------------------------------- */
+.swagger-spec .swagger-ui .btn {
+  color: var(--sm-text-strong);
+  border: 1px solid var(--sm-border);
+  background: var(--sm-surface-3);
+  border-radius: 0.5rem;
+  box-shadow: none;
+}
+.swagger-spec .swagger-ui .btn:hover {
+  border-color: var(--sm-accent);
+}
+.swagger-spec .swagger-ui .btn.execute {
+  background: var(--sm-accent);
+  border-color: var(--sm-accent);
+  color: #042f2e;
+  font-weight: 600;
+}
+.swagger-spec .swagger-ui .btn.execute:hover {
+  filter: brightness(1.08);
+}
+.swagger-spec .swagger-ui .btn.authorize {
+  color: var(--sm-green);
+  border-color: rgba(74, 222, 128, 0.5);
+}
+.swagger-spec .swagger-ui .btn.authorize svg {
+  fill: var(--sm-green);
+}
+
+/* Per-operation padlocks on secured endpoints — default fill is near-black and
+   the unlocked state is dimmed to ~0.4 opacity, so they vanish on the dark
+   theme. Make them clearly visible: teal when authorized (locked), muted slate
+   when not (unlocked). */
+.swagger-spec .swagger-ui .authorization__btn {
+  opacity: 1;
+}
+.swagger-spec .swagger-ui .authorization__btn svg,
+.swagger-spec .swagger-ui .authorization__btn.unlocked svg {
+  fill: var(--sm-text-muted);
+}
+.swagger-spec .swagger-ui .authorization__btn.locked svg {
+  fill: var(--sm-accent);
+}
+
+.swagger-spec .swagger-ui .btn.cancel {
+  color: var(--sm-red);
+  border-color: rgba(248, 113, 113, 0.5);
+}
+
+/* ---- Auth modal ----------------------------------------------------------- */
+.swagger-spec .swagger-ui .dialog-ux .modal-ux {
+  background: #0b1220;
+  border: 1px solid var(--sm-border);
+  border-radius: 1rem;
+}
+.swagger-spec .swagger-ui .dialog-ux .modal-ux-header h3,
+.swagger-spec .swagger-ui .dialog-ux .modal-ux-content h4,
+.swagger-spec .swagger-ui .dialog-ux .modal-ux-content p,
+.swagger-spec .swagger-ui .dialog-ux .modal-ux-content label {
+  color: var(--sm-text);
+}
+.swagger-spec .swagger-ui .dialog-ux .modal-ux-header {
+  border-bottom: 1px solid var(--sm-border);
+}
+
+/* ---- Misc: icons, arrows, copy, loading ---------------------------------- */
+.swagger-spec .swagger-ui .opblock-summary-control:focus {
+  outline: none;
+}
+.swagger-spec .swagger-ui svg.arrow,
+.swagger-spec .swagger-ui .expand-operation svg,
+.swagger-spec .swagger-ui .models-control svg,
+.swagger-spec .swagger-ui .model-toggle::after {
+  fill: var(--sm-text-muted);
+}
+.swagger-spec .swagger-ui .model-toggle::after {
+  /* swagger uses a dark caret image; tint container instead */
+  opacity: 0.7;
+}
+/* Only restyle the copy button's container. The inner <button> uses its
+   `background` as the (white) copy-icon SVG image — overriding that property
+   wipes the icon and leaves a blank square, so leave it untouched. The white
+   icon reads fine on the dark container below. */
+.swagger-spec .swagger-ui .copy-to-clipboard {
+  background: var(--sm-surface-3);
+  border: 1px solid var(--sm-border);
+  border-radius: 0.375rem;
+}
+
+/* Validation / loading states */
+.swagger-spec .swagger-ui .loading-container .loading::after {
+  border-color: var(--sm-accent) transparent transparent;
+}
+.swagger-spec .swagger-ui .errors-wrapper {
+  background: rgba(248, 113, 113, 0.08);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  border-radius: 0.75rem;
+  color: var(--sm-text);
 }
