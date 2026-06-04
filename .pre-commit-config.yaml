@@ -21,12 +21,12 @@ repos:
         name: Check YAML
       - id: debug-statements
       - id: end-of-file-fixer
-        exclude: ^CHANGELOG.md$
+        exclude: ^(CHANGELOG.md|public/developers/.*\.json)$
       - id: mixed-line-ending
-        exclude: ^CHANGELOG.md$
+        exclude: ^(CHANGELOG.md|public/developers/.*\.json)$
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
-        exclude: ^CHANGELOG.md$
+        exclude: ^(CHANGELOG.md|public/developers/.*\.json)$
 
   # Markdown linter to ensure the quality of the documentation
   # More information can be found in its source repository:
