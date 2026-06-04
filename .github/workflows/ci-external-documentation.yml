@@ -41,7 +41,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -U setuptools wheel
 
-          # Install the THiNK User API
+          # Install the THiNK User API using the complete list of dependencies.
           pip install --no-deps -r .external/dataspaces-services/docker/requirements.middle.txt
           pip install --no-deps .external/dataspaces-services
 
