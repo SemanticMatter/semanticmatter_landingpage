@@ -39,7 +39,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -U setuptools wheel
-          pip install -U .external/dataspaces-services[middle-api]
+
+          # Install the THiNK User API and its dependencies without installing the dependencies of the dependencies (to avoid potential conflicts with the dependencies of this repository)
+          pip install --no-deps -r .external/dataspaces-services/docker/requirements.middle.txt
+          pip install --no-deps .external/dataspaces-services
+
+          # Install DataSpaces-Utils with the OpenAPI extra to get the CLI tool for generating OpenAPI specifications
           pip install -U DataSpaces-Utils[openapi]
 
       - name: Generate OpenAPI Specification
