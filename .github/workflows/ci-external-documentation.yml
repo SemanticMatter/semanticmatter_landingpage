@@ -2,7 +2,7 @@ name: CI - External Documentation
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs daily at midnight
+    - cron: '23 1 * * 1' # Runs weekly on Mondays at 1:23 AM UTC
   workflow_dispatch:
 
 env:
