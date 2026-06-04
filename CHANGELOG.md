@@ -1,16 +1,24 @@
 # Changelog
 
-## [v1.20260604.55:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
+## [v1.20260604.56:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
 
-[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260601.54...HEAD)
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260604.55...HEAD)
+
+**Fixed bugs:**
+
+- CI workflow for updating OpenAPI spec is failing [\#41](https://github.com/SemanticMatter/semanticmatter_landingpage/issues/41)
+
+**Merged pull requests:**
+
+- Add credentials for SINTEF's PyPI [\#42](https://github.com/SemanticMatter/semanticmatter_landingpage/pull/42) ([CasperWA](https://github.com/CasperWA))
+
+## [v1.20260604.55](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260604.55) (2026-06-04)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260601.54...v1.20260604.55)
 
 **Implemented enhancements:**
 
 - Add local version of OpenAPI schema\(s\) [\#39](https://github.com/SemanticMatter/semanticmatter_landingpage/issues/39)
-
-**Merged pull requests:**
-
-- Use a local Middle/THiNK User-facing API OpenAPI specification [\#40](https://github.com/SemanticMatter/semanticmatter_landingpage/pull/40) ([CasperWA](https://github.com/CasperWA))
 
 ## [v1.20260601.54](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260601.54) (2026-06-01)
 
