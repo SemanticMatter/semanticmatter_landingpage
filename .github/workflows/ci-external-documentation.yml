@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ${{ github.repository }}
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Retrieve THiNK User API source code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: SemanticMatter/DataSpaces-Services
           ref: main
@@ -72,7 +72,7 @@ jobs:
 
     steps:
       - name: Checkout ${{ github.repository }}
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           token: ${{ secrets.BOT_PAT }}
           persist-credentials: true
