@@ -258,10 +258,10 @@ export default function SculpinPage() {
               Core message
             </p>
             <p className="mt-4 font-[var(--font-heading)] text-2xl font-semibold leading-snug text-white md:text-3xl">
-              THiNK turns data and documentation into shared semantic knowledge.
+              THiNK gives organizations a trusted semantic foundation
               <span className="bg-gradient-to-r from-cyan-200 via-teal-300 to-violet-300 bg-clip-text text-transparent">
                 {" "}
-                Sculpin turns that knowledge into action.
+                Sculpin makes that foundation accessible, actionable, and intelligent through knowledge-aware AI agents.
               </span>
             </p>
           </div>
