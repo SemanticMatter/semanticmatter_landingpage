@@ -1,0 +1,101 @@
+name: CI - External Documentation
+
+on:
+  schedule:
+    - cron: '23 1 * * 1' # Runs weekly on Mondays at 1:23 AM UTC
+  workflow_dispatch:
+
+env:
+  PIP_INDEX_URL: ${{ vars.GITLAB_PYPI_INDEX }}
+
+jobs:
+  think-user-api:
+    name: Generate THiNK User API OpenAPI Specification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ${{ github.repository }}
+        uses: actions/checkout@v7
+
+      - name: Retrieve THiNK User API source code
+        uses: actions/checkout@v7
+        with:
+          repository: SemanticMatter/DataSpaces-Services
+          ref: main
+          token: ${{ secrets.BOT_PAT }}
+          path: '.external/dataspaces-services'
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Configure .netrc credentials for gitlab.sintef.no
+        uses: extractions/netrc@v3.0.0
+        with:
+          machine: gitlab.sintef.no
+          username: ${{ secrets.SINTEF_GITLAB_REGISTRY_USER }}
+          password: ${{ secrets.SINTEF_GITLAB_REGISTRY_PAT }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -U setuptools wheel
+
+          # Install the THiNK User API using the complete list of dependencies.
+          pip install --no-deps -r .external/dataspaces-services/docker/requirements.middle.txt
+          pip install --no-deps .external/dataspaces-services
+
+          # Install DataSpaces-Utils with the OpenAPI extra to get the CLI tool for generating OpenAPI specifications
+          pip install -U DataSpaces-Utils[openapi]
+
+      - name: Generate OpenAPI Specification
+        run: |
+          ds-utils openapi create-schema \
+            --verbose \
+            --disable-auth-role-checks-env-name=DS_DISABLE_AUTH_ROLE_CHECKS \
+            --app-factory=dataspaces.main.create_app \
+            --output think-user-api-openapi.json
+
+      - name: Upload OpenAPI Specification as Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: think-user-api-openapi-spec
+          path: think-user-api-openapi.json
+
+  update:
+    name: Update External Documentation Sources
+    runs-on: ubuntu-latest
+    needs: think-user-api
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout ${{ github.repository }}
+        uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.BOT_PAT }}
+          persist-credentials: true
+
+      - name: Download OpenAPI Specification Artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: think-user-api-openapi-spec
+          path: .external/think-user-api
+
+      - name: Set up git configuration
+        run: |
+          git config --global user.name "${{ vars.CI_CD_GIT_USER }}"
+          git config --global user.email "${{ vars.CI_CD_GIT_EMAIL }}"
+
+      - name: Update OpenAPI Specification in Repository
+        run: |
+          cp -f .external/think-user-api/think-user-api-openapi.json public/developers/think-user-api-openapi.json
+          git add public/developers/think-user-api-openapi.json
+          if git diff --cached --quiet; then
+            echo "OpenAPI specification unchanged; nothing to commit."
+          else
+            # Do not skip CI, rather, we want the CD - Release workflow to run if there are changes to the OpenAPI specification
+            git commit -m "Update THiNK User API OpenAPI Specification"
+            git push origin HEAD:${{ github.ref }}
+          fi

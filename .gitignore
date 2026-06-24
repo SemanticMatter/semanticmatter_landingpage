@@ -17,3 +17,6 @@ pnpm-debug.log*
 
 # typescript
 *.tsbuildinfo
+
+# CI/CD
+.external/
