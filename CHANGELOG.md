@@ -1,5 +1,17 @@
 # Changelog
 
+## [v1.20260624.66:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260624.65...HEAD)
+
+**Merged pull requests:**
+
+- Tfh/sculpin page [\#49](https://github.com/SemanticMatter/semanticmatter_landingpage/pull/49) ([quaat](https://github.com/quaat))
+
+## [v1.20260624.65](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260624.65) (2026-06-24)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260622.64...v1.20260624.65)
+
 ## [v1.20260622.64](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260622.64) (2026-06-22)
 
 [Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260622.63...v1.20260622.64)

@@ -17,6 +17,11 @@ const productItems = [
     description: "Reasoning workspace for knowledge operations"
   },
   {
+    name: "Sculpin",
+    path: "/products/sculpin",
+    description: "Knowledge-aware AI agents for THiNK"
+  },
+  {
     name: "Blobfish",
     path: "/products/blobfish",
     description: "Adaptive metadata ingestion and modeling"

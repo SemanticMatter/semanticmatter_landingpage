@@ -8,6 +8,12 @@ const products = [
       "Model, organize, and reason over structured knowledge using shared ontologies and graph-based methods."
   },
   {
+    title: "Sculpin",
+    href: "/products/sculpin",
+    description:
+      "Knowledge-aware AI agents that ground answers in THiNK's semantic knowledge, evidence, and connected tools."
+  },
+  {
     title: "Blobfish",
     href: "/products/blobfish",
     description:
