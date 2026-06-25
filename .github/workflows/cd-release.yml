@@ -123,6 +123,8 @@ jobs:
     name: Deploy to Production
     needs: [update-version,docker]
     runs-on: ubuntu-latest
+    environment:
+      name: production
     if: needs.update-version.outputs.continue-workflow == 'true'
 
     permissions:
