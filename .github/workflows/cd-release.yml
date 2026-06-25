@@ -38,10 +38,11 @@ jobs:
         git config --global user.name "${{ vars.CI_CD_GIT_USER }}"
         git config --global user.email "${{ vars.CI_CD_GIT_EMAIL }}"
 
-    - name: Set up Node v20
+    # This should match the Node version from the Dockerfile
+    - name: Set up Node v24
       uses: actions/setup-node@v6
       with:
-        node-version: "20"
+        node-version: "24"
         cache: "npm"
 
     - name: Update npm
@@ -117,3 +118,34 @@ jobs:
       GITLAB_REGISTRY_PASSWORD: ${{ secrets.SINTEF_GITLAB_REGISTRY_PAT }}
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+  deploy:
+    name: Deploy to Production
+    needs: [update-version,docker]
+    runs-on: ubuntu-latest
+    if: needs.update-version.outputs.continue-workflow == 'true'
+
+    environment:
+      name: production
+
+    permissions:
+      contents: read
+      deployments: write
+
+    steps:
+      - name: Create deployment
+        uses: actions/github-script@v9
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const deployment = await github.rest.repos.createDeployment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: '${{ needs.update-version.outputs.tag }}',
+              environment: 'production',
+              required_contexts: [],
+              auto_merge: false,
+              production_environment: true,
+              description: `Deploying ${{ needs.update-version.outputs.tag }} to production`,
+            });
+            core.info(`Created deployment ${deployment.data.id} for ${{ needs.update-version.outputs.tag }} (sha: ${context.sha})`);
