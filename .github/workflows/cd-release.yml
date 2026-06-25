@@ -123,9 +123,10 @@ jobs:
     name: Deploy to Production
     needs: [update-version,docker]
     runs-on: ubuntu-latest
+    if: needs.update-version.outputs.continue-workflow == 'true'
+
     environment:
       name: production
-    if: needs.update-version.outputs.continue-workflow == 'true'
 
     permissions:
       contents: read
@@ -147,4 +148,4 @@ jobs:
               production_environment: true,
               description: `Deploying ${{ needs.update-version.outputs.tag }} to production`,
             });
-            core.info(`Created deployment ${deployment.data.id} for commit ${context.sha}`);
+            core.info(`Created deployment ${deployment.data.id} for ${{ needs.update-version.outputs.tag }} (sha: ${context.sha})`);
