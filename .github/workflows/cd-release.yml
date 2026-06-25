@@ -138,11 +138,11 @@ jobs:
             const deployment = await github.rest.repos.createDeployment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: context.sha,
+              ref: '${{ needs.update-version.outputs.tag }}',
               environment: 'production',
               required_contexts: [],
               auto_merge: false,
               production_environment: true,
-              description: `Deploying commit ${context.sha} to production`,
+              description: `Deploying ${{ needs.update-version.outputs.tag }} to production`,
             });
             core.info(`Created deployment ${deployment.data.id} for commit ${context.sha}`);
