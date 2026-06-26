@@ -1,16 +1,12 @@
 # Changelog
 
-## [v1.20260625.67:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
+## [v1.20260625.67](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260625.67) (2026-06-25)
 
-[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260624.66...HEAD)
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260624.66...v1.20260625.67)
 
 **Implemented enhancements:**
 
 - Add deploy-pet deployment integration [\#50](https://github.com/SemanticMatter/semanticmatter_landingpage/issues/50)
-
-**Merged pull requests:**
-
-- Add deploy-step to CD - Release workflow [\#51](https://github.com/SemanticMatter/semanticmatter_landingpage/pull/51) ([CasperWA](https://github.com/CasperWA))
 
 ## [v1.20260624.66](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260624.66) (2026-06-24)
 
