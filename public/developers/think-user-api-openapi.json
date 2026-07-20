@@ -5,2097 +5,6 @@
     "version": "1.20260629.502"
   },
   "paths": {
-    "/resources/concepts": {
-      "get": {
-        "tags": [
-          "resources"
-        ],
-        "summary": "Retrieve ontology concepts",
-        "description": "Retrieve ontology concepts.\n\nThe depth parameter controls how deep the ontology concepts should be retrieved.\nDepth 0 is the concepts themselves, depth 1 includes their immediate children, and so on.\nThe default depth is 1.",
-        "operationId": "get_ontology_concepts_resources_concepts_get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "concept_uris",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "List of ontology concept URIs.",
-              "title": "Concept Uris"
-            },
-            "description": "List of ontology concept URIs."
-          },
-          {
-            "name": "depth",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 5,
-              "minimum": 0,
-              "default": 1,
-              "title": "Depth"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Ontology concepts and their relations.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OntologyConcepts"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failed to fetch ontology concepts from the backend service.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "One or more of the provided ontology concept IRIs are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "One or more of the provided ontology namespaces do not exist. Or, none of the provided ontology concepts could be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "The provided ontology concept IRIs contain duplicates.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with an upstream service.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/admin/users": {
-      "get": {
-        "tags": [
-          "admin"
-        ],
-        "summary": "List all users",
-        "description": "List or stream all users.\n\nRequires admin privileges.",
-        "operationId": "list_users_admin_users_get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "stream",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "description": "Whether to stream the results.",
-              "default": false,
-              "title": "Stream"
-            },
-            "description": "Whether to stream the results."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A list of users.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/User"
-                  },
-                  "title": "Response List Users Admin Users Get"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the admin router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with a backend service.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/admin/users/current": {
-      "get": {
-        "tags": [
-          "admin"
-        ],
-        "summary": "Get current user",
-        "description": "Get the current authenticated user.\n\nIf a valid access token is provided, this endpoint returns the user\nassociated with that token.",
-        "operationId": "get_current_user_admin_users_current_get",
-        "responses": {
-          "200": {
-            "description": "The current authenticated user.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the admin router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with a backend service.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The current user could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ]
-      }
-    },
-    "/admin/users/{user_id_or_username}": {
-      "get": {
-        "tags": [
-          "admin"
-        ],
-        "summary": "Get user by ID or username",
-        "description": "Get a user by their ID or username.\n\nIf a valid access token is provided, and the ID or username for the user representing said\ntoken is also provided, the full user information is returned.\nThis is essentially equivalent to the `/users/current` endpoint.\n\nOtherwise, the token must represent a user with admin privileges to retrieve information about\nother users.",
-        "operationId": "get_user_by_id_or_username_admin_users__user_id_or_username__get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "user_id_or_username",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "format": "uuid4"
-                },
-                {
-                  "type": "string"
-                }
-              ],
-              "description": "ID or username of the user to retrieve",
-              "union_mode": "left_to_right",
-              "title": "User Id Or Username"
-            },
-            "description": "ID or username of the user to retrieve"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The user with the specified ID or username.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the admin router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with a backend service.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The specified user could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/documentation/packages": {
-      "get": {
-        "tags": [
-          "documentation.package"
-        ],
-        "summary": "List packages in a group",
-        "description": "List packages in a group, optionally returning only their names.\n\nWhen `only_names` is `True`, a shallow listing is returned containing only\npackage names. When `False`, fully resolved package representations are\nreturned for each package in the specified group.",
-        "operationId": "list_packages_documentation_packages_get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "group",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique group name",
-              "title": "Group"
-            },
-            "description": "The unique group name"
-          },
-          {
-            "name": "only_names",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "description": "Whether to only return package names",
-              "default": false,
-              "title": "Only Names"
-            },
-            "description": "Whether to only return package names"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A list of packages in the specified group.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "anyOf": [
-                    {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/CompletePackage"
-                      }
-                    },
-                    {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
-                  ],
-                  "title": "Response List Packages Documentation Packages Get"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The dataset series for one or more packages could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "documentation.package"
-        ],
-        "summary": "Create a package with resources",
-        "description": "Create a package, optionally including package-wide dcat:Datasets (documentation sources)\nand resources with dcat:DatasetSeries (documentation sources).",
-        "operationId": "create_package_with_resources_documentation_packages_post",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCompletePackage",
-                "description": "Complete (frontend) package to create"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Information about the created package.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreatePackageResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "A package (or resource(s)) with the same name already exists.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/documentation/packages/{package_name}": {
-      "get": {
-        "tags": [
-          "documentation.package"
-        ],
-        "summary": "Retrieve a package with its resources",
-        "description": "Retrieve a complete package, including its resources, from the source catalog.",
-        "operationId": "retrieve_package_with_resources_documentation_packages__package_name__get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "package_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique package name",
-              "title": "Package Name"
-            },
-            "description": "The unique package name"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A complete package with its resources.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CompletePackage"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The package or its dataset series or the dataset series for its resources could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "documentation.package"
-        ],
-        "summary": "Update a package with its datasets",
-        "description": "Update a package, optionally including package-wide dcat:Datasets (documentation sources).",
-        "operationId": "update_package_with_datasets_documentation_packages__package_name__patch",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "package_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique package name",
-              "title": "Package Name"
-            },
-            "description": "The unique package name"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateCompletePackage",
-                "description": "Complete (frontend) package to update"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The updated package with its datasets.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CompletePackage"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The request was badly formed.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The package or its dataset series or the dataset series for its resources could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "documentation.package"
-        ],
-        "summary": "Delete a package with its resources",
-        "description": "Delete a package from the source catalog.",
-        "operationId": "delete_package_with_resources_documentation_packages__package_name__delete",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "package_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique package name",
-              "title": "Package Name"
-            },
-            "description": "The unique package name"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Package deleted successfully."
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The package could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/documentation/groups": {
-      "get": {
-        "tags": [
-          "documentation.group"
-        ],
-        "summary": "List all groups with their packages",
-        "description": "List all groups with their packages.\n\nThe list of packages in each group is shallow, meaning that only the package names are returned.",
-        "operationId": "list_groups_documentation_groups_get",
-        "responses": {
-          "200": {
-            "description": "A list of groups with their packages (shallow).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/CompleteGroupShallow"
-                  },
-                  "type": "array",
-                  "title": "Response List Groups Documentation Groups Get"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "documentation.group"
-        ],
-        "summary": "Create a group with packages",
-        "description": "Create a group with packages.",
-        "operationId": "create_group_with_packages_documentation_groups_post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCompleteGroup",
-                "description": "Complete (frontend) Group to create"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Information about the created group.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateGroupResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "A group (or package(s)) with the same name already exists.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ]
-      }
-    },
-    "/documentation/groups/{group_name}": {
-      "get": {
-        "tags": [
-          "documentation.group"
-        ],
-        "summary": "Retrieve a group with its packages",
-        "description": "Retrieve a group with its packages.\n\nThe list of packages is shallow, meaning that only the package names are returned.",
-        "operationId": "retrieve_group_with_packages_documentation_groups__group_name__get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "group_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique group name",
-              "title": "Group Name"
-            },
-            "description": "The unique group name"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A group with its packages (shallow).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CompleteGroupShallow"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Group not found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "documentation.group"
-        ],
-        "summary": "Update a group",
-        "description": "Update a group.",
-        "operationId": "update_group_documentation_groups__group_name__patch",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "group_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique group name",
-              "title": "Group Name"
-            },
-            "description": "The unique group name"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GroupUpdate",
-                "description": "The DS Catalog group to update"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The updated group.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CompleteGroupShallow"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Group not found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "documentation.group"
-        ],
-        "summary": "Delete a group with its packages",
-        "operationId": "delete_group_with_packages_documentation_groups__group_name__delete",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "group_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique group name",
-              "title": "Group Name"
-            },
-            "description": "The unique group name"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Group deleted successfully."
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Group not found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/documentation/projects": {
-      "get": {
-        "tags": [
-          "documentation.project"
-        ],
-        "summary": "List all projects",
-        "description": "List all projects.\n\nThe list of targets in each project is shallow, meaning that only the target names are returned.",
-        "operationId": "list_projects_documentation_projects_get",
-        "responses": {
-          "200": {
-            "description": "A list of projects with their targets (shallow).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/CompleteProjectShallow"
-                  },
-                  "type": "array",
-                  "title": "Response List Projects Documentation Projects Get"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "documentation.project"
-        ],
-        "summary": "Create a project with targets",
-        "description": "Create a project with targets.",
-        "operationId": "create_project_with_targets_documentation_projects_post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCompleteProject",
-                "description": "Complete (frontend) Project to create"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Information about the created project.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateProjectResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "A project (or target(s)) with the same name already exists.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ]
-      }
-    },
-    "/documentation/projects/{project_name}": {
-      "get": {
-        "tags": [
-          "documentation.project"
-        ],
-        "summary": "Retrieve a project with its targets",
-        "description": "Retrieve a project with its targets.\n\nThe list of targets is shallow, meaning that only the target names are returned.",
-        "operationId": "retrieve_project_with_targets_documentation_projects__project_name__get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "project_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique project name",
-              "title": "Project Name"
-            },
-            "description": "The unique project name"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A project with its targets (shallow).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CompleteProjectShallow"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The project could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "documentation.project"
-        ],
-        "summary": "Update a project",
-        "description": "Update a project.",
-        "operationId": "update_project_documentation_projects__project_name__patch",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "project_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique project name",
-              "title": "Project Name"
-            },
-            "description": "The unique project name"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProjectUpdate",
-                "description": "The DS Catalog project to update"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The updated project.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CompleteProjectShallow"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Project not found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "documentation.project"
-        ],
-        "summary": "Delete a project with its targets",
-        "description": "Delete a project with its targets.",
-        "operationId": "delete_project_with_targets_documentation_projects__project_name__delete",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "project_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique project name",
-              "title": "Project Name"
-            },
-            "description": "The unique project name"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Project deleted successfully."
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Project not found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/documentation/resources/{resource_name}": {
       "get": {
         "tags": [
@@ -3036,6 +945,578 @@
         }
       }
     },
+    "/documentation/packages": {
+      "get": {
+        "tags": [
+          "documentation.package"
+        ],
+        "summary": "List packages in a group",
+        "description": "List packages in a group, optionally returning only their names.\n\nWhen `only_names` is `True`, a shallow listing is returned containing only\npackage names. When `False`, fully resolved package representations are\nreturned for each package in the specified group.",
+        "operationId": "list_packages_documentation_packages_get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "group",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique group name",
+              "title": "Group"
+            },
+            "description": "The unique group name"
+          },
+          {
+            "name": "only_names",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to only return package names",
+              "default": false,
+              "title": "Only Names"
+            },
+            "description": "Whether to only return package names"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of packages in the specified group.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/CompletePackage"
+                      }
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "title": "Response List Packages Documentation Packages Get"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The dataset series for one or more packages could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "documentation.package"
+        ],
+        "summary": "Create a package with resources",
+        "description": "Create a package, optionally including package-wide dcat:Datasets (documentation sources)\nand resources with dcat:DatasetSeries (documentation sources).",
+        "operationId": "create_package_with_resources_documentation_packages_post",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCompletePackage",
+                "description": "Complete (frontend) package to create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Information about the created package.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePackageResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A package (or resource(s)) with the same name already exists.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documentation/packages/{package_name}": {
+      "get": {
+        "tags": [
+          "documentation.package"
+        ],
+        "summary": "Retrieve a package with its resources",
+        "description": "Retrieve a complete package, including its resources, from the source catalog.",
+        "operationId": "retrieve_package_with_resources_documentation_packages__package_name__get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "package_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique package name",
+              "title": "Package Name"
+            },
+            "description": "The unique package name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A complete package with its resources.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompletePackage"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The package or its dataset series or the dataset series for its resources could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "documentation.package"
+        ],
+        "summary": "Update a package with its datasets",
+        "description": "Update a package, optionally including package-wide dcat:Datasets (documentation sources).",
+        "operationId": "update_package_with_datasets_documentation_packages__package_name__patch",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "package_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique package name",
+              "title": "Package Name"
+            },
+            "description": "The unique package name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCompletePackage",
+                "description": "Complete (frontend) package to update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated package with its datasets.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompletePackage"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The request was badly formed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The package or its dataset series or the dataset series for its resources could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "documentation.package"
+        ],
+        "summary": "Delete a package with its resources",
+        "description": "Delete a package from the source catalog.",
+        "operationId": "delete_package_with_resources_documentation_packages__package_name__delete",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "package_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique package name",
+              "title": "Package Name"
+            },
+            "description": "The unique package name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Package deleted successfully."
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The package could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/documentation/targets": {
       "get": {
         "tags": [
@@ -3620,54 +2101,31 @@
         }
       }
     },
-    "/files/upload": {
-      "post": {
+    "/documentation/projects": {
+      "get": {
         "tags": [
-          "files"
+          "documentation.project"
         ],
-        "summary": "Upload a file",
-        "description": "Upload a file.\n\nThe following headers are required:\n\n- `X-DataSpaces-FileType`: The type of the file to upload.\n  This can be either 'object', 'entity', or 'ontology'.\n- `Content-Type`: The MIME type of the file to upload.",
-        "operationId": "upload_file_files_upload_post",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "X-DataSpaces-FileType",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/FileType",
-              "description": "The type of the file to upload."
-            },
-            "description": "The type of the file to upload."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/Body_upload_file_files_upload_post"
-              }
-            }
-          }
-        },
+        "summary": "List all projects",
+        "description": "List all projects.\n\nThe list of targets in each project is shallow, meaning that only the target names are returned.",
+        "operationId": "list_projects_documentation_projects_get",
         "responses": {
-          "201": {
-            "description": "Information about the uploaded file.",
+          "200": {
+            "description": "A list of projects with their targets (shallow).",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FileUploadResponse"
+                  "items": {
+                    "$ref": "#/components/schemas/CompleteProjectShallow"
+                  },
+                  "type": "array",
+                  "title": "Response List Projects Documentation Projects Get"
                 }
               }
             }
           },
           "500": {
-            "description": "A general server error occurred.",
+            "description": "An error occurred in the documentation router.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3717,7 +2175,53 @@
             }
           },
           "502": {
-            "description": "An error occurred while communicating with a backend service.",
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "documentation.project"
+        ],
+        "summary": "Create a project with targets",
+        "description": "Create a project with targets.",
+        "operationId": "create_project_with_targets_documentation_projects_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCompleteProject",
+                "description": "Complete (frontend) Project to create"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Information about the created project.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateProjectResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3726,8 +2230,48 @@
               }
             }
           },
-          "400": {
-            "description": "The request was badly formed. Hint: Check the required headers. It may be that the provided file type (header: X-DataSpaces-FileType) is incorrect or unknown. Or, for 'ontology' file types, check that the required namespace is provided.",
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3737,7 +2281,342 @@
             }
           },
           "409": {
-            "description": "The resource being created already exists.",
+            "description": "A project (or target(s)) with the same name already exists.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ]
+      }
+    },
+    "/documentation/projects/{project_name}": {
+      "get": {
+        "tags": [
+          "documentation.project"
+        ],
+        "summary": "Retrieve a project with its targets",
+        "description": "Retrieve a project with its targets.\n\nThe list of targets is shallow, meaning that only the target names are returned.",
+        "operationId": "retrieve_project_with_targets_documentation_projects__project_name__get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "project_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique project name",
+              "title": "Project Name"
+            },
+            "description": "The unique project name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A project with its targets (shallow).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompleteProjectShallow"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The project could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "documentation.project"
+        ],
+        "summary": "Update a project",
+        "description": "Update a project.",
+        "operationId": "update_project_documentation_projects__project_name__patch",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "project_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique project name",
+              "title": "Project Name"
+            },
+            "description": "The unique project name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectUpdate",
+                "description": "The DS Catalog project to update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated project.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompleteProjectShallow"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Project not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "documentation.project"
+        ],
+        "summary": "Delete a project with its targets",
+        "description": "Delete a project with its targets.",
+        "operationId": "delete_project_with_targets_documentation_projects__project_name__delete",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "project_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique project name",
+              "title": "Project Name"
+            },
+            "description": "The unique project name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Project deleted successfully."
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Project not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3749,48 +2628,31 @@
         }
       }
     },
-    "/files/download/{file_id}": {
+    "/documentation/groups": {
       "get": {
         "tags": [
-          "files"
+          "documentation.group"
         ],
-        "summary": "Download a file by its ID",
-        "description": "Download a file by its ID.\n\nTODO: Support Accept headers for returning different/specific file formats.\n\nThe following headers are required:\n\n- `X-DataSpaces-FileType`: The type of the file to download.\n  This can be either 'object', 'entity', or 'ontology'.",
-        "operationId": "download_file_files_download__file_id__get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "file_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "File ID",
-              "description": "The ID of the file to download."
-            },
-            "description": "The ID of the file to download."
-          },
-          {
-            "name": "X-DataSpaces-FileType",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/FileType",
-              "description": "The type of the file to download."
-            },
-            "description": "The type of the file to download."
-          }
-        ],
+        "summary": "List all groups with their packages",
+        "description": "List all groups with their packages.\n\nThe list of packages in each group is shallow, meaning that only the package names are returned.",
+        "operationId": "list_groups_documentation_groups_get",
         "responses": {
           "200": {
-            "description": "The requested file."
+            "description": "A list of groups with their packages (shallow).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/CompleteGroupShallow"
+                  },
+                  "type": "array",
+                  "title": "Response List Groups Documentation Groups Get"
+                }
+              }
+            }
           },
           "500": {
-            "description": "A general server error occurred.",
+            "description": "An error occurred in the documentation router.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3840,7 +2702,552 @@
             }
           },
           "502": {
-            "description": "An error occurred while communicating with a backend service.",
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "documentation.group"
+        ],
+        "summary": "Create a group with packages",
+        "description": "Create a group with packages.",
+        "operationId": "create_group_with_packages_documentation_groups_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCompleteGroup",
+                "description": "Complete (frontend) Group to create"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Information about the created group.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateGroupResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A group (or package(s)) with the same name already exists.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ]
+      }
+    },
+    "/documentation/groups/{group_name}": {
+      "get": {
+        "tags": [
+          "documentation.group"
+        ],
+        "summary": "Retrieve a group with its packages",
+        "description": "Retrieve a group with its packages.\n\nThe list of packages is shallow, meaning that only the package names are returned.",
+        "operationId": "retrieve_group_with_packages_documentation_groups__group_name__get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "group_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique group name",
+              "title": "Group Name"
+            },
+            "description": "The unique group name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A group with its packages (shallow).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompleteGroupShallow"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Group not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "documentation.group"
+        ],
+        "summary": "Update a group",
+        "description": "Update a group.",
+        "operationId": "update_group_documentation_groups__group_name__patch",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "group_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique group name",
+              "title": "Group Name"
+            },
+            "description": "The unique group name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupUpdate",
+                "description": "The DS Catalog group to update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated group.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompleteGroupShallow"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Group not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "documentation.group"
+        ],
+        "summary": "Delete a group with its packages",
+        "operationId": "delete_group_with_packages_documentation_groups__group_name__delete",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "group_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique group name",
+              "title": "Group Name"
+            },
+            "description": "The unique group name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Group deleted successfully."
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Group not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/concepts": {
+      "get": {
+        "tags": [
+          "resources"
+        ],
+        "summary": "Retrieve ontology concepts",
+        "description": "Retrieve ontology concepts.\n\nThe depth parameter controls how deep the ontology concepts should be retrieved.\nDepth 0 is the concepts themselves, depth 1 includes their immediate children, and so on.\nThe default depth is 1.",
+        "operationId": "get_ontology_concepts_resources_concepts_get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "concept_uris",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of ontology concept URIs.",
+              "title": "Concept Uris"
+            },
+            "description": "List of ontology concept URIs."
+          },
+          {
+            "name": "depth",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 5,
+              "minimum": 0,
+              "default": 1,
+              "title": "Depth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ontology concepts and their relations.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OntologyConcepts"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to fetch ontology concepts from the backend service.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3850,7 +3257,37 @@
             }
           },
           "400": {
-            "description": "The request was badly formed. Hint: Check the required headers or your file ID. It may be that the provided file type (header: X-DataSpaces-FileType) is incorrect or unknown.",
+            "description": "One or more of the provided ontology concept IRIs are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "One or more of the provided ontology namespaces do not exist. Or, none of the provided ontology concepts could be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The provided ontology concept IRIs contain duplicates.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with an upstream service.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4270,6 +3707,569 @@
           },
           "502": {
             "description": "The backend target is misformed and cannot be processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/users": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "List all users",
+        "description": "List or stream all users.\n\nRequires admin privileges.",
+        "operationId": "list_users_admin_users_get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "stream",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to stream the results.",
+              "default": false,
+              "title": "Stream"
+            },
+            "description": "Whether to stream the results."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of users.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  },
+                  "title": "Response List Users Admin Users Get"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the admin router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with a backend service.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/users/current": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Get current user",
+        "description": "Get the current authenticated user.\n\nIf a valid access token is provided, this endpoint returns the user\nassociated with that token.",
+        "operationId": "get_current_user_admin_users_current_get",
+        "responses": {
+          "200": {
+            "description": "The current authenticated user.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the admin router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with a backend service.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The current user could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ]
+      }
+    },
+    "/admin/users/{user_id_or_username}": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Get user by ID or username",
+        "description": "Get a user by their ID or username.\n\nIf a valid access token is provided, and the ID or username for the user representing said\ntoken is also provided, the full user information is returned.\nThis is essentially equivalent to the `/users/current` endpoint.\n\nOtherwise, the token must represent a user with admin privileges to retrieve information about\nother users.",
+        "operationId": "get_user_by_id_or_username_admin_users__user_id_or_username__get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id_or_username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "description": "ID or username of the user to retrieve",
+              "union_mode": "left_to_right",
+              "title": "User Id Or Username"
+            },
+            "description": "ID or username of the user to retrieve"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user with the specified ID or username.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the admin router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with a backend service.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The specified user could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/files/upload": {
+      "post": {
+        "tags": [
+          "files"
+        ],
+        "summary": "Upload a file",
+        "description": "Upload a file.\n\nThe following headers are required:\n\n- `X-DataSpaces-FileType`: The type of the file to upload.\n  This can be either 'object', 'entity', or 'ontology'.\n- `Content-Type`: The MIME type of the file to upload.",
+        "operationId": "upload_file_files_upload_post",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-DataSpaces-FileType",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/FileType",
+              "description": "The type of the file to upload."
+            },
+            "description": "The type of the file to upload."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_file_files_upload_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Information about the uploaded file.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileUploadResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "A general server error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with a backend service.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was badly formed. Hint: Check the required headers. It may be that the provided file type (header: X-DataSpaces-FileType) is incorrect or unknown. Or, for 'ontology' file types, check that the required namespace is provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The resource being created already exists.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/files/download/{file_id}": {
+      "get": {
+        "tags": [
+          "files"
+        ],
+        "summary": "Download a file by its ID",
+        "description": "Download a file by its ID.\n\nTODO: Support Accept headers for returning different/specific file formats.\n\nThe following headers are required:\n\n- `X-DataSpaces-FileType`: The type of the file to download.\n  This can be either 'object', 'entity', or 'ontology'.",
+        "operationId": "download_file_files_download__file_id__get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "file_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "File ID",
+              "description": "The ID of the file to download."
+            },
+            "description": "The ID of the file to download."
+          },
+          {
+            "name": "X-DataSpaces-FileType",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/FileType",
+              "description": "The type of the file to download."
+            },
+            "description": "The type of the file to download."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested file."
+          },
+          "500": {
+            "description": "A general server error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with a backend service.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was badly formed. Hint: Check the required headers or your file ID. It may be that the provided file type (header: X-DataSpaces-FileType) is incorrect or unknown.",
             "content": {
               "application/json": {
                 "schema": {
