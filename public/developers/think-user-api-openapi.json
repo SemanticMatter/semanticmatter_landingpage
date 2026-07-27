@@ -5,39 +5,25 @@
     "version": "1.20260629.502"
   },
   "paths": {
-    "/documentation/resources/{resource_name}": {
+    "/documentation/groups": {
       "get": {
         "tags": [
-          "documentation.resource"
+          "documentation.group"
         ],
-        "summary": "Retrieve a resource with a dataset series",
-        "description": "Retrieve a resource with a dcat:DatasetSeries (documentation sources).",
-        "operationId": "retrieve_resource_with_dataset_series_documentation_resources__resource_name__get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "resource_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique resource name",
-              "title": "Resource Name"
-            },
-            "description": "The unique resource name"
-          }
-        ],
+        "summary": "List all groups with their packages",
+        "description": "List all groups with their packages.\n\nThe list of packages in each group is shallow, meaning that only the package names are returned.",
+        "operationId": "list_groups_documentation_groups_get",
         "responses": {
           "200": {
-            "description": "A resource with a dataset series.",
+            "description": "A list of groups with their packages (shallow).",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/dataspaces__models__documentation__CompleteResource"
+                  "items": {
+                    "$ref": "#/components/schemas/CompleteGroupShallow"
+                  },
+                  "type": "array",
+                  "title": "Response List Groups Documentation Groups Get"
                 }
               }
             }
@@ -99,255 +85,29 @@
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
-              }
-            }
-          },
-          "404": {
-            "description": "The resource or its dataset series could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "documentation.resource"
-        ],
-        "summary": "Update a resource with a dataset series",
-        "description": "Update a resource with a dcat:DatasetSeries (documentation sources).",
-        "operationId": "update_resource_with_dataset_series_documentation_resources__resource_name__patch",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "resource_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique resource name",
-              "title": "Resource Name"
-            },
-            "description": "The unique resource name"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateCompleteResource",
-                "description": "Complete (frontend) resource to update"
               }
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "The updated resource with a dataset series.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/dataspaces__models__documentation__CompleteResource"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The request was badly formed.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The resource or its dataset series could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "documentation.resource"
-        ],
-        "summary": "Delete a resource with its dataset series",
-        "operationId": "delete_resource_with_dataset_series_documentation_resources__resource_name__delete",
         "security": [
           {
             "DataSpaces": []
           }
-        ],
-        "parameters": [
-          {
-            "name": "resource_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique resource name",
-              "title": "Resource Name"
-            },
-            "description": "The unique resource name"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Resource deleted successfully."
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The resource could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/documentation/resources": {
+        ]
+      },
       "post": {
         "tags": [
-          "documentation.resource"
+          "documentation.group"
         ],
-        "summary": "Create a resource with a dataset series",
-        "description": "Create a resource with a dcat:DatasetSeries (documentation sources).",
-        "operationId": "create_resource_with_dataset_series_documentation_resources_post",
+        "summary": "Create a group with packages",
+        "description": "Create a group with packages.",
+        "operationId": "create_group_with_packages_documentation_groups_post",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/dataspaces__models__documentation__CreateCompleteResource",
-                "description": "Complete (frontend) resource to create"
+                "$ref": "#/components/schemas/CreateCompleteGroup",
+                "description": "Complete (frontend) Group to create"
               }
             }
           },
@@ -355,11 +115,11 @@
         },
         "responses": {
           "201": {
-            "description": "Information about the created resource.",
+            "description": "Information about the created group.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateResourceResponse"
+                  "$ref": "#/components/schemas/CreateGroupResponse"
                 }
               }
             }
@@ -425,7 +185,7 @@
             }
           },
           "409": {
-            "description": "A resource with the same name already exists.",
+            "description": "A group (or package(s)) with the same name already exists.",
             "content": {
               "application/json": {
                 "schema": {
@@ -442,14 +202,14 @@
         ]
       }
     },
-    "/documentation/resources/{resource_name}/datasets/{dataset_id}": {
+    "/documentation/groups/{group_name}": {
       "get": {
         "tags": [
-          "documentation.resource.dataset"
+          "documentation.group"
         ],
-        "summary": "Retrieve a dataset for a resource",
-        "description": "Retrieve a dataset for a resource.",
-        "operationId": "retrieve_dataset_for_resource_documentation_resources__resource_name__datasets__dataset_id__get",
+        "summary": "Retrieve a group with its packages",
+        "description": "Retrieve a group with its packages.\n\nThe list of packages is shallow, meaning that only the package names are returned.",
+        "operationId": "retrieve_group_with_packages_documentation_groups__group_name__get",
         "security": [
           {
             "DataSpaces": []
@@ -457,38 +217,24 @@
         ],
         "parameters": [
           {
-            "name": "resource_name",
+            "name": "group_name",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique resource name",
-              "title": "Resource Name"
+              "description": "The unique group name",
+              "title": "Group Name"
             },
-            "description": "The unique resource name"
-          },
-          {
-            "name": "dataset_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid4",
-              "description": "The unique dataset ID",
-              "title": "Dataset Id"
-            },
-            "description": "The unique dataset ID"
+            "description": "The unique group name"
           }
         ],
         "responses": {
           "200": {
-            "description": "The requested dataset for the resource.",
+            "description": "A group with its packages (shallow).",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "title": "Response Retrieve Dataset For Resource Documentation Resources  Resource Name  Datasets  Dataset Id  Get"
+                  "$ref": "#/components/schemas/CompleteGroupShallow"
                 }
               }
             }
@@ -554,7 +300,7 @@
             }
           },
           "404": {
-            "description": "The resource, its dataset series or the dataset itself could not be found.",
+            "description": "Group not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -567,11 +313,11 @@
       },
       "patch": {
         "tags": [
-          "documentation.resource.dataset"
+          "documentation.group"
         ],
-        "summary": "Update a dataset for a resource",
-        "description": "Update a dataset for a resource.",
-        "operationId": "update_dataset_for_resource_documentation_resources__resource_name__datasets__dataset_id__patch",
+        "summary": "Update a group",
+        "description": "Update a group.",
+        "operationId": "update_group_documentation_groups__group_name__patch",
         "security": [
           {
             "DataSpaces": []
@@ -579,27 +325,15 @@
         ],
         "parameters": [
           {
-            "name": "resource_name",
+            "name": "group_name",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique resource name",
-              "title": "Resource Name"
+              "description": "The unique group name",
+              "title": "Group Name"
             },
-            "description": "The unique resource name"
-          },
-          {
-            "name": "dataset_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid4",
-              "description": "The unique dataset ID",
-              "title": "Dataset Id"
-            },
-            "description": "The unique dataset ID"
+            "description": "The unique group name"
           }
         ],
         "requestBody": {
@@ -607,21 +341,19 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DocumentSource",
-                "description": "Dataset to update"
+                "$ref": "#/components/schemas/GroupUpdate",
+                "description": "The DS Catalog group to update"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "The updated dataset for the resource.",
+            "description": "The updated group.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "title": "Response Update Dataset For Resource Documentation Resources  Resource Name  Datasets  Dataset Id  Patch"
+                  "$ref": "#/components/schemas/CompleteGroupShallow"
                 }
               }
             }
@@ -686,18 +418,8 @@
               }
             }
           },
-          "400": {
-            "description": "The request was badly formed.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
           "404": {
-            "description": "The resource, its dataset series or the dataset itself could not be found.",
+            "description": "Group not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -710,11 +432,10 @@
       },
       "delete": {
         "tags": [
-          "documentation.resource.dataset"
+          "documentation.group"
         ],
-        "summary": "Delete a dataset for a resource",
-        "description": "Delete a dataset for a resource.",
-        "operationId": "delete_dataset_for_resource_documentation_resources__resource_name__datasets__dataset_id__delete",
+        "summary": "Delete a group with its packages",
+        "operationId": "delete_group_with_packages_documentation_groups__group_name__delete",
         "security": [
           {
             "DataSpaces": []
@@ -722,32 +443,20 @@
         ],
         "parameters": [
           {
-            "name": "resource_name",
+            "name": "group_name",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique resource name",
-              "title": "Resource Name"
+              "description": "The unique group name",
+              "title": "Group Name"
             },
-            "description": "The unique resource name"
-          },
-          {
-            "name": "dataset_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid4",
-              "description": "The unique dataset ID",
-              "title": "Dataset Id"
-            },
-            "description": "The unique dataset ID"
+            "description": "The unique group name"
           }
         ],
         "responses": {
           "204": {
-            "description": "Dataset deleted successfully."
+            "description": "Group deleted successfully."
           },
           "500": {
             "description": "An error occurred in the documentation router.",
@@ -810,130 +519,7 @@
             }
           },
           "404": {
-            "description": "The resource, its dataset series or the dataset itself could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/documentation/resources/{resource_name}/datasets": {
-      "post": {
-        "tags": [
-          "documentation.resource.dataset"
-        ],
-        "summary": "Create a dataset for a resource",
-        "description": "Create a dataset for a resource.",
-        "operationId": "create_dataset_for_resource_documentation_resources__resource_name__datasets_post",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "resource_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique resource name",
-              "title": "Resource Name"
-            },
-            "description": "The unique resource name"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DocumentationSources-Input",
-                "description": "Dataset to create"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "The created dataset for the resource.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "title": "Response Create Dataset For Resource Documentation Resources  Resource Name  Datasets Post"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The resource or its dataset series could not be found.",
+            "description": "Group not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2628,211 +2214,14 @@
         }
       }
     },
-    "/documentation/groups": {
+    "/documentation/resources/{resource_name}": {
       "get": {
         "tags": [
-          "documentation.group"
+          "documentation.resource"
         ],
-        "summary": "List all groups with their packages",
-        "description": "List all groups with their packages.\n\nThe list of packages in each group is shallow, meaning that only the package names are returned.",
-        "operationId": "list_groups_documentation_groups_get",
-        "responses": {
-          "200": {
-            "description": "A list of groups with their packages (shallow).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/CompleteGroupShallow"
-                  },
-                  "type": "array",
-                  "title": "Response List Groups Documentation Groups Get"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "documentation.group"
-        ],
-        "summary": "Create a group with packages",
-        "description": "Create a group with packages.",
-        "operationId": "create_group_with_packages_documentation_groups_post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCompleteGroup",
-                "description": "Complete (frontend) Group to create"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Information about the created group.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateGroupResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "A group (or package(s)) with the same name already exists.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ]
-      }
-    },
-    "/documentation/groups/{group_name}": {
-      "get": {
-        "tags": [
-          "documentation.group"
-        ],
-        "summary": "Retrieve a group with its packages",
-        "description": "Retrieve a group with its packages.\n\nThe list of packages is shallow, meaning that only the package names are returned.",
-        "operationId": "retrieve_group_with_packages_documentation_groups__group_name__get",
+        "summary": "Retrieve a resource with a dataset series",
+        "description": "Retrieve a resource with a dcat:DatasetSeries (documentation sources).",
+        "operationId": "retrieve_resource_with_dataset_series_documentation_resources__resource_name__get",
         "security": [
           {
             "DataSpaces": []
@@ -2840,24 +2229,24 @@
         ],
         "parameters": [
           {
-            "name": "group_name",
+            "name": "resource_name",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique group name",
-              "title": "Group Name"
+              "description": "The unique resource name",
+              "title": "Resource Name"
             },
-            "description": "The unique group name"
+            "description": "The unique resource name"
           }
         ],
         "responses": {
           "200": {
-            "description": "A group with its packages (shallow).",
+            "description": "A resource with a dataset series.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompleteGroupShallow"
+                  "$ref": "#/components/schemas/dataspaces__models__documentation__CompleteResource"
                 }
               }
             }
@@ -2923,7 +2312,7 @@
             }
           },
           "404": {
-            "description": "Group not found.",
+            "description": "The resource or its dataset series could not be found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2936,11 +2325,11 @@
       },
       "patch": {
         "tags": [
-          "documentation.group"
+          "documentation.resource"
         ],
-        "summary": "Update a group",
-        "description": "Update a group.",
-        "operationId": "update_group_documentation_groups__group_name__patch",
+        "summary": "Update a resource with a dataset series",
+        "description": "Update a resource with a dcat:DatasetSeries (documentation sources).",
+        "operationId": "update_resource_with_dataset_series_documentation_resources__resource_name__patch",
         "security": [
           {
             "DataSpaces": []
@@ -2948,15 +2337,15 @@
         ],
         "parameters": [
           {
-            "name": "group_name",
+            "name": "resource_name",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique group name",
-              "title": "Group Name"
+              "description": "The unique resource name",
+              "title": "Resource Name"
             },
-            "description": "The unique group name"
+            "description": "The unique resource name"
           }
         ],
         "requestBody": {
@@ -2964,19 +2353,19 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GroupUpdate",
-                "description": "The DS Catalog group to update"
+                "$ref": "#/components/schemas/UpdateCompleteResource",
+                "description": "Complete (frontend) resource to update"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "The updated group.",
+            "description": "The updated resource with a dataset series.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompleteGroupShallow"
+                  "$ref": "#/components/schemas/dataspaces__models__documentation__CompleteResource"
                 }
               }
             }
@@ -3012,7 +2401,7 @@
             }
           },
           "422": {
-            "description": "The provided request parameters are invalid.",
+            "description": "The request was badly formed.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3042,7 +2431,7 @@
             }
           },
           "404": {
-            "description": "Group not found.",
+            "description": "The resource or its dataset series could not be found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3055,10 +2444,10 @@
       },
       "delete": {
         "tags": [
-          "documentation.group"
+          "documentation.resource"
         ],
-        "summary": "Delete a group with its packages",
-        "operationId": "delete_group_with_packages_documentation_groups__group_name__delete",
+        "summary": "Delete a resource with its dataset series",
+        "operationId": "delete_resource_with_dataset_series_documentation_resources__resource_name__delete",
         "security": [
           {
             "DataSpaces": []
@@ -3066,20 +2455,20 @@
         ],
         "parameters": [
           {
-            "name": "group_name",
+            "name": "resource_name",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique group name",
-              "title": "Group Name"
+              "description": "The unique resource name",
+              "title": "Resource Name"
             },
-            "description": "The unique group name"
+            "description": "The unique resource name"
           }
         ],
         "responses": {
           "204": {
-            "description": "Group deleted successfully."
+            "description": "Resource deleted successfully."
           },
           "500": {
             "description": "An error occurred in the documentation router.",
@@ -3142,7 +2531,7 @@
             }
           },
           "404": {
-            "description": "Group not found.",
+            "description": "The resource could not be found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3154,60 +2543,38 @@
         }
       }
     },
-    "/resources/concepts": {
-      "get": {
+    "/documentation/resources": {
+      "post": {
         "tags": [
-          "resources"
+          "documentation.resource"
         ],
-        "summary": "Retrieve ontology concepts",
-        "description": "Retrieve ontology concepts.\n\nThe depth parameter controls how deep the ontology concepts should be retrieved.\nDepth 0 is the concepts themselves, depth 1 includes their immediate children, and so on.\nThe default depth is 1.",
-        "operationId": "get_ontology_concepts_resources_concepts_get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "concept_uris",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "List of ontology concept URIs.",
-              "title": "Concept Uris"
-            },
-            "description": "List of ontology concept URIs."
-          },
-          {
-            "name": "depth",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 5,
-              "minimum": 0,
-              "default": 1,
-              "title": "Depth"
+        "summary": "Create a resource with a dataset series",
+        "description": "Create a resource with a dcat:DatasetSeries (documentation sources).",
+        "operationId": "create_resource_with_dataset_series_documentation_resources_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dataspaces__models__documentation__CreateCompleteResource",
+                "description": "Complete (frontend) resource to create"
+              }
             }
-          }
-        ],
+          },
+          "required": true
+        },
         "responses": {
-          "200": {
-            "description": "Ontology concepts and their relations.",
+          "201": {
+            "description": "Information about the created resource.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OntologyConcepts"
+                  "$ref": "#/components/schemas/CreateResourceResponse"
                 }
               }
             }
           },
           "500": {
-            "description": "Failed to fetch ontology concepts from the backend service.",
+            "description": "An error occurred in the documentation router.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3256,18 +2623,8 @@
               }
             }
           },
-          "400": {
-            "description": "One or more of the provided ontology concept IRIs are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "One or more of the provided ontology namespaces do not exist. Or, none of the provided ontology concepts could be found.",
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3277,7 +2634,116 @@
             }
           },
           "409": {
-            "description": "The provided ontology concept IRIs contain duplicates.",
+            "description": "A resource with the same name already exists.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ]
+      }
+    },
+    "/documentation/resources/{resource_name}/datasets/{dataset_id}": {
+      "get": {
+        "tags": [
+          "documentation.resource.dataset"
+        ],
+        "summary": "Retrieve a dataset for a resource",
+        "description": "Retrieve a dataset for a resource.",
+        "operationId": "retrieve_dataset_for_resource_documentation_resources__resource_name__datasets__dataset_id__get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "resource_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique resource name",
+              "title": "Resource Name"
+            },
+            "description": "The unique resource name"
+          },
+          {
+            "name": "dataset_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The unique dataset ID",
+              "title": "Dataset Id"
+            },
+            "description": "The unique dataset ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested dataset for the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Retrieve Dataset For Resource Documentation Resources  Resource Name  Datasets  Dataset Id  Get"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3287,7 +2753,717 @@
             }
           },
           "502": {
-            "description": "An error occurred while communicating with an upstream service.",
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource, its dataset series or the dataset itself could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "documentation.resource.dataset"
+        ],
+        "summary": "Update a dataset for a resource",
+        "description": "Update a dataset for a resource.",
+        "operationId": "update_dataset_for_resource_documentation_resources__resource_name__datasets__dataset_id__patch",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "resource_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique resource name",
+              "title": "Resource Name"
+            },
+            "description": "The unique resource name"
+          },
+          {
+            "name": "dataset_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The unique dataset ID",
+              "title": "Dataset Id"
+            },
+            "description": "The unique dataset ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentSource",
+                "description": "Dataset to update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated dataset for the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Update Dataset For Resource Documentation Resources  Resource Name  Datasets  Dataset Id  Patch"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was badly formed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource, its dataset series or the dataset itself could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "documentation.resource.dataset"
+        ],
+        "summary": "Delete a dataset for a resource",
+        "description": "Delete a dataset for a resource.",
+        "operationId": "delete_dataset_for_resource_documentation_resources__resource_name__datasets__dataset_id__delete",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "resource_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique resource name",
+              "title": "Resource Name"
+            },
+            "description": "The unique resource name"
+          },
+          {
+            "name": "dataset_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid4",
+              "description": "The unique dataset ID",
+              "title": "Dataset Id"
+            },
+            "description": "The unique dataset ID"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Dataset deleted successfully."
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource, its dataset series or the dataset itself could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documentation/resources/{resource_name}/datasets": {
+      "post": {
+        "tags": [
+          "documentation.resource.dataset"
+        ],
+        "summary": "Create a dataset for a resource",
+        "description": "Create a dataset for a resource.",
+        "operationId": "create_dataset_for_resource_documentation_resources__resource_name__datasets_post",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "resource_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique resource name",
+              "title": "Resource Name"
+            },
+            "description": "The unique resource name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentationSources-Input",
+                "description": "Dataset to create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The created dataset for the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Create Dataset For Resource Documentation Resources  Resource Name  Datasets Post"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource or its dataset series could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/users": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "List all users",
+        "description": "List or stream all users.\n\nRequires admin privileges.",
+        "operationId": "list_users_admin_users_get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "stream",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to stream the results.",
+              "default": false,
+              "title": "Stream"
+            },
+            "description": "Whether to stream the results."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of users.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  },
+                  "title": "Response List Users Admin Users Get"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the admin router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with a backend service.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/users/current": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Get current user",
+        "description": "Get the current authenticated user.\n\nIf a valid access token is provided, this endpoint returns the user\nassociated with that token.",
+        "operationId": "get_current_user_admin_users_current_get",
+        "responses": {
+          "200": {
+            "description": "The current authenticated user.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the admin router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with a backend service.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The current user could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ]
+      }
+    },
+    "/admin/users/{user_id_or_username}": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Get user by ID or username",
+        "description": "Get a user by their ID or username.\n\nIf a valid access token is provided, and the ID or username for the user representing said\ntoken is also provided, the full user information is returned.\nThis is essentially equivalent to the `/users/current` endpoint.\n\nOtherwise, the token must represent a user with admin privileges to retrieve information about\nother users.",
+        "operationId": "get_user_by_id_or_username_admin_users__user_id_or_username__get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id_or_username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid4"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "description": "ID or username of the user to retrieve",
+              "union_mode": "left_to_right",
+              "title": "User Id Or Username"
+            },
+            "description": "ID or username of the user to retrieve"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user with the specified ID or username.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the admin router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with a backend service.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The specified user could not be found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3718,327 +3894,6 @@
         }
       }
     },
-    "/admin/users": {
-      "get": {
-        "tags": [
-          "admin"
-        ],
-        "summary": "List all users",
-        "description": "List or stream all users.\n\nRequires admin privileges.",
-        "operationId": "list_users_admin_users_get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "stream",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "description": "Whether to stream the results.",
-              "default": false,
-              "title": "Stream"
-            },
-            "description": "Whether to stream the results."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A list of users.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/User"
-                  },
-                  "title": "Response List Users Admin Users Get"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the admin router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with a backend service.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/admin/users/current": {
-      "get": {
-        "tags": [
-          "admin"
-        ],
-        "summary": "Get current user",
-        "description": "Get the current authenticated user.\n\nIf a valid access token is provided, this endpoint returns the user\nassociated with that token.",
-        "operationId": "get_current_user_admin_users_current_get",
-        "responses": {
-          "200": {
-            "description": "The current authenticated user.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the admin router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with a backend service.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The current user could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ]
-      }
-    },
-    "/admin/users/{user_id_or_username}": {
-      "get": {
-        "tags": [
-          "admin"
-        ],
-        "summary": "Get user by ID or username",
-        "description": "Get a user by their ID or username.\n\nIf a valid access token is provided, and the ID or username for the user representing said\ntoken is also provided, the full user information is returned.\nThis is essentially equivalent to the `/users/current` endpoint.\n\nOtherwise, the token must represent a user with admin privileges to retrieve information about\nother users.",
-        "operationId": "get_user_by_id_or_username_admin_users__user_id_or_username__get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "user_id_or_username",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "format": "uuid4"
-                },
-                {
-                  "type": "string"
-                }
-              ],
-              "description": "ID or username of the user to retrieve",
-              "union_mode": "left_to_right",
-              "title": "User Id Or Username"
-            },
-            "description": "ID or username of the user to retrieve"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The user with the specified ID or username.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the admin router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with a backend service.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The specified user could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/files/upload": {
       "post": {
         "tags": [
@@ -4270,6 +4125,151 @@
           },
           "400": {
             "description": "The request was badly formed. Hint: Check the required headers or your file ID. It may be that the provided file type (header: X-DataSpaces-FileType) is incorrect or unknown.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resources/concepts": {
+      "get": {
+        "tags": [
+          "resources"
+        ],
+        "summary": "Retrieve ontology concepts",
+        "description": "Retrieve ontology concepts.\n\nThe depth parameter controls how deep the ontology concepts should be retrieved.\nDepth 0 is the concepts themselves, depth 1 includes their immediate children, and so on.\nThe default depth is 1.",
+        "operationId": "get_ontology_concepts_resources_concepts_get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "concept_uris",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of ontology concept URIs.",
+              "title": "Concept Uris"
+            },
+            "description": "List of ontology concept URIs."
+          },
+          {
+            "name": "depth",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 5,
+              "minimum": 0,
+              "default": 1,
+              "title": "Depth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ontology concepts and their relations.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OntologyConcepts"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to fetch ontology concepts from the backend service.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "One or more of the provided ontology concept IRIs are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "One or more of the provided ontology namespaces do not exist. Or, none of the provided ontology concepts could be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The provided ontology concept IRIs contain duplicates.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with an upstream service.",
             "content": {
               "application/json": {
                 "schema": {
