@@ -1,6 +1,6 @@
 {
   "name": "semantic-matter-spa",
-  "version": "1.20260803.76",
+  "version": "1.20260803.77",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,8 +11,8 @@
   "dependencies": {
     "clsx": "2.1.1",
     "framer-motion": "12.42.2",
-    "lucide-react": "1.26.0",
-    "next": "^16.2.11",
+    "lucide-react": "1.27.0",
+    "next": "^16.2.12",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-force-graph-2d": "1.29.1",
@@ -26,8 +26,8 @@
     "@types/swagger-ui-dist": "3.30.6",
     "autoprefixer": "10.5.4",
     "eslint": "^9.39.5",
-    "eslint-config-next": "16.2.11",
-    "postcss": "8.5.22",
+    "eslint-config-next": "16.2.12",
+    "postcss": "8.5.23",
     "tailwindcss": "3.4.19",
     "typescript": "6.0.3"
   }
