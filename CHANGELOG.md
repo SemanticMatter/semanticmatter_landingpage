@@ -1,12 +1,16 @@
 # Changelog
 
-## [v1.20260810.80:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
+## [v1.20260810.81:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
 
-[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260810.79...HEAD)
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260810.80...HEAD)
 
 **Merged pull requests:**
 
-- Bump brace-expansion from 1.1.12 to 1.1.18 in the npm\_and\_yarn group across 1 directory [\#67](https://github.com/SemanticMatter/semanticmatter_landingpage/pull/67) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump js-yaml from 4.3.0 to 4.3.1 in the npm\_and\_yarn group across 1 directory [\#68](https://github.com/SemanticMatter/semanticmatter_landingpage/pull/68) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.20260810.80](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260810.80) (2026-08-10)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260810.79...v1.20260810.80)
 
 ## [v1.20260810.79](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260810.79) (2026-08-10)
 
