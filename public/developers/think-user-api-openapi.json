@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "DataSpaces",
-    "version": "1.20260727.504"
+    "version": "1.20260803.505"
   },
   "paths": {
     "/documentation/groups": {
