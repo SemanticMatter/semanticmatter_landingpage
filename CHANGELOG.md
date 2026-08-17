@@ -1,12 +1,8 @@
 # Changelog
 
-## [v1.20260810.81:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
+## [v1.20260810.81](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260810.81) (2026-08-10)
 
-[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260810.80...HEAD)
-
-**Merged pull requests:**
-
-- Bump js-yaml from 4.3.0 to 4.3.1 in the npm\_and\_yarn group across 1 directory [\#68](https://github.com/SemanticMatter/semanticmatter_landingpage/pull/68) ([dependabot[bot]](https://github.com/apps/dependabot))
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260810.80...v1.20260810.81)
 
 ## [v1.20260810.80](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260810.80) (2026-08-10)
 

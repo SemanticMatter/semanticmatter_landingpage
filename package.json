@@ -1,6 +1,6 @@
 {
   "name": "semantic-matter-spa",
-  "version": "1.20260810.81",
+  "version": "1.20260817.82",
   "private": true,
   "scripts": {
     "dev": "next dev",
