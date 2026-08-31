@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "DataSpaces",
-    "version": "1.20260817.506"
+    "version": "1.20260825.509"
   },
   "paths": {
     "/composer/{target_name}": {
