@@ -1,5 +1,17 @@
 # Changelog
 
+## [v1.20260910.90:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260910.89...HEAD)
+
+**Merged pull requests:**
+
+- Bump postcss-selector-parser from 6.1.2 to 6.1.4 in the npm\_and\_yarn group across 1 directory [\#72](https://github.com/SemanticMatter/semanticmatter_landingpage/pull/72) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.20260910.89](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260910.89) (2026-09-10)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260907.88...v1.20260910.89)
+
 ## [v1.20260907.88](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260907.88) (2026-09-07)
 
 [Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260831.87...v1.20260907.88)
