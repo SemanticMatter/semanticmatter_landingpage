@@ -1,12 +1,8 @@
 # Changelog
 
-## [v1.20260915.92:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
+## [v1.20260915.92](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260915.92) (2026-09-15)
 
-[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260911.91...HEAD)
-
-**Merged pull requests:**
-
-- Bump the npm\_and\_yarn group across 1 directory with 3 updates [\#74](https://github.com/SemanticMatter/semanticmatter_landingpage/pull/74) ([dependabot[bot]](https://github.com/apps/dependabot))
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260911.91...v1.20260915.92)
 
 ## [v1.20260911.91](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260911.91) (2026-09-11)
 

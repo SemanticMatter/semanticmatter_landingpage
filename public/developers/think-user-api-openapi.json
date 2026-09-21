@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "DataSpaces",
-    "version": "1.20260901.511"
+    "version": "1.20260915.513"
   },
   "paths": {
     "/documentation/targets": {
