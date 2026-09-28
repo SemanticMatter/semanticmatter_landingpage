@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.20260921.94](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260921.94) (2026-09-21)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260921.93...v1.20260921.94)
+
 ## [v1.20260921.93](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20260921.93) (2026-09-21)
 
 [Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20260915.92...v1.20260921.93)

@@ -2,17 +2,17 @@
   "openapi": "3.1.0",
   "info": {
     "title": "DataSpaces",
-    "version": "1.20260915.513"
+    "version": "1.20260921.514"
   },
   "paths": {
-    "/documentation/targets": {
+    "/composer/{target_name}": {
       "get": {
         "tags": [
-          "documentation.target"
+          "composer"
         ],
-        "summary": "List targets in a project",
-        "description": "List all targets in a project in the target catalog.",
-        "operationId": "list_targets_documentation_targets_get",
+        "summary": "Retrieve results for a target catalog entry",
+        "description": "Provided its name, retrieve results for a target catalog entry.",
+        "operationId": "read_results_from_target_composer__target_name__get",
         "security": [
           {
             "DataSpaces": []
@@ -20,50 +20,429 @@
         ],
         "parameters": [
           {
-            "name": "project",
-            "in": "query",
+            "name": "target_name",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique project name",
-              "title": "Project"
+              "description": "Name of a target catalog entry, be it a project, target, or resource",
+              "title": "Target Name"
             },
-            "description": "The unique project name"
+            "description": "Name of a target catalog entry, be it a project, target, or resource"
           },
           {
-            "name": "only_names",
+            "name": "source",
             "in": "query",
             "required": false,
             "schema": {
-              "type": "boolean",
-              "description": "Whether to only return target names",
-              "default": false,
-              "title": "Only Names"
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Name of a source catalog entry, be it a group, package, or resource",
+              "title": "Source"
             },
-            "description": "Whether to only return target names"
+            "description": "Name of a source catalog entry, be it a group, package, or resource"
+          },
+          {
+            "name": "header",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Inject headers in the request to retrieve the source data.",
+              "title": "Header"
+            },
+            "description": "Inject headers in the request to retrieve the source data."
           }
         ],
         "responses": {
           "200": {
-            "description": "A list of targets in the specified project.",
+            "description": "A dictionary containing the results for the target catalog entry.",
             "content": {
               "application/json": {
                 "schema": {
-                  "anyOf": [
-                    {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/CompleteTarget"
-                      }
-                    },
-                    {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
-                  ],
-                  "title": "Response List Targets Documentation Targets Get"
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Read Results From Target Composer  Target Name  Get"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "A general server error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The target catalog entry or its dataset series could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/composer/{target_name}/properties/{target_property}": {
+      "get": {
+        "tags": [
+          "composer"
+        ],
+        "summary": "Retrieve a specific property from a target catalog entry",
+        "description": "Provided its name, retrieve a specific property from a target catalog entry.",
+        "operationId": "read_target_property_composer__target_name__properties__target_property__get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "target_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The target name",
+              "title": "Target Name"
+            },
+            "description": "The target name"
+          },
+          {
+            "name": "target_property",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The target property",
+              "title": "Target Property"
+            },
+            "description": "The target property"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Name of a source catalog entry, be it a group, package, or resource",
+              "title": "Source"
+            },
+            "description": "Name of a source catalog entry, be it a group, package, or resource"
+          },
+          {
+            "name": "header",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Inject headers in the request to retrieve the source data.",
+              "title": "Header"
+            },
+            "description": "Inject headers in the request to retrieve the source data."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The value of the requested property from the target catalog entry.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Read Target Property Composer  Target Name  Properties  Target Property  Get"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "A general server error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The target catalog entry, its dataset series or the requested property was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/composer/{target_name}/paths": {
+      "get": {
+        "tags": [
+          "composer"
+        ],
+        "summary": "Get all graph paths leading to the target entry",
+        "description": "Get all graph paths leading to the target catalog entry.",
+        "operationId": "get_graph_paths_for_target_composer__target_name__paths_get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "target_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The target name",
+              "title": "Target Name"
+            },
+            "description": "The target name"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Name of a source catalog entry, be it a group, package, or resource",
+              "title": "Source"
+            },
+            "description": "Name of a source catalog entry, be it a group, package, or resource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An object containing the knowledge graph and a mapping of target catalog entry names to all graph paths leading to it.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FullGraphWithPaths"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "A general server error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "A knowledge graph path is empty (or request parameters are invalid).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The target catalog entry, its dataset series or any graph paths leading to the target entry could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The backend target is misformed and cannot be processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documentation/groups": {
+      "get": {
+        "tags": [
+          "documentation.group"
+        ],
+        "summary": "List all groups with their packages",
+        "description": "List all groups with their packages.\n\nThe list of packages in each group is shallow, meaning that only the package names are returned.",
+        "operationId": "list_groups_documentation_groups_get",
+        "responses": {
+          "200": {
+            "description": "A list of groups with their packages (shallow).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/CompleteGroupShallow"
+                  },
+                  "type": "array",
+                  "title": "Response List Groups Documentation Groups Get"
                 }
               }
             }
@@ -127,49 +506,39 @@
                 }
               }
             }
-          },
-          "404": {
-            "description": "The dataset series for one or more targets could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
           }
-        }
-      },
-      "post": {
-        "tags": [
-          "documentation.target"
-        ],
-        "summary": "Create a target with resources",
-        "description": "Create a target in the target catalog, optionally including dcat:Datasets (documentation sources)\nand resources with dcat:DatasetSeries (documentation sources).",
-        "operationId": "create_target_documentation_targets_post",
+        },
         "security": [
           {
             "DataSpaces": []
           }
+        ]
+      },
+      "post": {
+        "tags": [
+          "documentation.group"
         ],
+        "summary": "Create a group with packages",
+        "description": "Create a group with packages.",
+        "operationId": "create_group_with_packages_documentation_groups_post",
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateCompleteTarget",
-                "description": "The complete (frontend) target to create"
+                "$ref": "#/components/schemas/CreateCompleteGroup",
+                "description": "Complete (frontend) Group to create"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "201": {
-            "description": "Information about the created target.",
+            "description": "Information about the created group.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateTargetResponse"
+                  "$ref": "#/components/schemas/CreateGroupResponse"
                 }
               }
             }
@@ -235,7 +604,7 @@
             }
           },
           "409": {
-            "description": "A target with the same name already exists.",
+            "description": "A group (or package(s)) with the same name already exists.",
             "content": {
               "application/json": {
                 "schema": {
@@ -244,17 +613,22 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ]
       }
     },
-    "/documentation/targets/{target_name}": {
-      "patch": {
+    "/documentation/groups/{group_name}": {
+      "get": {
         "tags": [
-          "documentation.target"
+          "documentation.group"
         ],
-        "summary": "Update a target with its datasets",
-        "description": "Update a target in the target catalog, optionally including dcat:Datasets (documentation\nsources).",
-        "operationId": "update_target_documentation_targets__target_name__patch",
+        "summary": "Retrieve a group with its packages",
+        "description": "Retrieve a group with its packages.\n\nThe list of packages is shallow, meaning that only the package names are returned.",
+        "operationId": "retrieve_group_with_packages_documentation_groups__group_name__get",
         "security": [
           {
             "DataSpaces": []
@@ -262,35 +636,24 @@
         ],
         "parameters": [
           {
-            "name": "target_name",
+            "name": "group_name",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "Name of the target to update",
-              "title": "Target Name"
+              "description": "The unique group name",
+              "title": "Group Name"
             },
-            "description": "Name of the target to update"
+            "description": "The unique group name"
           }
         ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateCompleteTarget",
-                "description": "The complete (frontend) target to update. At least one of the fields must be provided."
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
-            "description": "The updated target with its datasets.",
+            "description": "A group with its packages (shallow).",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompleteTarget"
+                  "$ref": "#/components/schemas/CompleteGroupShallow"
                 }
               }
             }
@@ -326,7 +689,7 @@
             }
           },
           "422": {
-            "description": "The request was badly formed.",
+            "description": "The provided request parameters are invalid.",
             "content": {
               "application/json": {
                 "schema": {
@@ -356,7 +719,126 @@
             }
           },
           "404": {
-            "description": "The target or its dataset series could not be found.",
+            "description": "Group not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "documentation.group"
+        ],
+        "summary": "Update a group",
+        "description": "Update a group.",
+        "operationId": "update_group_documentation_groups__group_name__patch",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "group_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The unique group name",
+              "title": "Group Name"
+            },
+            "description": "The unique group name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupUpdate",
+                "description": "The DS Catalog group to update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated group.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompleteGroupShallow"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Group not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -369,11 +851,10 @@
       },
       "delete": {
         "tags": [
-          "documentation.target"
+          "documentation.group"
         ],
-        "summary": "Delete a target with its generators",
-        "description": "Delete a target from the target catalog.",
-        "operationId": "delete_target_documentation_targets__target_name__delete",
+        "summary": "Delete a group with its packages",
+        "operationId": "delete_group_with_packages_documentation_groups__group_name__delete",
         "security": [
           {
             "DataSpaces": []
@@ -381,20 +862,20 @@
         ],
         "parameters": [
           {
-            "name": "target_name",
+            "name": "group_name",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The name of the target to delete",
-              "title": "Target Name"
+              "description": "The unique group name",
+              "title": "Group Name"
             },
-            "description": "The name of the target to delete"
+            "description": "The unique group name"
           }
         ],
         "responses": {
           "204": {
-            "description": "Target deleted successfully."
+            "description": "Group deleted successfully."
           },
           "500": {
             "description": "An error occurred in the documentation router.",
@@ -457,127 +938,7 @@
             }
           },
           "404": {
-            "description": "The target could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "documentation.target"
-        ],
-        "summary": "Retrieve a target with generators",
-        "description": "Retrieve a target from the target catalog.\n\nNote, this does not read the target's results - but rather the target's metadata\n(catalog and knowledge graph information) and its resources.",
-        "operationId": "retrieve_target_with_resources_documentation_targets__target_name__get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "target_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The name of the target to retrieve",
-              "title": "Target Name"
-            },
-            "description": "The name of the target to retrieve"
-          },
-          {
-            "name": "validate",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "description": "Whether to validate the target before returning it. Validation checks whether the metadata for the target is complete.",
-              "default": true,
-              "title": "Validate"
-            },
-            "description": "Whether to validate the target before returning it. Validation checks whether the metadata for the target is complete."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The retrieved target with its generators.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CompleteTarget"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The target or its dataset series could not be found.",
+            "description": "Group not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1518,532 +1879,6 @@
           },
           "404": {
             "description": "The resource or its dataset series could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/documentation/groups": {
-      "get": {
-        "tags": [
-          "documentation.group"
-        ],
-        "summary": "List all groups with their packages",
-        "description": "List all groups with their packages.\n\nThe list of packages in each group is shallow, meaning that only the package names are returned.",
-        "operationId": "list_groups_documentation_groups_get",
-        "responses": {
-          "200": {
-            "description": "A list of groups with their packages (shallow).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/CompleteGroupShallow"
-                  },
-                  "type": "array",
-                  "title": "Response List Groups Documentation Groups Get"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "documentation.group"
-        ],
-        "summary": "Create a group with packages",
-        "description": "Create a group with packages.",
-        "operationId": "create_group_with_packages_documentation_groups_post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCompleteGroup",
-                "description": "Complete (frontend) Group to create"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Information about the created group.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateGroupResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "A group (or package(s)) with the same name already exists.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ]
-      }
-    },
-    "/documentation/groups/{group_name}": {
-      "get": {
-        "tags": [
-          "documentation.group"
-        ],
-        "summary": "Retrieve a group with its packages",
-        "description": "Retrieve a group with its packages.\n\nThe list of packages is shallow, meaning that only the package names are returned.",
-        "operationId": "retrieve_group_with_packages_documentation_groups__group_name__get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "group_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique group name",
-              "title": "Group Name"
-            },
-            "description": "The unique group name"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A group with its packages (shallow).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CompleteGroupShallow"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Group not found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "documentation.group"
-        ],
-        "summary": "Update a group",
-        "description": "Update a group.",
-        "operationId": "update_group_documentation_groups__group_name__patch",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "group_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique group name",
-              "title": "Group Name"
-            },
-            "description": "The unique group name"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GroupUpdate",
-                "description": "The DS Catalog group to update"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The updated group.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CompleteGroupShallow"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Group not found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "documentation.group"
-        ],
-        "summary": "Delete a group with its packages",
-        "operationId": "delete_group_with_packages_documentation_groups__group_name__delete",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "group_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The unique group name",
-              "title": "Group Name"
-            },
-            "description": "The unique group name"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Group deleted successfully."
-          },
-          "500": {
-            "description": "An error occurred in the documentation router.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with the backend services.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Group not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3154,14 +2989,14 @@
         }
       }
     },
-    "/files/upload": {
-      "post": {
+    "/documentation/targets": {
+      "get": {
         "tags": [
-          "files"
+          "documentation.target"
         ],
-        "summary": "Upload a file",
-        "description": "Upload a file.\n\nThe following headers are required:\n\n- `X-DataSpaces-FileType`: The type of the file to upload.\n  This can be either 'object', 'entity', or 'ontology'.\n- `Content-Type`: The MIME type of the file to upload.",
-        "operationId": "upload_file_files_upload_post",
+        "summary": "List targets in a project",
+        "description": "List all targets in a project in the target catalog.",
+        "operationId": "list_targets_documentation_targets_get",
         "security": [
           {
             "DataSpaces": []
@@ -3169,39 +3004,56 @@
         ],
         "parameters": [
           {
-            "name": "X-DataSpaces-FileType",
-            "in": "header",
+            "name": "project",
+            "in": "query",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/FileType",
-              "description": "The type of the file to upload."
+              "type": "string",
+              "description": "The unique project name",
+              "title": "Project"
             },
-            "description": "The type of the file to upload."
+            "description": "The unique project name"
+          },
+          {
+            "name": "only_names",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to only return target names",
+              "default": false,
+              "title": "Only Names"
+            },
+            "description": "Whether to only return target names"
           }
         ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/Body_upload_file_files_upload_post"
-              }
-            }
-          }
-        },
         "responses": {
-          "201": {
-            "description": "Information about the uploaded file.",
+          "200": {
+            "description": "A list of targets in the specified project.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FileUploadResponse"
+                  "anyOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/CompleteTarget"
+                      }
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ],
+                  "title": "Response List Targets Documentation Targets Get"
                 }
               }
             }
           },
           "500": {
-            "description": "A general server error occurred.",
+            "description": "An error occurred in the documentation router.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3251,7 +3103,7 @@
             }
           },
           "502": {
-            "description": "An error occurred while communicating with a backend service.",
+            "description": "An error occurred while communicating with the backend services.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3260,8 +3112,104 @@
               }
             }
           },
-          "400": {
-            "description": "The request was badly formed. Hint: Check the required headers. It may be that the provided file type (header: X-DataSpaces-FileType) is incorrect or unknown. Or, for 'ontology' file types, check that the required namespace is provided.",
+          "404": {
+            "description": "The dataset series for one or more targets could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "documentation.target"
+        ],
+        "summary": "Create a target with resources",
+        "description": "Create a target in the target catalog, optionally including dcat:Datasets (documentation sources)\nand resources with dcat:DatasetSeries (documentation sources).",
+        "operationId": "create_target_documentation_targets_post",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCompleteTarget",
+                "description": "The complete (frontend) target to create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Information about the created target.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTargetResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3271,7 +3219,7 @@
             }
           },
           "409": {
-            "description": "The resource being created already exists.",
+            "description": "A target with the same name already exists.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3283,14 +3231,14 @@
         }
       }
     },
-    "/files/download/{file_id}": {
-      "get": {
+    "/documentation/targets/{target_name}": {
+      "patch": {
         "tags": [
-          "files"
+          "documentation.target"
         ],
-        "summary": "Download a file by its ID",
-        "description": "Download a file by its ID.\n\nTODO: Support Accept headers for returning different/specific file formats.\n\nThe following headers are required:\n\n- `X-DataSpaces-FileType`: The type of the file to download.\n  This can be either 'object', 'entity', or 'ontology'.",
-        "operationId": "download_file_files_download__file_id__get",
+        "summary": "Update a target with its datasets",
+        "description": "Update a target in the target catalog, optionally including dcat:Datasets (documentation\nsources).",
+        "operationId": "update_target_documentation_targets__target_name__patch",
         "security": [
           {
             "DataSpaces": []
@@ -3298,33 +3246,142 @@
         ],
         "parameters": [
           {
-            "name": "file_id",
+            "name": "target_name",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "File ID",
-              "description": "The ID of the file to download."
+              "description": "Name of the target to update",
+              "title": "Target Name"
             },
-            "description": "The ID of the file to download."
+            "description": "Name of the target to update"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCompleteTarget",
+                "description": "The complete (frontend) target to update. At least one of the fields must be provided."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated target with its datasets.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompleteTarget"
+                }
+              }
+            }
           },
+          "500": {
+            "description": "An error occurred in the documentation router.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The request was badly formed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The target or its dataset series could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "documentation.target"
+        ],
+        "summary": "Delete a target with its generators",
+        "description": "Delete a target from the target catalog.",
+        "operationId": "delete_target_documentation_targets__target_name__delete",
+        "security": [
           {
-            "name": "X-DataSpaces-FileType",
-            "in": "header",
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "target_name",
+            "in": "path",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/FileType",
-              "description": "The type of the file to download."
+              "type": "string",
+              "description": "The name of the target to delete",
+              "title": "Target Name"
             },
-            "description": "The type of the file to download."
+            "description": "The name of the target to delete"
           }
         ],
         "responses": {
-          "200": {
-            "description": "The requested file."
+          "204": {
+            "description": "Target deleted successfully."
           },
           "500": {
-            "description": "A general server error occurred.",
+            "description": "An error occurred in the documentation router.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3374,7 +3431,7 @@
             }
           },
           "502": {
-            "description": "An error occurred while communicating with a backend service.",
+            "description": "An error occurred while communicating with the backend services.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3383,8 +3440,8 @@
               }
             }
           },
-          "400": {
-            "description": "The request was badly formed. Hint: Check the required headers or your file ID. It may be that the provided file type (header: X-DataSpaces-FileType) is incorrect or unknown.",
+          "404": {
+            "description": "The target could not be found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3394,16 +3451,14 @@
             }
           }
         }
-      }
-    },
-    "/composer/{target_name}": {
+      },
       "get": {
         "tags": [
-          "composer"
+          "documentation.target"
         ],
-        "summary": "Retrieve results for a target catalog entry",
-        "description": "Provided its name, retrieve results for a target catalog entry.",
-        "operationId": "read_results_from_target_composer__target_name__get",
+        "summary": "Retrieve a target with generators",
+        "description": "Retrieve a target from the target catalog.\n\nNote, this does not read the target's results - but rather the target's metadata\n(catalog and knowledge graph information) and its resources.",
+        "operationId": "retrieve_target_with_resources_documentation_targets__target_name__get",
         "security": [
           {
             "DataSpaces": []
@@ -3416,66 +3471,37 @@
             "required": true,
             "schema": {
               "type": "string",
-              "description": "Name of a target catalog entry, be it a project, target, or resource",
+              "description": "The name of the target to retrieve",
               "title": "Target Name"
             },
-            "description": "Name of a target catalog entry, be it a project, target, or resource"
+            "description": "The name of the target to retrieve"
           },
           {
-            "name": "source",
+            "name": "validate",
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Name of a source catalog entry, be it a group, package, or resource",
-              "title": "Source"
+              "type": "boolean",
+              "description": "Whether to validate the target before returning it. Validation checks whether the metadata for the target is complete.",
+              "default": true,
+              "title": "Validate"
             },
-            "description": "Name of a source catalog entry, be it a group, package, or resource"
-          },
-          {
-            "name": "header",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Inject headers in the request to retrieve the source data.",
-              "title": "Header"
-            },
-            "description": "Inject headers in the request to retrieve the source data."
+            "description": "Whether to validate the target before returning it. Validation checks whether the metadata for the target is complete."
           }
         ],
         "responses": {
           "200": {
-            "description": "A dictionary containing the results for the target catalog entry.",
+            "description": "The retrieved target with its generators.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "title": "Response Read Results From Target Composer  Target Name  Get"
+                  "$ref": "#/components/schemas/CompleteTarget"
                 }
               }
             }
           },
           "500": {
-            "description": "A general server error occurred.",
+            "description": "An error occurred in the documentation router.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3516,284 +3542,6 @@
           },
           "501": {
             "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The target catalog entry or its dataset series could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/composer/{target_name}/properties/{target_property}": {
-      "get": {
-        "tags": [
-          "composer"
-        ],
-        "summary": "Retrieve a specific property from a target catalog entry",
-        "description": "Provided its name, retrieve a specific property from a target catalog entry.",
-        "operationId": "read_target_property_composer__target_name__properties__target_property__get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "target_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The target name",
-              "title": "Target Name"
-            },
-            "description": "The target name"
-          },
-          {
-            "name": "target_property",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The target property",
-              "title": "Target Property"
-            },
-            "description": "The target property"
-          },
-          {
-            "name": "source",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Name of a source catalog entry, be it a group, package, or resource",
-              "title": "Source"
-            },
-            "description": "Name of a source catalog entry, be it a group, package, or resource"
-          },
-          {
-            "name": "header",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Inject headers in the request to retrieve the source data.",
-              "title": "Header"
-            },
-            "description": "Inject headers in the request to retrieve the source data."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The value of the requested property from the target catalog entry.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "Response Read Target Property Composer  Target Name  Properties  Target Property  Get"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "A general server error occurred.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The target catalog entry, its dataset series or the requested property was not found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/composer/{target_name}/paths": {
-      "get": {
-        "tags": [
-          "composer"
-        ],
-        "summary": "Get all graph paths leading to the target entry",
-        "description": "Get all graph paths leading to the target catalog entry.",
-        "operationId": "get_graph_paths_for_target_composer__target_name__paths_get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "target_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The target name",
-              "title": "Target Name"
-            },
-            "description": "The target name"
-          },
-          {
-            "name": "source",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Name of a source catalog entry, be it a group, package, or resource",
-              "title": "Source"
-            },
-            "description": "Name of a source catalog entry, be it a group, package, or resource"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "An object containing the knowledge graph and a mapping of target catalog entry names to all graph paths leading to it.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FullGraphWithPaths"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "A general server error occurred.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "A knowledge graph path is empty (or request parameters are invalid).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The target catalog entry, its dataset series or any graph paths leading to the target entry could not be found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3803,7 +3551,17 @@
             }
           },
           "502": {
-            "description": "The backend target is misformed and cannot be processed.",
+            "description": "An error occurred while communicating with the backend services.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The target or its dataset series could not be found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4270,6 +4028,248 @@
           },
           "404": {
             "description": "The specified user could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/files/upload": {
+      "post": {
+        "tags": [
+          "files"
+        ],
+        "summary": "Upload a file",
+        "description": "Upload a file.\n\nThe following headers are required:\n\n- `X-DataSpaces-FileType`: The type of the file to upload.\n  This can be either 'object', 'entity', or 'ontology'.\n- `Content-Type`: The MIME type of the file to upload.",
+        "operationId": "upload_file_files_upload_post",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-DataSpaces-FileType",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/FileType",
+              "description": "The type of the file to upload."
+            },
+            "description": "The type of the file to upload."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_file_files_upload_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Information about the uploaded file.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileUploadResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "A general server error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with a backend service.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was badly formed. Hint: Check the required headers. It may be that the provided file type (header: X-DataSpaces-FileType) is incorrect or unknown. Or, for 'ontology' file types, check that the required namespace is provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The resource being created already exists.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/files/download/{file_id}": {
+      "get": {
+        "tags": [
+          "files"
+        ],
+        "summary": "Download a file by its ID",
+        "description": "Download a file by its ID.\n\nTODO: Support Accept headers for returning different/specific file formats.\n\nThe following headers are required:\n\n- `X-DataSpaces-FileType`: The type of the file to download.\n  This can be either 'object', 'entity', or 'ontology'.",
+        "operationId": "download_file_files_download__file_id__get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "file_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "File ID",
+              "description": "The ID of the file to download."
+            },
+            "description": "The ID of the file to download."
+          },
+          {
+            "name": "X-DataSpaces-FileType",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/FileType",
+              "description": "The type of the file to download."
+            },
+            "description": "The type of the file to download."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested file."
+          },
+          "500": {
+            "description": "A general server error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with a backend service.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was badly formed. Hint: Check the required headers or your file ID. It may be that the provided file type (header: X-DataSpaces-FileType) is incorrect or unknown.",
             "content": {
               "application/json": {
                 "schema": {
