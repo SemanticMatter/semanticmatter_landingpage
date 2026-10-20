@@ -1,5 +1,6 @@
 "use client";
 
+import { useReducedMotionConfig } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import ForceGraph2D from "react-force-graph-2d";
 
@@ -35,8 +36,10 @@ function createData() {
 }
 
 const palette = ["#11B8B8", "#8A2BE2", "#67E8F9"];
+const layoutTicks = 80;
 
 export default function HeroGraph() {
+  const reduceMotion = useReducedMotionConfig();
   const [size, setSize] = useState({ width: 1280, height: 620 });
   const graph = useMemo(() => createData(), []);
 
@@ -61,11 +64,13 @@ export default function HeroGraph() {
         nodeRelSize={3.5}
         linkColor={() => "rgba(148, 163, 184, 0.22)"}
         nodeColor={(node) => palette[(node.group as number) % palette.length] ?? "#11B8B8"}
-        cooldownTicks={80}
+        // With reduced motion, run the same ticks before the first frame so the
+        // graph appears already settled instead of animating into place.
+        warmupTicks={reduceMotion ? layoutTicks : 0}
+        cooldownTicks={reduceMotion ? 0 : layoutTicks}
         d3AlphaDecay={0.02}
         d3VelocityDecay={0.2}
         enableNodeDrag={false}
-        autoPauseRedraw={false}
       />
     </div>
   );
