@@ -46,7 +46,8 @@ const navItems = [
 ];
 
 export default function Navbar() {
-  const pathname = usePathname();
+  // trailingSlash is enabled, so "/learn/" must match the "/learn" nav path.
+  const pathname = usePathname().replace(/\/+$/, "") || "/";
   const [mobileOpen, setMobileOpen] = useState(false);
   const isProductsActive = pathname.startsWith("/products");
   const closeMobileMenu = () => setMobileOpen(false);
