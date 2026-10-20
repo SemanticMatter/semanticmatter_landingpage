@@ -196,9 +196,9 @@ export default function DataFederationPage() {
                 <TableProperties className="h-3.5 w-3.5" />
                 Federated Data Layer (FDL)
               </p>
-              <h1 className="mt-5 font-[var(--font-heading)] text-4xl font-semibold tracking-tight md:text-6xl">
+              <h1 className="mt-5 font-display text-4xl font-semibold tracking-tight md:text-6xl">
                 Data Federation
-                <span className="mt-2 block bg-gradient-to-r from-cyan-200 via-teal-300 to-violet-300 bg-clip-text text-transparent">
+                <span className="mt-2 block bg-linear-to-r from-cyan-200 via-teal-300 to-violet-300 bg-clip-text text-transparent">
                   One way to query across distributed sources
                 </span>
               </h1>
@@ -268,14 +268,14 @@ export default function DataFederationPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+        <h2 className="font-display text-3xl font-semibold md:text-4xl">
           Why teams move to federation
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           {painPoints.map((point) => (
             <article
               key={point}
-              className="rounded-2xl border border-red-300/20 bg-red-300/[0.06] p-5 text-slate-200"
+              className="rounded-2xl border border-red-300/20 bg-red-300/6 p-5 text-slate-200"
             >
               <p className="text-sm">{point}</p>
             </article>
@@ -284,13 +284,13 @@ export default function DataFederationPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+        <h2 className="font-display text-3xl font-semibold md:text-4xl">
           Federation vs replication
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           {federationVsReplication.map((item) => (
             <article key={item.title} className="glass rounded-2xl p-6">
-              <h3 className="font-[var(--font-heading)] text-2xl font-semibold">
+              <h3 className="font-display text-2xl font-semibold">
                 {item.title}
               </h3>
               <p className="mt-2 text-sm text-slate-300">{item.subtitle}</p>
@@ -309,7 +309,7 @@ export default function DataFederationPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-14">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+          <h2 className="font-display text-3xl font-semibold md:text-4xl">
             What’s built vs what’s next
           </h2>
           <p className="max-w-2xl text-sm text-slate-300 md:text-base">
@@ -323,7 +323,7 @@ export default function DataFederationPage() {
               className="rounded-2xl border border-white/10 bg-white/5 p-5"
             >
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <h3 className="font-[var(--font-heading)] text-xl font-semibold">
+                <h3 className="font-display text-xl font-semibold">
                   {item.capability}
                 </h3>
                 <span
@@ -339,7 +339,7 @@ export default function DataFederationPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+        <h2 className="font-display text-3xl font-semibold md:text-4xl">
           Architecture overview
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
@@ -350,7 +350,7 @@ export default function DataFederationPage() {
                 <div className="inline-flex rounded-lg bg-white/10 p-2 text-teal-200">
                   <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-4 font-[var(--font-heading)] text-xl font-semibold">
+                <h3 className="mt-4 font-display text-xl font-semibold">
                   {plane.title}
                 </h3>
                 <ul className="mt-3 space-y-2 text-sm text-slate-300">
@@ -365,7 +365,7 @@ export default function DataFederationPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+        <h2 className="font-display text-3xl font-semibold md:text-4xl">
           Live federation views
         </h2>
         <p className="mt-4 max-w-3xl text-slate-300">
@@ -380,7 +380,7 @@ export default function DataFederationPage() {
       <section className="mx-auto max-w-7xl px-6 py-14">
         <div className="grid gap-8 lg:grid-cols-[1fr_1fr]">
           <article className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <h2 className="font-[var(--font-heading)] text-2xl font-semibold md:text-3xl">
+            <h2 className="font-display text-2xl font-semibold md:text-3xl">
               How a query runs
             </h2>
             <ol className="mt-5 space-y-3 text-sm text-slate-300">
@@ -396,7 +396,7 @@ export default function DataFederationPage() {
           </article>
 
           <article className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <h2 className="font-[var(--font-heading)] text-2xl font-semibold md:text-3xl">
+            <h2 className="font-display text-2xl font-semibold md:text-3xl">
               Connectors and adapters
             </h2>
             <ul className="mt-5 space-y-3 text-sm text-slate-300">
@@ -412,7 +412,7 @@ export default function DataFederationPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+        <h2 className="font-display text-3xl font-semibold md:text-4xl">
           API examples
         </h2>
         <p className="mt-4 max-w-3xl text-slate-300">
@@ -439,7 +439,7 @@ export default function DataFederationPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+        <h2 className="font-display text-3xl font-semibold md:text-4xl">
           Governance, security, and operations
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
@@ -459,14 +459,14 @@ export default function DataFederationPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-14">
         <div className="glass rounded-3xl p-8 md:p-10">
-          <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+          <h2 className="font-display text-3xl font-semibold md:text-4xl">
             Roadmap priorities
           </h2>
           <div className="mt-6 grid gap-3">
             {roadmap.map((item, idx) => (
               <article
                 key={item}
-                className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-slate-200"
+                className="rounded-xl border border-white/10 bg-white/4 px-4 py-3 text-sm text-slate-200"
               >
                 <span className="mr-2 text-teal-200">{idx + 1}.</span>
                 {item}
@@ -474,8 +474,8 @@ export default function DataFederationPage() {
             ))}
           </div>
 
-          <div className="mt-8 rounded-2xl border border-violet-300/30 bg-violet-300/[0.1] p-6">
-            <h3 className="font-[var(--font-heading)] text-2xl font-semibold text-slate-100">
+          <div className="mt-8 rounded-2xl border border-violet-300/30 bg-violet-300/10 p-6">
+            <h3 className="font-display text-2xl font-semibold text-slate-100">
               Move from prototype to production federation
             </h3>
             <p className="mt-3 max-w-3xl text-sm text-slate-200">

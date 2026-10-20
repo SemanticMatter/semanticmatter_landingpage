@@ -125,9 +125,9 @@ export default function ThinkPage() {
                 <Sparkles className="h-3.5 w-3.5" />
                 SemanticMatter THiNK Platform
               </p>
-              <h1 className="mt-5 font-[var(--font-heading)] text-4xl font-semibold tracking-tight md:text-6xl">
+              <h1 className="mt-5 font-display text-4xl font-semibold tracking-tight md:text-6xl">
                 THiNK
-                <span className="mt-2 block bg-gradient-to-r from-cyan-200 via-teal-300 to-violet-300 bg-clip-text text-transparent">
+                <span className="mt-2 block bg-linear-to-r from-cyan-200 via-teal-300 to-violet-300 bg-clip-text text-transparent">
                   Semantic documentation and interoperability
                 </span>
               </h1>
@@ -197,13 +197,13 @@ export default function ThinkPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-12">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+        <h2 className="font-display text-3xl font-semibold md:text-4xl">
           Where interoperability breaks down
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           {interoperabilityChallenges.map((item) => (
             <article key={item.title} className="glass rounded-2xl p-6">
-              <h3 className="font-[var(--font-heading)] text-2xl font-semibold">
+              <h3 className="font-display text-2xl font-semibold">
                 {item.title}
               </h3>
               <p className="mt-3 text-slate-300">{item.description}</p>
@@ -214,7 +214,7 @@ export default function ThinkPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-14">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+          <h2 className="font-display text-3xl font-semibold md:text-4xl">
             What THiNK does
           </h2>
           <p className="max-w-2xl text-sm text-slate-300 md:text-base">
@@ -228,12 +228,12 @@ export default function ThinkPage() {
             return (
               <article
                 key={item.title}
-                className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition-colors hover:bg-white/[0.08]"
+                className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition-colors hover:bg-white/8"
               >
                 <div className="inline-flex rounded-lg bg-white/10 p-2 text-teal-200 transition-transform group-hover:scale-110">
                   <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-4 font-[var(--font-heading)] text-xl font-semibold">
+                <h3 className="mt-4 font-display text-xl font-semibold">
                   {item.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate-300">
@@ -251,7 +251,7 @@ export default function ThinkPage() {
             <div className="inline-flex rounded-lg bg-white/10 p-2 text-teal-200">
               <ScanText className="h-5 w-5" />
             </div>
-            <h3 className="mt-4 font-[var(--font-heading)] text-2xl font-semibold">
+            <h3 className="mt-4 font-display text-2xl font-semibold">
               From paper to structured metadata
             </h3>
             <p className="mt-3 text-slate-300">
@@ -270,7 +270,7 @@ export default function ThinkPage() {
             </div>
           </article>
           <article className="glass rounded-2xl p-6">
-            <h3 className="font-[var(--font-heading)] text-2xl font-semibold">
+            <h3 className="font-display text-2xl font-semibold">
               Standards and FAIR alignment
             </h3>
             <p className="mt-3 text-slate-300">
@@ -292,7 +292,7 @@ export default function ThinkPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+        <h2 className="font-display text-3xl font-semibold md:text-4xl">
           Priority use cases
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
@@ -301,7 +301,7 @@ export default function ThinkPage() {
               key={item.title}
               className="rounded-2xl border border-white/10 bg-white/5 p-6"
             >
-              <h3 className="font-[var(--font-heading)] text-xl font-semibold text-slate-100">
+              <h3 className="font-display text-xl font-semibold text-slate-100">
                 {item.title}
               </h3>
               <p className="mt-3 text-sm text-slate-300">{item.description}</p>
@@ -312,7 +312,7 @@ export default function ThinkPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-12">
         <div className="glass rounded-3xl p-8 md:p-10">
-          <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+          <h2 className="font-display text-3xl font-semibold md:text-4xl">
             Roadmap and expected impact
           </h2>
 
@@ -320,14 +320,14 @@ export default function ThinkPage() {
             {roadmap.map((item) => (
               <div
                 key={item}
-                className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-slate-200"
+                className="rounded-xl border border-white/10 bg-white/4 px-4 py-3 text-sm text-slate-200"
               >
                 {item}
               </div>
             ))}
           </div>
 
-          <div className="mt-8 rounded-2xl border border-teal-300/30 bg-teal-300/[0.08] p-6">
+          <div className="mt-8 rounded-2xl border border-teal-300/30 bg-teal-300/8 p-6">
             <p className="text-sm uppercase tracking-[0.2em] text-teal-100">
               What changes in practice
             </p>

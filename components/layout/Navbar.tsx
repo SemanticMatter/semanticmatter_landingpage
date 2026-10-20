@@ -60,7 +60,7 @@ export default function Navbar() {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
         <Link
           href="/"
-          className="flex items-center gap-2 font-[var(--font-heading)] text-xl font-semibold tracking-tight"
+          className="flex items-center gap-2 font-display text-xl font-semibold tracking-tight"
         >
           <Network className="h-6 w-6 text-teal-300" />
           <span>
@@ -111,7 +111,7 @@ export default function Navbar() {
       </div>
 
       {mobileOpen ? (
-        <div className="border-t border-white/10 bg-[#050508]/95 px-6 py-5 md:hidden">
+        <div className="border-t border-white/10 bg-ink/95 px-6 py-5 md:hidden">
           <div className="flex flex-col gap-3">
             <Link href="/" className="py-1.5 text-sm text-slate-200" onClick={closeMobileMenu}>
               Overview

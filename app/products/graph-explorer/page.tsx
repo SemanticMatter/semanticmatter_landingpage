@@ -294,9 +294,9 @@ export default function GraphExplorerPage() {
                 <Sparkles className="h-3.5 w-3.5" />
                 RDF Graph Explorer v0.0.0
               </p>
-              <h1 className="mt-5 font-[var(--font-heading)] text-4xl font-semibold tracking-tight md:text-6xl">
+              <h1 className="mt-5 font-display text-4xl font-semibold tracking-tight md:text-6xl">
                 Graph Explorer
-                <span className="mt-2 block bg-gradient-to-r from-cyan-200 via-teal-300 to-violet-300 bg-clip-text text-transparent">
+                <span className="mt-2 block bg-linear-to-r from-cyan-200 via-teal-300 to-violet-300 bg-clip-text text-transparent">
                   Local RDF Visualization + API-Connected Reasoning and SHACL
                 </span>
               </h1>
@@ -373,7 +373,7 @@ export default function GraphExplorerPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+        <h2 className="font-display text-3xl font-semibold md:text-4xl">
           Implemented capabilities
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -382,12 +382,12 @@ export default function GraphExplorerPage() {
             return (
               <article
                 key={capability.title}
-                className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition-colors hover:bg-white/[0.08]"
+                className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition-colors hover:bg-white/8"
               >
                 <div className="inline-flex rounded-lg bg-white/10 p-2 text-cyan-200 transition-transform group-hover:scale-110">
                   <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-4 font-[var(--font-heading)] text-xl font-semibold">
+                <h3 className="mt-4 font-display text-xl font-semibold">
                   {capability.title}
                 </h3>
                 <p className="mt-2 text-sm text-slate-300">{capability.description}</p>
@@ -398,7 +398,7 @@ export default function GraphExplorerPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+        <h2 className="font-display text-3xl font-semibold md:text-4xl">
           Live application views
         </h2>
         <p className="mt-4 max-w-3xl text-slate-300">
@@ -422,7 +422,7 @@ export default function GraphExplorerPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+        <h2 className="font-display text-3xl font-semibold md:text-4xl">
           Reasoning and SHACL status
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
@@ -432,7 +432,7 @@ export default function GraphExplorerPage() {
               className="rounded-2xl border border-white/10 bg-white/5 p-6"
             >
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <h3 className="font-[var(--font-heading)] text-xl font-semibold">
+                <h3 className="font-display text-xl font-semibold">
                   {item.title}
                 </h3>
                 <span
@@ -448,13 +448,13 @@ export default function GraphExplorerPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+        <h2 className="font-display text-3xl font-semibold md:text-4xl">
           User workflows
         </h2>
         <div className="mt-8 grid gap-5 lg:grid-cols-2">
           {workflows.map((workflow) => (
             <article key={workflow.title} className="glass rounded-2xl p-6">
-              <h3 className="font-[var(--font-heading)] text-2xl font-semibold">
+              <h3 className="font-display text-2xl font-semibold">
                 {workflow.title}
               </h3>
               <ol className="mt-4 space-y-3 text-sm text-slate-300">
@@ -474,7 +474,7 @@ export default function GraphExplorerPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-14">
         <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-          <h2 className="font-[var(--font-heading)] text-2xl font-semibold md:text-3xl">
+          <h2 className="font-display text-2xl font-semibold md:text-3xl">
             Knowledge Graph Analysis API surface
           </h2>
           <p className="mt-3 text-sm text-slate-300">
@@ -495,22 +495,22 @@ export default function GraphExplorerPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-14">
         <div className="glass rounded-3xl p-8 md:p-10">
-          <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+          <h2 className="font-display text-3xl font-semibold md:text-4xl">
             Feature Roadmap
           </h2>
           <div className="mt-6 grid gap-3">
             {roadmap.map((item, idx) => (
               <article
                 key={item}
-                className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-slate-200"
+                className="rounded-xl border border-white/10 bg-white/4 px-4 py-3 text-sm text-slate-200"
               >
                 <span className="mr-2 text-cyan-200">{idx + 1}.</span>
                 {item}
               </article>
             ))}
           </div>
-          <div className="mt-8 rounded-2xl border border-cyan-300/35 bg-cyan-300/[0.1] p-6">
-            <h3 className="font-[var(--font-heading)] text-2xl font-semibold text-slate-100">
+          <div className="mt-8 rounded-2xl border border-cyan-300/35 bg-cyan-300/10 p-6">
+            <h3 className="font-display text-2xl font-semibold text-slate-100">
               Build the next exploration tier
             </h3>
             <p className="mt-3 max-w-3xl text-sm text-slate-200">

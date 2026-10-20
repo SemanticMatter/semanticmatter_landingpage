@@ -8,7 +8,7 @@ const useCases = [
 export default function UseCasesPage() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20">
-      <h1 className="font-[var(--font-heading)] text-4xl font-semibold md:text-5xl">
+      <h1 className="font-display text-4xl font-semibold md:text-5xl">
         Use Cases
       </h1>
       <p className="mt-4 max-w-2xl text-slate-300">

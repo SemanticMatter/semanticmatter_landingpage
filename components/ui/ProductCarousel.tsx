@@ -80,7 +80,7 @@ export default function ProductCarousel({
   return (
     <div className="w-full">
       <div
-        className="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-br from-slate-900 via-slate-900/90 to-cyan-950/35 shadow-[0_24px_90px_rgba(0,0,0,0.45)]"
+        className="relative overflow-hidden rounded-3xl border border-white/15 bg-linear-to-br from-slate-900 via-slate-900/90 to-cyan-950/35 shadow-[0_24px_90px_rgba(0,0,0,0.45)]"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onTouchStart={(event) => {
@@ -98,7 +98,7 @@ export default function ProductCarousel({
           setIsPaused(false);
         }}
       >
-        <div className="relative aspect-[16/9] w-full bg-slate-950/80">
+        <div className="relative aspect-video w-full bg-slate-950/80">
           <AnimatePresence custom={direction} initial={false} mode="wait">
             <motion.div
               key={activeSlide.src}
@@ -140,7 +140,7 @@ export default function ProductCarousel({
         </div>
 
         <div className="border-t border-white/10 bg-slate-950/50 px-5 py-4 md:px-6">
-          <h3 className="font-[var(--font-heading)] text-xl font-semibold text-slate-100">
+          <h3 className="font-display text-xl font-semibold text-slate-100">
             {activeSlide.title}
           </h3>
           <p className="mt-1 text-sm text-slate-300">{activeSlide.caption}</p>
@@ -157,10 +157,10 @@ export default function ProductCarousel({
             className={`group overflow-hidden rounded-xl border transition ${
               idx === activeIndex
                 ? "border-cyan-300/60 bg-cyan-300/10"
-                : "border-white/15 bg-white/[0.03] hover:border-white/30"
+                : "border-white/15 bg-white/3 hover:border-white/30"
             }`}
           >
-            <div className="relative aspect-[16/9] w-full">
+            <div className="relative aspect-video w-full">
               <div className={`h-full w-full ${slide.imageBackgroundClassName ?? ""}`}>
                 <img
                   src={slide.src}

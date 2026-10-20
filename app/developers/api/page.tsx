@@ -33,7 +33,7 @@ export default function ApiReferencePage() {
           Back to Developers
         </Link>
 
-        <h1 className="mt-6 font-[var(--font-heading)] text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        <h1 className="mt-6 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
           THiNK User API Reference
         </h1>
         <p className="mt-3 max-w-2xl text-slate-400">

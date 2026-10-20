@@ -16,7 +16,7 @@ export default function FeatureCard({
       <div className="mb-4 inline-flex rounded-lg bg-white/6 p-3 transition-transform group-hover:scale-110">
         {icon}
       </div>
-      <h3 className="font-[var(--font-heading)] text-2xl font-semibold">{title}</h3>
+      <h3 className="font-display text-2xl font-semibold">{title}</h3>
       <p className="mt-3 leading-relaxed text-slate-300">{description}</p>
     </article>
   );

@@ -36,7 +36,7 @@ const products = [
 export default function ProductsPage() {
   return (
     <div className="mx-auto max-w-7xl px-6 py-20">
-      <h1 className="font-[var(--font-heading)] text-4xl font-semibold md:text-5xl">
+      <h1 className="font-display text-4xl font-semibold md:text-5xl">
         Products
       </h1>
       <p className="mt-4 max-w-2xl text-slate-300">
@@ -49,7 +49,7 @@ export default function ProductsPage() {
             href={product.href}
             className="glass rounded-2xl p-6 transition-colors hover:bg-white/10"
           >
-            <h2 className="font-[var(--font-heading)] text-2xl font-semibold">
+            <h2 className="font-display text-2xl font-semibold">
               {product.title}
             </h2>
             <p className="mt-3 text-slate-300">{product.description}</p>
