@@ -311,9 +311,9 @@ export default function BlobfishPage() {
                 <Sparkles className="h-3.5 w-3.5" />
                 OpenAI v1-Compatible API for R&D
               </p>
-              <h1 className="mt-5 font-[var(--font-heading)] text-4xl font-semibold tracking-tight md:text-6xl">
+              <h1 className="mt-5 font-display text-4xl font-semibold tracking-tight md:text-6xl">
                 From Lab Notebooks to
-                <span className="mt-2 block bg-gradient-to-r from-cyan-200 via-teal-300 to-violet-300 bg-clip-text text-transparent">
+                <span className="mt-2 block bg-linear-to-r from-cyan-200 via-teal-300 to-violet-300 bg-clip-text text-transparent">
                   Machine-Readable Knowledge Graphs
                 </span>
               </h1>
@@ -349,7 +349,7 @@ export default function BlobfishPage() {
                     <div className="inline-flex rounded-lg bg-white/10 p-2 text-cyan-200">
                       <Icon className="h-4 w-4" />
                     </div>
-                    <h2 className="mt-3 font-[var(--font-heading)] text-xl font-semibold">
+                    <h2 className="mt-3 font-display text-xl font-semibold">
                       {item.title}
                     </h2>
                     <p className="mt-2 text-sm text-slate-300">{item.description}</p>
@@ -363,7 +363,7 @@ export default function BlobfishPage() {
 
       <section className="mx-auto grid max-w-7xl gap-8 px-6 py-14 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
-          <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+          <h2 className="font-display text-3xl font-semibold md:text-4xl">
             Industrial R&D data in practice
           </h2>
           <p className="mt-4 text-slate-300">
@@ -374,7 +374,7 @@ export default function BlobfishPage() {
             {painPoints.map((point) => (
               <div
                 key={point}
-                className="flex items-start gap-3 rounded-xl border border-red-300/20 bg-red-300/[0.06] px-4 py-3 text-sm text-slate-200"
+                className="flex items-start gap-3 rounded-xl border border-red-300/20 bg-red-300/6 px-4 py-3 text-sm text-slate-200"
               >
                 <span className="mt-0.5 text-red-300">x</span>
                 <span>{point}</span>
@@ -386,7 +386,7 @@ export default function BlobfishPage() {
           <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
             Multi-Modal Input Data
           </p>
-          <h3 className="mt-2 font-[var(--font-heading)] text-2xl font-semibold">
+          <h3 className="mt-2 font-display text-2xl font-semibold">
             Unstructured Information to Graph
           </h3>
           <p className="mt-4 text-sm text-slate-300">
@@ -415,7 +415,7 @@ export default function BlobfishPage() {
       <section className="mx-auto max-w-7xl px-6 py-14">
         <div className="grid gap-8 lg:grid-cols-[1fr_1fr]">
           <div>
-          <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+          <h2 className="font-display text-3xl font-semibold md:text-4xl">
             SemanticMatter lab assistant
           </h2>
             <p className="mt-4 text-slate-300">
@@ -443,7 +443,7 @@ export default function BlobfishPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-          <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+          <h2 className="font-display text-3xl font-semibold md:text-4xl">
             Core capabilities
           </h2>
         <p className="mt-4 max-w-3xl text-slate-300">
@@ -456,12 +456,12 @@ export default function BlobfishPage() {
             return (
               <article
                 key={capability.title}
-                className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition-colors hover:bg-white/[0.08]"
+                className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition-colors hover:bg-white/8"
               >
                 <div className="inline-flex rounded-lg bg-white/10 p-2 text-teal-200 transition-transform group-hover:scale-110">
                   <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-4 font-[var(--font-heading)] text-xl font-semibold">
+                <h3 className="mt-4 font-display text-xl font-semibold">
                   {capability.title}
                 </h3>
                 <ul className="mt-3 space-y-2 text-sm text-slate-300">
@@ -479,7 +479,7 @@ export default function BlobfishPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-          <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+          <h2 className="font-display text-3xl font-semibold md:text-4xl">
             From the presentation
           </h2>
         <p className="mt-4 max-w-3xl text-slate-300">
@@ -492,7 +492,7 @@ export default function BlobfishPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-          <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+          <h2 className="font-display text-3xl font-semibold md:text-4xl">
           From lab records to decisions
         </h2>
         <p className="mt-4 text-slate-300">
@@ -502,12 +502,12 @@ export default function BlobfishPage() {
           {decisionFlow.map((step, idx) => (
             <article
               key={step.title}
-              className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/[0.02] p-5"
+              className="rounded-2xl border border-white/10 bg-linear-to-br from-white/10 to-white/2 p-5"
             >
               <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
                 Step {idx + 1}
               </p>
-              <h3 className="mt-2 font-[var(--font-heading)] text-lg font-semibold text-slate-100">
+              <h3 className="mt-2 font-display text-lg font-semibold text-slate-100">
                 {step.title}
               </h3>
               <p className="mt-2 text-sm text-slate-300">{step.description}</p>
@@ -517,13 +517,13 @@ export default function BlobfishPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+        <h2 className="font-display text-3xl font-semibold md:text-4xl">
           Proven impact
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           {impacts.map((impact) => (
             <article key={impact.title} className="glass rounded-2xl p-6">
-              <h3 className="font-[var(--font-heading)] text-xl font-semibold">
+              <h3 className="font-display text-xl font-semibold">
                 {impact.title}
               </h3>
               <p className="mt-3 text-sm text-slate-300">{impact.description}</p>
@@ -542,7 +542,7 @@ export default function BlobfishPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-14">
         <div className="glass rounded-3xl p-8 md:p-10">
-          <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+          <h2 className="font-display text-3xl font-semibold md:text-4xl">
             Why Blobfish Matters
           </h2>
           <p className="mt-4 max-w-4xl text-slate-300">
@@ -553,7 +553,7 @@ export default function BlobfishPage() {
             {investorNarrative.map((item) => (
               <article
                 key={item.title}
-                className="rounded-xl border border-white/10 bg-white/[0.04] p-4"
+                className="rounded-xl border border-white/10 bg-white/4 p-4"
               >
                 <h3 className="font-semibold text-slate-100">{item.title}</h3>
                 <p className="mt-2 text-sm text-slate-300">{item.description}</p>
@@ -564,7 +564,7 @@ export default function BlobfishPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+        <h2 className="font-display text-3xl font-semibold md:text-4xl">
           Industrial Use Cases: Strategic Expansion
         </h2>
         <div className="mt-8 space-y-4">
@@ -576,7 +576,7 @@ export default function BlobfishPage() {
               <p className="text-xs uppercase tracking-[0.2em] text-violet-200">
                 {phase.phase}
               </p>
-              <h3 className="mt-2 font-[var(--font-heading)] text-2xl font-semibold">
+              <h3 className="mt-2 font-display text-2xl font-semibold">
                 {phase.title}
               </h3>
               <p className="mt-3 text-slate-300">{phase.description}</p>
@@ -586,7 +586,7 @@ export default function BlobfishPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+        <h2 className="font-display text-3xl font-semibold md:text-4xl">
           How it works
         </h2>
         <div className="mt-8 grid gap-4 md:grid-cols-5">
@@ -606,7 +606,7 @@ export default function BlobfishPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-14">
-        <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+        <h2 className="font-display text-3xl font-semibold md:text-4xl">
           Frequently asked questions
         </h2>
         <div className="mt-8 space-y-4">
@@ -623,13 +623,13 @@ export default function BlobfishPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 pb-20 pt-10">
-        <div className="rounded-3xl border border-teal-300/35 bg-teal-300/[0.1] p-8 md:p-10">
+        <div className="rounded-3xl border border-teal-300/35 bg-teal-300/10 p-8 md:p-10">
           <div className="grid gap-8 md:grid-cols-[1.2fr_0.8fr] md:items-end">
             <div>
               <p className="text-xs uppercase tracking-[0.2em] text-teal-100">
                 Bring order to lab data
               </p>
-              <h2 className="mt-3 font-[var(--font-heading)] text-3xl font-semibold md:text-5xl">
+              <h2 className="mt-3 font-display text-3xl font-semibold md:text-5xl">
                 Machine-readable FAIR data for modern R&D
               </h2>
               <p className="mt-4 max-w-2xl text-slate-100">

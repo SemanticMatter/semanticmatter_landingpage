@@ -18,9 +18,9 @@ const Endpoint = ({ path, method }: { path: string; method?: string }) => {
   );
 
   return (
-    <div className="flex min-w-0 items-center gap-3 rounded-lg border border-slate-800 bg-slate-950/50 px-3 py-2 font-mono text-sm shadow-sm transition-colors hover:border-slate-700">
+    <div className="flex min-w-0 items-center gap-3 rounded-lg border border-slate-800 bg-slate-950/50 px-3 py-2 font-mono text-sm shadow-xs transition-colors hover:border-slate-700">
       {method && (
-        <span className={`text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 ${
+        <span className={`text-[10px] leading-5 font-bold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 ${
           method === 'GET' ? 'bg-blue-500/20 text-blue-400' :
           method === 'POST' ? 'bg-green-500/20 text-green-400' :
           method === 'PUT' ? 'bg-yellow-500/20 text-yellow-400' :
@@ -36,12 +36,12 @@ const Endpoint = ({ path, method }: { path: string; method?: string }) => {
 };
 
 const Card = ({ title, icon: Icon, children }: { title: string; icon: any; children: React.ReactNode }) => (
-  <div className="flex min-w-0 flex-col gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 shadow-lg backdrop-blur-sm">
+  <div className="flex min-w-0 flex-col gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-6 shadow-lg backdrop-blur-xs">
     <div className="flex items-center gap-3">
       <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
         <Icon size={20} />
       </div>
-      <h3 className="font-[var(--font-heading)] text-lg font-semibold text-white">
+      <h3 className="font-display text-lg font-semibold text-white">
         {title}
       </h3>
     </div>
@@ -62,8 +62,8 @@ export default function DevelopersPage() {
             <Terminal size={14} />
             <span>Developer Portal</span>
           </div>
-          <h1 className="font-[var(--font-heading)] text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Build with <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">THiNK</span>
+          <h1 className="font-display text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Build with <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-indigo-400">THiNK</span>
           </h1>
           <p className="text-lg leading-relaxed text-slate-400">
             Integrate semantic documentation and catalog operations directly into your stack.
@@ -84,7 +84,7 @@ export default function DevelopersPage() {
 
         {/* API SURFACE (MIDDLE LAYER & BACKEND) */}
         <div className="mt-24">
-          <h2 className="font-[var(--font-heading)] text-2xl font-semibold text-white md:text-3xl">
+          <h2 className="font-display text-2xl font-semibold text-white md:text-3xl">
             API Surface
           </h2>
           <p className="mt-2 text-slate-400">Core endpoints available for integration today.</p>
@@ -92,7 +92,7 @@ export default function DevelopersPage() {
           <div className="mt-8 grid grid-cols-1 gap-6">
             <Card title="Catalog & Documentation" icon={Database}>
               <p className="text-sm">Manage source (Groups, Packages, Resources) and target (Projects, Targets) models.</p>
-              <div className="mt-4 space-y-2">
+              <div className="space-y-2">
                 <Endpoint path="/documentation/groups/{group_name}" method="API" />
                 <Endpoint path="/documentation/packages/{package_name}" method="API" />
                 <Endpoint path="/documentation/resources/{resource_name}/datasets/{dataset_id}" method="API" />
@@ -103,7 +103,7 @@ export default function DevelopersPage() {
 
             <Card title="Composer Reads" icon={Layers}>
               <p className="text-sm">Read computed target outputs, individual properties, and graph traversal paths.</p>
-              <div className="mt-4 space-y-2">
+              <div className="space-y-2">
                 <Endpoint path="/composer/{target_name}" method="GET" />
                 <Endpoint path="/composer/{target_name}/properties/{target_property}" method="GET" />
                 <Endpoint path="/composer/{target_name}/paths" method="GET" />
@@ -112,19 +112,19 @@ export default function DevelopersPage() {
 
             <Card title="Semantic Concepts & Files" icon={FileCode2}>
               <p className="text-sm">Exchange object, entity, or ontology files and retrieve URI-based semantic concepts.</p>
-              <div className="mt-4 space-y-2">
+              <div className="space-y-2">
                 <Endpoint path="/resources/concepts" method="GET" />
                 <Endpoint path="/files/upload" method="POST" />
                 <Endpoint path="/files/download/{file_id}" method="GET" />
               </div>
-              <div className="mt-2 rounded bg-slate-950/50 p-3 text-xs border border-slate-800/50">
+              <div className="rounded-sm bg-slate-950/50 p-3 text-xs border border-slate-800/50">
                 <span className="font-semibold text-slate-300">Required Header:</span> <code className="text-blue-400">X-DataSpaces-FileType</code> (object, entity, ontology)
               </div>
             </Card>
 
             <Card title="Workflow Management" icon={Workflow}>
               <p className="text-sm">Backend routes to register workflows, replace definitions, and manage trigger lifecycles.</p>
-              <div className="mt-4 space-y-2">
+              <div className="space-y-2">
                 <Endpoint path="/workflow/workflows/{workflow_name}" method="API" />
                 <Endpoint path="/workflow/{workflow_name}/triggers" method="API" />
                 <Endpoint path="/workflow/{workflow_name}/routes" method="API" />
@@ -137,7 +137,7 @@ export default function DevelopersPage() {
         {/* CAPABILITIES & PERFORMANCE TIPS */}
         <div className="mt-24 grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5 space-y-6">
-            <h2 className="font-[var(--font-heading)] text-2xl font-semibold text-white md:text-3xl">
+            <h2 className="font-display text-2xl font-semibold text-white md:text-3xl">
               Performance & Discovery
             </h2>
             <p className="text-slate-400">
@@ -165,7 +165,7 @@ export default function DevelopersPage() {
 
         {/* INTEGRATION PATTERNS */}
         <div className="mt-24">
-          <h2 className="font-[var(--font-heading)] text-2xl font-semibold text-white md:text-3xl">
+          <h2 className="font-display text-2xl font-semibold text-white md:text-3xl">
             Ecosystem Integration
           </h2>
           <p className="mt-2 text-slate-400">THiNK acts as a semantic control layer next to your existing systems, not a replacement.</p>
@@ -189,7 +189,7 @@ export default function DevelopersPage() {
 
         {/* WALKTHROUGH FLOWS */}
         <div className="mt-24">
-          <h2 className="font-[var(--font-heading)] text-2xl font-semibold text-white md:text-3xl">
+          <h2 className="font-display text-2xl font-semibold text-white md:text-3xl">
             Integration Walkthroughs
           </h2>
 

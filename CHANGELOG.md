@@ -1,5 +1,17 @@
 # Changelog
 
+## [v1.20261020.102:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20261019.100...HEAD)
+
+**Merged pull requests:**
+
+- Migrate to Tailwind CSS v4 \(drops vulnerable postcss-selector-parser, bumps sharp\) [\#83](https://github.com/SemanticMatter/semanticmatter_landingpage/pull/83) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.20261019.100](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20261019.100) (2026-10-19)
+
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20261019.101...v1.20261019.100)
+
 ## [v1.20261019.101](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20261019.101) (2026-10-19)
 
 [Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20261013.99...v1.20261019.101)

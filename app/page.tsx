@@ -24,11 +24,11 @@ export default function OverviewPage() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.0, ease: "easeOut" }}
-          className="font-[var(--font-heading)] text-5xl font-bold tracking-tight md:text-7xl"
+          className="font-display text-5xl font-bold tracking-tight md:text-7xl"
         >
           Semantic Infrastructure for
           <br />
-          <span className="bg-gradient-to-r from-teal-400 via-cyan-300 to-violet-500 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-teal-400 via-cyan-300 to-violet-500 bg-clip-text text-transparent">
             Complex Data Ecosystems
           </span>
         </motion.h1>
@@ -89,8 +89,8 @@ export default function OverviewPage() {
       </section>
 
       <section id="contact-information" className="relative z-10 mx-auto max-w-7xl px-6 pb-24">
-        <div className="rounded-2xl border border-white/15 bg-gradient-to-b from-white/10 to-white/5 p-8 md:p-10">
-          <h2 className="font-[var(--font-heading)] text-3xl font-semibold md:text-4xl">
+        <div className="rounded-2xl border border-white/15 bg-linear-to-b from-white/10 to-white/5 p-8 md:p-10">
+          <h2 className="font-display text-3xl font-semibold md:text-4xl">
             Contact Us
           </h2>
           <p className="mt-3 text-slate-300">
