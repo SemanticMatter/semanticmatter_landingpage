@@ -11,8 +11,6 @@
   --background-image-hero-grid:
     radial-gradient(circle at 20% 20%, rgb(17 184 184 / 0.15), transparent 40%),
     radial-gradient(circle at 80% 0%, rgb(138 43 226 / 0.18), transparent 45%);
-
-  --shadow-glow: 0 0 60px rgb(17 184 184 / 0.18);
 }
 
 /* `--font-heading` is set by next/font in app/layout.tsx; exposed as `font-display`. */

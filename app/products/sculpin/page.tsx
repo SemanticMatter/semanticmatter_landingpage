@@ -257,7 +257,7 @@ export default function SculpinPage() {
             <p className="text-xs uppercase tracking-[0.2em] text-teal-100">
               Core message
             </p>
-            <p className="mt-4 font-display text-2xl font-semibold leading-snug text-white md:text-3xl">
+            <p className="mt-4 font-display text-2xl font-semibold leading-snug text-white md:text-3xl md:leading-9">
               THiNK gives organizations a trusted semantic foundation
               <span className="bg-linear-to-r from-cyan-200 via-teal-300 to-violet-300 bg-clip-text text-transparent">
                 {" "}
