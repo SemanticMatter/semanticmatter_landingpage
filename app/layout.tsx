@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
 import type { ReactNode } from "react";
 import Footer from "@/components/layout/Footer";
+import MotionProvider from "@/components/layout/MotionProvider";
 import Navbar from "@/components/layout/Navbar";
 import "./globals.css";
 
@@ -49,9 +50,11 @@ export default function RootLayout({
       <body
         className={`${bodyFont.variable} ${headingFont.variable} bg-ink text-slate-100 antialiased`}
       >
-        <Navbar />
-        <main className="min-h-screen pt-20">{children}</main>
-        <Footer />
+        <MotionProvider>
+          <Navbar />
+          <main className="min-h-screen pt-20">{children}</main>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

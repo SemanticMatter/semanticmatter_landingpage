@@ -46,7 +46,8 @@ const navItems = [
 ];
 
 export default function Navbar() {
-  const pathname = usePathname();
+  // trailingSlash is enabled, so "/learn/" must match the "/learn" nav path.
+  const pathname = usePathname().replace(/\/+$/, "") || "/";
   const [mobileOpen, setMobileOpen] = useState(false);
   const isProductsActive = pathname.startsWith("/products");
   const closeMobileMenu = () => setMobileOpen(false);
@@ -70,7 +71,10 @@ export default function Navbar() {
 
         <nav className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => {
-            const active = pathname === item.path;
+            const active =
+              item.path === "/"
+                ? pathname === "/"
+                : pathname === item.path || pathname.startsWith(`${item.path}/`);
             return (
               <div key={item.path} className="relative">
                 <Link
