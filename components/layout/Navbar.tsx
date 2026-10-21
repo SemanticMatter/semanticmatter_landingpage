@@ -71,7 +71,10 @@ export default function Navbar() {
 
         <nav className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => {
-            const active = pathname === item.path;
+            const active =
+              item.path === "/"
+                ? pathname === "/"
+                : pathname === item.path || pathname.startsWith(`${item.path}/`);
             return (
               <div key={item.path} className="relative">
                 <Link
