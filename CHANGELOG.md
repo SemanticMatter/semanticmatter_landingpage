@@ -1,8 +1,8 @@
 # Changelog
 
-## [v1.20261021.103:](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/HEAD)
+## [v1.20261021.103](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20261021.103) (2026-10-21)
 
-[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20261020.102...HEAD)
+[Full Changelog](https://github.com/SemanticMatter/semanticmatter_landingpage/compare/v1.20261020.102...v1.20261021.103)
 
 **Implemented enhancements:**
 
@@ -15,10 +15,6 @@
 **Closed issues:**
 
 - Dependency housekeeping after PR \#80: audit fixes and deferred major upgrades [\#82](https://github.com/SemanticMatter/semanticmatter_landingpage/issues/82)
-
-**Merged pull requests:**
-
-- Respect reduced motion, stop idle hero graph redraws, fix Navbar active link, bump deps [\#86](https://github.com/SemanticMatter/semanticmatter_landingpage/pull/86) ([CasperWA-ai-bot](https://github.com/CasperWA-ai-bot))
 
 ## [v1.20261020.102](https://github.com/SemanticMatter/semanticmatter_landingpage/tree/v1.20261020.102) (2026-10-20)
 

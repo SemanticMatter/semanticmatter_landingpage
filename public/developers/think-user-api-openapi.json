@@ -3949,7 +3949,6 @@
                 }
               ],
               "description": "ID or username of the user to retrieve",
-              "union_mode": "left_to_right",
               "title": "User Id Or Username"
             },
             "description": "ID or username of the user to retrieve"
