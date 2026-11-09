@@ -2,146 +2,17 @@
   "openapi": "3.1.0",
   "info": {
     "title": "DataSpaces",
-    "version": "1.20260921.514"
+    "version": "1.20261109.515"
   },
   "paths": {
-    "/files/upload": {
-      "post": {
-        "tags": [
-          "files"
-        ],
-        "summary": "Upload a file",
-        "description": "Upload a file.\n\nThe following headers are required:\n\n- `X-DataSpaces-FileType`: The type of the file to upload.\n  This can be either 'object', 'entity', or 'ontology'.\n- `Content-Type`: The MIME type of the file to upload.",
-        "operationId": "upload_file_files_upload_post",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "X-DataSpaces-FileType",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/FileType",
-              "description": "The type of the file to upload."
-            },
-            "description": "The type of the file to upload."
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/Body_upload_file_files_upload_post"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Information about the uploaded file.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FileUploadResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "A general server error occurred.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with a backend service.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The request was badly formed. Hint: Check the required headers. It may be that the provided file type (header: X-DataSpaces-FileType) is incorrect or unknown. Or, for 'ontology' file types, check that the required namespace is provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "The resource being created already exists.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/files/download/{file_id}": {
+    "/composer/{target_name}": {
       "get": {
         "tags": [
-          "files"
+          "composer"
         ],
-        "summary": "Download a file by its ID",
-        "description": "Download a file by its ID.\n\nTODO: Support Accept headers for returning different/specific file formats.\n\nThe following headers are required:\n\n- `X-DataSpaces-FileType`: The type of the file to download.\n  This can be either 'object', 'entity', or 'ontology'.",
-        "operationId": "download_file_files_download__file_id__get",
+        "summary": "Retrieve results for a target catalog entry",
+        "description": "Provided its name, retrieve results for a target catalog entry.",
+        "operationId": "read_results_from_target_composer__target_name__get",
         "security": [
           {
             "DataSpaces": []
@@ -149,30 +20,68 @@
         ],
         "parameters": [
           {
-            "name": "file_id",
+            "name": "target_name",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "title": "File ID",
-              "description": "The ID of the file to download."
+              "description": "Name of a target catalog entry, be it a project, target, or resource",
+              "title": "Target Name"
             },
-            "description": "The ID of the file to download."
+            "description": "Name of a target catalog entry, be it a project, target, or resource"
           },
           {
-            "name": "X-DataSpaces-FileType",
-            "in": "header",
-            "required": true,
+            "name": "source",
+            "in": "query",
+            "required": false,
             "schema": {
-              "$ref": "#/components/schemas/FileType",
-              "description": "The type of the file to download."
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Name of a source catalog entry, be it a group, package, or resource",
+              "title": "Source"
             },
-            "description": "The type of the file to download."
+            "description": "Name of a source catalog entry, be it a group, package, or resource"
+          },
+          {
+            "name": "header",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Inject headers in the request to retrieve the source data.",
+              "title": "Header"
+            },
+            "description": "Inject headers in the request to retrieve the source data."
           }
         ],
         "responses": {
           "200": {
-            "description": "The requested file."
+            "description": "A dictionary containing the results for the target catalog entry.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Read Results From Target Composer  Target Name  Get"
+                }
+              }
+            }
           },
           "500": {
             "description": "A general server error occurred.",
@@ -224,18 +133,8 @@
               }
             }
           },
-          "502": {
-            "description": "An error occurred while communicating with a backend service.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The request was badly formed. Hint: Check the required headers or your file ID. It may be that the provided file type (header: X-DataSpaces-FileType) is incorrect or unknown.",
+          "404": {
+            "description": "The target catalog entry or its dataset series could not be found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -247,25 +146,303 @@
         }
       }
     },
-    "/documentation/projects": {
+    "/composer/{target_name}/properties/{target_property}": {
       "get": {
         "tags": [
-          "documentation.project"
+          "composer"
         ],
-        "summary": "List all projects",
-        "description": "List all projects.\n\nThe list of targets in each project is shallow, meaning that only the target names are returned.",
-        "operationId": "list_projects_documentation_projects_get",
+        "summary": "Retrieve a specific property from a target catalog entry",
+        "description": "Provided its name, retrieve a specific property from a target catalog entry.",
+        "operationId": "read_target_property_composer__target_name__properties__target_property__get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "target_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The target name",
+              "title": "Target Name"
+            },
+            "description": "The target name"
+          },
+          {
+            "name": "target_property",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The target property",
+              "title": "Target Property"
+            },
+            "description": "The target property"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Name of a source catalog entry, be it a group, package, or resource",
+              "title": "Source"
+            },
+            "description": "Name of a source catalog entry, be it a group, package, or resource"
+          },
+          {
+            "name": "header",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Inject headers in the request to retrieve the source data.",
+              "title": "Header"
+            },
+            "description": "Inject headers in the request to retrieve the source data."
+          }
+        ],
         "responses": {
           "200": {
-            "description": "A list of projects with their targets (shallow).",
+            "description": "The value of the requested property from the target catalog entry.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Read Target Property Composer  Target Name  Properties  Target Property  Get"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "A general server error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The target catalog entry, its dataset series or the requested property was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/composer/{target_name}/paths": {
+      "get": {
+        "tags": [
+          "composer"
+        ],
+        "summary": "Get all graph paths leading to the target entry",
+        "description": "Get all graph paths leading to the target catalog entry.",
+        "operationId": "get_graph_paths_for_target_composer__target_name__paths_get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "target_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The target name",
+              "title": "Target Name"
+            },
+            "description": "The target name"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Name of a source catalog entry, be it a group, package, or resource",
+              "title": "Source"
+            },
+            "description": "Name of a source catalog entry, be it a group, package, or resource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An object containing the knowledge graph and a mapping of target catalog entry names to all graph paths leading to it.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FullGraphWithPaths"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "A general server error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "A knowledge graph path is empty (or request parameters are invalid).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The target catalog entry, its dataset series or any graph paths leading to the target entry could not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The backend target is misformed and cannot be processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documentation/groups": {
+      "get": {
+        "tags": [
+          "documentation.group"
+        ],
+        "summary": "List all groups with their packages",
+        "description": "List all groups with their packages.\n\nThe list of packages in each group is shallow, meaning that only the package names are returned.",
+        "operationId": "list_groups_documentation_groups_get",
+        "responses": {
+          "200": {
+            "description": "A list of groups with their packages (shallow).",
             "content": {
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/CompleteProjectShallow"
+                    "$ref": "#/components/schemas/CompleteGroupShallow"
                   },
                   "type": "array",
-                  "title": "Response List Projects Documentation Projects Get"
+                  "title": "Response List Groups Documentation Groups Get"
                 }
               }
             }
@@ -339,17 +516,17 @@
       },
       "post": {
         "tags": [
-          "documentation.project"
+          "documentation.group"
         ],
-        "summary": "Create a project with targets",
-        "description": "Create a project with targets.",
-        "operationId": "create_project_with_targets_documentation_projects_post",
+        "summary": "Create a group with packages",
+        "description": "Create a group with packages.",
+        "operationId": "create_group_with_packages_documentation_groups_post",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateCompleteProject",
-                "description": "Complete (frontend) Project to create"
+                "$ref": "#/components/schemas/CreateCompleteGroup",
+                "description": "Complete (frontend) Group to create"
               }
             }
           },
@@ -357,11 +534,11 @@
         },
         "responses": {
           "201": {
-            "description": "Information about the created project.",
+            "description": "Information about the created group.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateProjectResponse"
+                  "$ref": "#/components/schemas/CreateGroupResponse"
                 }
               }
             }
@@ -427,7 +604,7 @@
             }
           },
           "409": {
-            "description": "A project (or target(s)) with the same name already exists.",
+            "description": "A group (or package(s)) with the same name already exists.",
             "content": {
               "application/json": {
                 "schema": {
@@ -444,14 +621,14 @@
         ]
       }
     },
-    "/documentation/projects/{project_name}": {
+    "/documentation/groups/{group_name}": {
       "get": {
         "tags": [
-          "documentation.project"
+          "documentation.group"
         ],
-        "summary": "Retrieve a project with its targets",
-        "description": "Retrieve a project with its targets.\n\nThe list of targets is shallow, meaning that only the target names are returned.",
-        "operationId": "retrieve_project_with_targets_documentation_projects__project_name__get",
+        "summary": "Retrieve a group with its packages",
+        "description": "Retrieve a group with its packages.\n\nThe list of packages is shallow, meaning that only the package names are returned.",
+        "operationId": "retrieve_group_with_packages_documentation_groups__group_name__get",
         "security": [
           {
             "DataSpaces": []
@@ -459,24 +636,24 @@
         ],
         "parameters": [
           {
-            "name": "project_name",
+            "name": "group_name",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique project name",
-              "title": "Project Name"
+              "description": "The unique group name",
+              "title": "Group Name"
             },
-            "description": "The unique project name"
+            "description": "The unique group name"
           }
         ],
         "responses": {
           "200": {
-            "description": "A project with its targets (shallow).",
+            "description": "A group with its packages (shallow).",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompleteProjectShallow"
+                  "$ref": "#/components/schemas/CompleteGroupShallow"
                 }
               }
             }
@@ -542,7 +719,7 @@
             }
           },
           "404": {
-            "description": "The project could not be found.",
+            "description": "Group not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -555,11 +732,11 @@
       },
       "patch": {
         "tags": [
-          "documentation.project"
+          "documentation.group"
         ],
-        "summary": "Update a project",
-        "description": "Update a project.",
-        "operationId": "update_project_documentation_projects__project_name__patch",
+        "summary": "Update a group",
+        "description": "Update a group.",
+        "operationId": "update_group_documentation_groups__group_name__patch",
         "security": [
           {
             "DataSpaces": []
@@ -567,15 +744,15 @@
         ],
         "parameters": [
           {
-            "name": "project_name",
+            "name": "group_name",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique project name",
-              "title": "Project Name"
+              "description": "The unique group name",
+              "title": "Group Name"
             },
-            "description": "The unique project name"
+            "description": "The unique group name"
           }
         ],
         "requestBody": {
@@ -583,19 +760,19 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProjectUpdate",
-                "description": "The DS Catalog project to update"
+                "$ref": "#/components/schemas/GroupUpdate",
+                "description": "The DS Catalog group to update"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "The updated project.",
+            "description": "The updated group.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompleteProjectShallow"
+                  "$ref": "#/components/schemas/CompleteGroupShallow"
                 }
               }
             }
@@ -661,7 +838,7 @@
             }
           },
           "404": {
-            "description": "Project not found.",
+            "description": "Group not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -674,11 +851,10 @@
       },
       "delete": {
         "tags": [
-          "documentation.project"
+          "documentation.group"
         ],
-        "summary": "Delete a project with its targets",
-        "description": "Delete a project with its targets.",
-        "operationId": "delete_project_with_targets_documentation_projects__project_name__delete",
+        "summary": "Delete a group with its packages",
+        "operationId": "delete_group_with_packages_documentation_groups__group_name__delete",
         "security": [
           {
             "DataSpaces": []
@@ -686,20 +862,20 @@
         ],
         "parameters": [
           {
-            "name": "project_name",
+            "name": "group_name",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique project name",
-              "title": "Project Name"
+              "description": "The unique group name",
+              "title": "Group Name"
             },
-            "description": "The unique project name"
+            "description": "The unique group name"
           }
         ],
         "responses": {
           "204": {
-            "description": "Project deleted successfully."
+            "description": "Group deleted successfully."
           },
           "500": {
             "description": "An error occurred in the documentation router.",
@@ -762,7 +938,7 @@
             }
           },
           "404": {
-            "description": "Project not found.",
+            "description": "Group not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1346,25 +1522,25 @@
         }
       }
     },
-    "/documentation/groups": {
+    "/documentation/projects": {
       "get": {
         "tags": [
-          "documentation.group"
+          "documentation.project"
         ],
-        "summary": "List all groups with their packages",
-        "description": "List all groups with their packages.\n\nThe list of packages in each group is shallow, meaning that only the package names are returned.",
-        "operationId": "list_groups_documentation_groups_get",
+        "summary": "List all projects",
+        "description": "List all projects.\n\nThe list of targets in each project is shallow, meaning that only the target names are returned.",
+        "operationId": "list_projects_documentation_projects_get",
         "responses": {
           "200": {
-            "description": "A list of groups with their packages (shallow).",
+            "description": "A list of projects with their targets (shallow).",
             "content": {
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/CompleteGroupShallow"
+                    "$ref": "#/components/schemas/CompleteProjectShallow"
                   },
                   "type": "array",
-                  "title": "Response List Groups Documentation Groups Get"
+                  "title": "Response List Projects Documentation Projects Get"
                 }
               }
             }
@@ -1438,17 +1614,17 @@
       },
       "post": {
         "tags": [
-          "documentation.group"
+          "documentation.project"
         ],
-        "summary": "Create a group with packages",
-        "description": "Create a group with packages.",
-        "operationId": "create_group_with_packages_documentation_groups_post",
+        "summary": "Create a project with targets",
+        "description": "Create a project with targets.",
+        "operationId": "create_project_with_targets_documentation_projects_post",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateCompleteGroup",
-                "description": "Complete (frontend) Group to create"
+                "$ref": "#/components/schemas/CreateCompleteProject",
+                "description": "Complete (frontend) Project to create"
               }
             }
           },
@@ -1456,11 +1632,11 @@
         },
         "responses": {
           "201": {
-            "description": "Information about the created group.",
+            "description": "Information about the created project.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateGroupResponse"
+                  "$ref": "#/components/schemas/CreateProjectResponse"
                 }
               }
             }
@@ -1526,7 +1702,7 @@
             }
           },
           "409": {
-            "description": "A group (or package(s)) with the same name already exists.",
+            "description": "A project (or target(s)) with the same name already exists.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1543,14 +1719,14 @@
         ]
       }
     },
-    "/documentation/groups/{group_name}": {
+    "/documentation/projects/{project_name}": {
       "get": {
         "tags": [
-          "documentation.group"
+          "documentation.project"
         ],
-        "summary": "Retrieve a group with its packages",
-        "description": "Retrieve a group with its packages.\n\nThe list of packages is shallow, meaning that only the package names are returned.",
-        "operationId": "retrieve_group_with_packages_documentation_groups__group_name__get",
+        "summary": "Retrieve a project with its targets",
+        "description": "Retrieve a project with its targets.\n\nThe list of targets is shallow, meaning that only the target names are returned.",
+        "operationId": "retrieve_project_with_targets_documentation_projects__project_name__get",
         "security": [
           {
             "DataSpaces": []
@@ -1558,24 +1734,24 @@
         ],
         "parameters": [
           {
-            "name": "group_name",
+            "name": "project_name",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique group name",
-              "title": "Group Name"
+              "description": "The unique project name",
+              "title": "Project Name"
             },
-            "description": "The unique group name"
+            "description": "The unique project name"
           }
         ],
         "responses": {
           "200": {
-            "description": "A group with its packages (shallow).",
+            "description": "A project with its targets (shallow).",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompleteGroupShallow"
+                  "$ref": "#/components/schemas/CompleteProjectShallow"
                 }
               }
             }
@@ -1641,7 +1817,7 @@
             }
           },
           "404": {
-            "description": "Group not found.",
+            "description": "The project could not be found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1654,11 +1830,11 @@
       },
       "patch": {
         "tags": [
-          "documentation.group"
+          "documentation.project"
         ],
-        "summary": "Update a group",
-        "description": "Update a group.",
-        "operationId": "update_group_documentation_groups__group_name__patch",
+        "summary": "Update a project",
+        "description": "Update a project.",
+        "operationId": "update_project_documentation_projects__project_name__patch",
         "security": [
           {
             "DataSpaces": []
@@ -1666,15 +1842,15 @@
         ],
         "parameters": [
           {
-            "name": "group_name",
+            "name": "project_name",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique group name",
-              "title": "Group Name"
+              "description": "The unique project name",
+              "title": "Project Name"
             },
-            "description": "The unique group name"
+            "description": "The unique project name"
           }
         ],
         "requestBody": {
@@ -1682,19 +1858,19 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GroupUpdate",
-                "description": "The DS Catalog group to update"
+                "$ref": "#/components/schemas/ProjectUpdate",
+                "description": "The DS Catalog project to update"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "The updated group.",
+            "description": "The updated project.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompleteGroupShallow"
+                  "$ref": "#/components/schemas/CompleteProjectShallow"
                 }
               }
             }
@@ -1760,7 +1936,7 @@
             }
           },
           "404": {
-            "description": "Group not found.",
+            "description": "Project not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1773,10 +1949,11 @@
       },
       "delete": {
         "tags": [
-          "documentation.group"
+          "documentation.project"
         ],
-        "summary": "Delete a group with its packages",
-        "operationId": "delete_group_with_packages_documentation_groups__group_name__delete",
+        "summary": "Delete a project with its targets",
+        "description": "Delete a project with its targets.",
+        "operationId": "delete_project_with_targets_documentation_projects__project_name__delete",
         "security": [
           {
             "DataSpaces": []
@@ -1784,20 +1961,20 @@
         ],
         "parameters": [
           {
-            "name": "group_name",
+            "name": "project_name",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The unique group name",
-              "title": "Group Name"
+              "description": "The unique project name",
+              "title": "Project Name"
             },
-            "description": "The unique group name"
+            "description": "The unique project name"
           }
         ],
         "responses": {
           "204": {
-            "description": "Group deleted successfully."
+            "description": "Project deleted successfully."
           },
           "500": {
             "description": "An error occurred in the documentation router.",
@@ -1860,7 +2037,7 @@
             }
           },
           "404": {
-            "description": "Group not found.",
+            "description": "Project not found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3396,14 +3573,14 @@
         }
       }
     },
-    "/composer/{target_name}": {
+    "/resources/concepts": {
       "get": {
         "tags": [
-          "composer"
+          "resources"
         ],
-        "summary": "Retrieve results for a target catalog entry",
-        "description": "Provided its name, retrieve results for a target catalog entry.",
-        "operationId": "read_results_from_target_composer__target_name__get",
+        "summary": "Retrieve ontology concepts",
+        "description": "Retrieve ontology concepts.\n\nThe depth parameter controls how deep the ontology concepts should be retrieved.\nDepth 0 is the concepts themselves, depth 1 includes their immediate children, and so on.\nThe default depth is 1.",
+        "operationId": "get_ontology_concepts_resources_concepts_get",
         "security": [
           {
             "DataSpaces": []
@@ -3411,71 +3588,45 @@
         ],
         "parameters": [
           {
-            "name": "target_name",
-            "in": "path",
+            "name": "concept_uris",
+            "in": "query",
             "required": true,
             "schema": {
-              "type": "string",
-              "description": "Name of a target catalog entry, be it a project, target, or resource",
-              "title": "Target Name"
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of ontology concept URIs.",
+              "title": "Concept Uris"
             },
-            "description": "Name of a target catalog entry, be it a project, target, or resource"
+            "description": "List of ontology concept URIs."
           },
           {
-            "name": "source",
+            "name": "depth",
             "in": "query",
             "required": false,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Name of a source catalog entry, be it a group, package, or resource",
-              "title": "Source"
-            },
-            "description": "Name of a source catalog entry, be it a group, package, or resource"
-          },
-          {
-            "name": "header",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Inject headers in the request to retrieve the source data.",
-              "title": "Header"
-            },
-            "description": "Inject headers in the request to retrieve the source data."
+              "type": "integer",
+              "maximum": 5,
+              "minimum": 0,
+              "default": 1,
+              "title": "Depth"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "A dictionary containing the results for the target catalog entry.",
+            "description": "Ontology concepts and their relations.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "title": "Response Read Results From Target Composer  Target Name  Get"
+                  "$ref": "#/components/schemas/OntologyConcepts"
                 }
               }
             }
           },
           "500": {
-            "description": "A general server error occurred.",
+            "description": "Failed to fetch ontology concepts from the backend service.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3524,148 +3675,8 @@
               }
             }
           },
-          "404": {
-            "description": "The target catalog entry or its dataset series could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/composer/{target_name}/properties/{target_property}": {
-      "get": {
-        "tags": [
-          "composer"
-        ],
-        "summary": "Retrieve a specific property from a target catalog entry",
-        "description": "Provided its name, retrieve a specific property from a target catalog entry.",
-        "operationId": "read_target_property_composer__target_name__properties__target_property__get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "target_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The target name",
-              "title": "Target Name"
-            },
-            "description": "The target name"
-          },
-          {
-            "name": "target_property",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The target property",
-              "title": "Target Property"
-            },
-            "description": "The target property"
-          },
-          {
-            "name": "source",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Name of a source catalog entry, be it a group, package, or resource",
-              "title": "Source"
-            },
-            "description": "Name of a source catalog entry, be it a group, package, or resource"
-          },
-          {
-            "name": "header",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Inject headers in the request to retrieve the source data.",
-              "title": "Header"
-            },
-            "description": "Inject headers in the request to retrieve the source data."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The value of the requested property from the target catalog entry.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "Response Read Target Property Composer  Target Name  Properties  Target Property  Get"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "A general server error occurred.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
+          "400": {
+            "description": "One or more of the provided ontology concept IRIs are invalid.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3675,75 +3686,7 @@
             }
           },
           "404": {
-            "description": "The target catalog entry, its dataset series or the requested property was not found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/composer/{target_name}/paths": {
-      "get": {
-        "tags": [
-          "composer"
-        ],
-        "summary": "Get all graph paths leading to the target entry",
-        "description": "Get all graph paths leading to the target catalog entry.",
-        "operationId": "get_graph_paths_for_target_composer__target_name__paths_get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "target_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "description": "The target name",
-              "title": "Target Name"
-            },
-            "description": "The target name"
-          },
-          {
-            "name": "source",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Name of a source catalog entry, be it a group, package, or resource",
-              "title": "Source"
-            },
-            "description": "Name of a source catalog entry, be it a group, package, or resource"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "An object containing the knowledge graph and a mapping of target catalog entry names to all graph paths leading to it.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FullGraphWithPaths"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "A general server error occurred.",
+            "description": "One or more of the provided ontology namespaces do not exist. Or, none of the provided ontology concepts could be found.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3752,48 +3695,8 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "A knowledge graph path is empty (or request parameters are invalid).",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The target catalog entry, its dataset series or any graph paths leading to the target entry could not be found.",
+          "409": {
+            "description": "The provided ontology concept IRIs contain duplicates.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3803,7 +3706,249 @@
             }
           },
           "502": {
-            "description": "The backend target is misformed and cannot be processed.",
+            "description": "An error occurred while communicating with an upstream service.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/files/upload": {
+      "post": {
+        "tags": [
+          "files"
+        ],
+        "summary": "Upload a file",
+        "description": "Upload a file.\n\nThe following headers are required:\n\n- `X-DataSpaces-FileType`: The type of the file to upload.\n  This can be either 'object', 'entity', or 'ontology'.\n- `Content-Type`: The MIME type of the file to upload.",
+        "operationId": "upload_file_files_upload_post",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-DataSpaces-FileType",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/FileType",
+              "description": "The type of the file to upload."
+            },
+            "description": "The type of the file to upload."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_file_files_upload_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Information about the uploaded file.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileUploadResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "A general server error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with a backend service.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was badly formed. Hint: Check the required headers. It may be that the provided file type (header: X-DataSpaces-FileType) is incorrect or unknown. Or, for 'ontology' file types, check that the required namespace is provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The resource being created already exists.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/files/download/{file_id}": {
+      "get": {
+        "tags": [
+          "files"
+        ],
+        "summary": "Download a file by its ID",
+        "description": "Download a file by its ID.\n\nTODO: Support Accept headers for returning different/specific file formats.\n\nThe following headers are required:\n\n- `X-DataSpaces-FileType`: The type of the file to download.\n  This can be either 'object', 'entity', or 'ontology'.",
+        "operationId": "download_file_files_download__file_id__get",
+        "security": [
+          {
+            "DataSpaces": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "file_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "File ID",
+              "description": "The ID of the file to download."
+            },
+            "description": "The ID of the file to download."
+          },
+          {
+            "name": "X-DataSpaces-FileType",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/FileType",
+              "description": "The type of the file to download."
+            },
+            "description": "The type of the file to download."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested file."
+          },
+          "500": {
+            "description": "A general server error occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing authentication credentials.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. The authenticated user does not have the required permissions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The provided request parameters are invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Not Implemented. The requested functionality is not implemented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "An error occurred while communicating with a backend service.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was badly formed. Hint: Check the required headers or your file ID. It may be that the provided file type (header: X-DataSpaces-FileType) is incorrect or unknown.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4124,151 +4269,6 @@
           },
           "404": {
             "description": "The specified user could not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/resources/concepts": {
-      "get": {
-        "tags": [
-          "resources"
-        ],
-        "summary": "Retrieve ontology concepts",
-        "description": "Retrieve ontology concepts.\n\nThe depth parameter controls how deep the ontology concepts should be retrieved.\nDepth 0 is the concepts themselves, depth 1 includes their immediate children, and so on.\nThe default depth is 1.",
-        "operationId": "get_ontology_concepts_resources_concepts_get",
-        "security": [
-          {
-            "DataSpaces": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "concept_uris",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "List of ontology concept URIs.",
-              "title": "Concept Uris"
-            },
-            "description": "List of ontology concept URIs."
-          },
-          {
-            "name": "depth",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 5,
-              "minimum": 0,
-              "default": 1,
-              "title": "Depth"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Ontology concepts and their relations.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OntologyConcepts"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Failed to fetch ontology concepts from the backend service.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized. Invalid or missing authentication credentials.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden. The authenticated user does not have the required permissions.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "The provided request parameters are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "501": {
-            "description": "Not Implemented. The requested functionality is not implemented.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "One or more of the provided ontology concept IRIs are invalid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "One or more of the provided ontology namespaces do not exist. Or, none of the provided ontology concepts could be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "The provided ontology concept IRIs contain duplicates.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "502": {
-            "description": "An error occurred while communicating with an upstream service.",
             "content": {
               "application/json": {
                 "schema": {
