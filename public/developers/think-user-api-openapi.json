@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "DataSpaces",
-    "version": "1.20261109.515"
+    "version": "1.20261113.516"
   },
   "paths": {
     "/composer/{target_name}": {
@@ -5757,18 +5757,6 @@
         "title": "MappingConfig",
         "description": "Defines mappings between entities and ontological concepts, along with prefixes."
       },
-      "MinioAccessLevel": {
-        "type": "string",
-        "enum": [
-          "readonly",
-          "writeonly",
-          "readwrite",
-          "diagnostics",
-          "consoleAdmin"
-        ],
-        "title": "MinioAccessLevel",
-        "description": "Enumeration of possible access levels for MinIO service."
-      },
       "Node": {
         "properties": {
           "name": {
@@ -7780,6 +7768,18 @@
         "title": "ResourceUpdate",
         "description": "Model for Resource updates"
       },
+      "S3AccessLevel": {
+        "type": "string",
+        "enum": [
+          "readonly",
+          "writeonly",
+          "readwrite",
+          "diagnostics",
+          "consoleAdmin"
+        ],
+        "title": "S3AccessLevel",
+        "description": "Enumeration of possible access levels for the S3 object store service (RustFS).\n\nThe values are the names of the built-in RustFS policies, which are also the names of\nthe client roles of the 'rustfs' Keycloak client."
+      },
       "SerializedRelationship": {
         "properties": {
           "start_node": {
@@ -7821,17 +7821,17 @@
       },
       "Services": {
         "properties": {
-          "minio": {
+          "s3": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/MinioAccessLevel"
+                "$ref": "#/components/schemas/S3AccessLevel"
               },
               {
                 "$ref": "#/components/schemas/GeneralAccessLevel"
               }
             ],
-            "title": "Minio",
-            "description": "Access level for MinIO service",
+            "title": "S3",
+            "description": "Access level for the S3 object store service (RustFS)",
             "default": "none"
           },
           "rabbitmq": {
@@ -9142,7 +9142,8 @@
               "acr": "",
               "service_account": "",
               "offline_access": "",
-              "minio-authorization": ""
+              "rustfs-authorization": "",
+              "kc-admin-api": ""
             },
             "authorizationUrl": "https://auth-dev.semanticmatter.com/realms/dataspaces/protocol/openid-connect/auth",
             "tokenUrl": "https://auth-dev.semanticmatter.com/realms/dataspaces/protocol/openid-connect/token"
